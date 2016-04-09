@@ -1,0 +1,9 @@
+﻿{
+"size":"font-size",
+"family":"font-family",
+"weight":"font-weight",
+"height":"line-height",
+"top":"margin-top",
+"bottom":"margin-bottom",
+"color":"color"
+}
