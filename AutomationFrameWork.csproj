@@ -152,7 +152,6 @@
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="TestNlog.cs" />
-    <Compile Include="Feature\Change Date Time In Note 5\ChangeDateTime.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />
     <Compile Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature.cs">
       <AutoGen>True</AutoGen>
@@ -164,14 +163,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckCssValue.feature</DependentUpon>
     </Compile>
-    <Compile Include="Feature\Login Mail With Singleton\LoginMail.cs" />
     <Compile Include="Feature\Login Mail\Login Mail.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Login Mail.feature</DependentUpon>
     </Compile>
     <Compile Include="Helper\CSSHelper.cs" />
-    <Compile Include="MobileParalell.cs" />
     <Compile Include="POM\HomePageSingleton\LoginElementS.cs" />
     <Compile Include="POM\HomePageSingleton\LoginPageS.cs" />
     <Compile Include="POM\HomePageSingleton\LoginValidateS.cs" />
@@ -214,6 +211,9 @@
   <ItemGroup>
     <Content Include="Resources\CSS.txt" />
     <Content Include="Resources\Font.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Feature\Change Date Time In Note 5\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

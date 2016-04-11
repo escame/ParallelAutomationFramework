@@ -17,7 +17,8 @@ namespace AutomationFrameWork
            
             for (int n = 0; n < 10; n++)
             {
-                logger.Debug("This write to log " + n);
+                logger.Debug("This debug write to log " + n);
+                logger.Info("This info write to log " + n);
                 System.Threading.Thread.Sleep(1000);
             }
         }

@@ -1,0 +1,22 @@
+----------NLog Demo Starting--------
+2016-04-11 16:51:00.0002|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 0
+2016-04-11 16:51:00.0182|INFO|AutomationFrameWork.TestNlog|This info write to log 0
+2016-04-11 16:51:01.0256|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 1
+2016-04-11 16:51:01.0256|INFO|AutomationFrameWork.TestNlog|This info write to log 1
+2016-04-11 16:51:02.0298|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 2
+2016-04-11 16:51:02.0298|INFO|AutomationFrameWork.TestNlog|This info write to log 2
+2016-04-11 16:51:03.0352|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 3
+2016-04-11 16:51:03.0352|INFO|AutomationFrameWork.TestNlog|This info write to log 3
+2016-04-11 16:51:04.0389|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 4
+2016-04-11 16:51:04.0389|INFO|AutomationFrameWork.TestNlog|This info write to log 4
+2016-04-11 16:51:05.0438|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 5
+2016-04-11 16:51:05.0457|INFO|AutomationFrameWork.TestNlog|This info write to log 5
+2016-04-11 16:51:06.0495|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 6
+2016-04-11 16:51:06.0495|INFO|AutomationFrameWork.TestNlog|This info write to log 6
+2016-04-11 16:51:07.0540|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 7
+2016-04-11 16:51:07.0540|INFO|AutomationFrameWork.TestNlog|This info write to log 7
+2016-04-11 16:51:08.0592|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 8
+2016-04-11 16:51:08.0611|INFO|AutomationFrameWork.TestNlog|This info write to log 8
+2016-04-11 16:51:09.0645|DEBUG|AutomationFrameWork.TestNlog|This debug write to log 9
+2016-04-11 16:51:09.0645|INFO|AutomationFrameWork.TestNlog|This info write to log 9
+----------NLog Demo Ending-----------
