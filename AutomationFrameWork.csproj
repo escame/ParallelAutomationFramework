@@ -149,6 +149,7 @@
     <Compile Include="Base\Driver\DriverFactory\DriverFactory.cs" />
     <Compile Include="Base\Element\BaseMobileElements.cs" />
     <Compile Include="Base\Element\BaseWebElements.cs" />
+    <Compile Include="Base\Reporter\ReportManager.cs" />
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="TestNlog.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Step Definition\Common Steps\CommonlSteps.cs" />
     <Compile Include="Step Definition\Login Steps\LoginMailSteps.cs" />
     <Compile Include="Helper\DriverHelper.cs" />
+    <Compile Include="TestNlog2.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="Helper\ValidateHelper.cs" />
   </ItemGroup>

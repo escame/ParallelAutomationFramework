@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutomationFrameWork.Base
 {
-    public abstract class PageInstance<T>
+    public abstract class PageInstance<T> 
     where T : new()
     {
         private static readonly Lazy<T> instance = new Lazy<T>(() => new T());

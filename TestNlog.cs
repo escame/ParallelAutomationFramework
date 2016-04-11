@@ -5,22 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using NLog;
-
+using AutomationFrameWork.Base;
 namespace AutomationFrameWork
 {
-    class TestNlog
+    [TestFixture]
+    public class TestNlog 
     {
         static Logger logger = LogManager.GetCurrentClassLogger();
-        [Test]
-        public void TesTNlog ()
+        [Test][ReportManager]
+        public void TesTNlog1 ()
         {
-           
-            for (int n = 0; n < 10; n++)
-            {
-                logger.Debug("This debug write to log " + n);
-                logger.Info("This info write to log " + n);
-                System.Threading.Thread.Sleep(1000);
-            }
+            Console.WriteLine("test log");
+            Assert.IsTrue(false);
+        }
+        [Test]
+        [ReportManager]
+        public void TesTNlog2 ()
+        {
+            Console.WriteLine("test log");
+            Assert.IsTrue(false);
+        }
+        [SetUp]
+        public void SetUp ()
+        {
+            Console.WriteLine(" set up in test");
+        }
+        [TearDown]
+        public void TearDown ()
+        {
+            Console.WriteLine(" tear down in test");
         }
     }
 }
