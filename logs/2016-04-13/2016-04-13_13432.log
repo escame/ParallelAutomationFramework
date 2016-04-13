@@ -1,0 +1,20 @@
+----------NLog Demo Starting--------
+2016-04-13 21:53:16.9798|INFO|AutomationFrameWork.Base.ReportManager|Before in report Suite: --, from TestNlog.{no method}.
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Before in report Case: --, from TestNlog.TesTNlog1.
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.TesTNlog1
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|After in report Case: --, from TestNlog.TesTNlog1.
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-13 21:53:16.9989|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Before in report Case: --, from TestNlog.TesTNlog2.
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.TesTNlog2
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|After in report Case: --, from TestNlog.TesTNlog2.
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|After in report Suite: --, from TestNlog.{no method}.
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-13 21:53:17.0109|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+----------NLog Demo Ending-----------
