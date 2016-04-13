@@ -184,7 +184,6 @@
     <Compile Include="Step Definition\Common Steps\CommonlSteps.cs" />
     <Compile Include="Step Definition\Login Steps\LoginMailSteps.cs" />
     <Compile Include="Helper\DriverHelper.cs" />
-    <Compile Include="TestNlog2.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="Helper\ValidateHelper.cs" />
   </ItemGroup>

@@ -1,9 +1,0 @@
-----------NLog Demo Starting--------
-2016-04-11 22:26:54.5665|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.TesTNlog1
-2016-04-11 22:26:54.5929|INFO|AutomationFrameWork.Base.ReportManager|Test result Failed
-2016-04-11 22:26:54.5929|INFO|AutomationFrameWork.Base.ReportManager|Test error at AutomationFrameWork.TestNlog.TesTNlog1() in D:\WorkSpace\Git\AutomationFramework\TestNlog.cs:line 19
-
-2016-04-11 22:26:54.5929|INFO|AutomationFrameWork.Base.ReportManager|Test result mess   Expected: True
-  But was:  False
-
-----------NLog Demo Ending-----------

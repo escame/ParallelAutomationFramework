@@ -8,9 +8,11 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using NLog;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace AutomationFrameWork.Base
 {
+    
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class |
                    AttributeTargets.Interface | AttributeTargets.Assembly,
                    AllowMultiple = true)]
@@ -27,6 +29,7 @@ namespace AutomationFrameWork.Base
 
         public void AfterTest (ITest test)
         {
+            WriteToConsole("After in report",test);
             logger.Info("Test result "+TestContext.CurrentContext.Result.Outcome.Status);
             logger.Info("Test error " + TestContext.CurrentContext.Result.StackTrace);
             logger.Info("Test result mess " + TestContext.CurrentContext.Result.Message);
@@ -34,9 +37,21 @@ namespace AutomationFrameWork.Base
 
         public void BeforeTest (ITest test)
         {
-            logger.Info("Start test " + test.FullName);
+            WriteToConsole("Before in report", test);
+            logger.Info("Start test " + test.FullName);           
         }
-        
+        private void WriteToConsole (string eventMessage, ITest test)
+        {
+            logger.Info(
+                "{0} {1}: {2}, from {3}.{4}.",
+                eventMessage,
+                test.IsSuite ? "Suite" : "Test",
+                "--",
+                test.Fixture != null ? test.Fixture.GetType().Name : "{no fixture}",
+                test.Method != null ? test.Method.Name : "{no method}");
+            logger.Info("Total Test Case: "+ test.TestCaseCount);
+                
+        }
         public void TestFinished (ITestResult result)
         {
             Console.WriteLine("MINH HOANG TEST "+result);

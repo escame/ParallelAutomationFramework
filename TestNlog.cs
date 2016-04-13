@@ -8,18 +8,17 @@ using NLog;
 using AutomationFrameWork.Base;
 namespace AutomationFrameWork
 {
-    [TestFixture]
+    [TestFixture][ReportManager]
     public class TestNlog 
     {
         static Logger logger = LogManager.GetCurrentClassLogger();
-        [Test][ReportManager]
+        [Test]
         public void TesTNlog1 ()
         {
             Console.WriteLine("test log");
-            Assert.IsTrue(false);
+            Assert.IsTrue(true);
         }
-        [Test]
-        [ReportManager]
+        [Test]        
         public void TesTNlog2 ()
         {
             Console.WriteLine("test log");
