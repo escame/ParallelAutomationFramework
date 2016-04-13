@@ -144,13 +144,10 @@ namespace AutomationFrameWork.Base.Driver
         /// <param name="address"></param>
         /// <param name="port"></param>
         public void AppiumInfo (string address, int port)
-        {
-            Console.WriteLine(address + "--" + port);
+        {           
             Dictionary<string, string> info = new Dictionary<string, string>();
             info.Add("address", address);
-            info.Add("port", port.ToString());
-            Console.WriteLine(info["address"]);
-            Console.WriteLine(info["port"]);
+            info.Add("port", port.ToString());       
             DriverFactory.Instance.DriverOptions = info;
         }
         /// <summary>

@@ -7,23 +7,23 @@ namespace AutomationFrameWork.POM.HomePage
     class LoginPage : BasePageWeb<LoginPage,LoginElement,LoginValidate>
     {       
        
-        public void navigate(string url)
+        public void Navigate(string url)
         {
             WebKeywords.Instance.Navigate(url);
         }
-        public void enterUserName(string username)
+        public void EnterUserName(string username)
         {
             WebKeywords.Instance.SetText(Element.txtUserName, username);
         }
-        public void clickNext()
+        public void ClickNext()
         {
             WebKeywords.Instance.Click(Element.btnNext);
         }
-        public void clickSignIn()
+        public void ClickSignIn()
         {
             WebKeywords.Instance.Click(Element.btnSignin);
         }
-        public void enterPass(string pass)
+        public void EnterPass(string pass)
         {
             WebKeywords.Instance.WaitElementToBeClickable(Element.waitTxtPass,30);
             WebKeywords.Instance.SetText(Element.txtPassword,pass);

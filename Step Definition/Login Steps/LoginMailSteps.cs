@@ -12,47 +12,47 @@ namespace AutomationFrameWork.Step_Definition.Login_Steps
         [Given(@"I have entered '(.*)' in browser")]
         public void GivenIHaveEnteredInBrowser(string url)
         {
-            LoginPage.Instance.navigate(url);            
+            LoginPage.Instance.Navigate(url);            
         }
         
         [When(@"I have entered '(.*)' into the username")]
         public void WhenIHaveEnteredIntoTheUsername(string username)
         {
-            LoginPage.Instance.enterUserName(username);
+            LoginPage.Instance.EnterUserName(username);
         }
         
         [When(@"I click on next button")]
         public void WhenIClickOnNextButton()
         {
-            LoginPage.Instance.clickNext();
+            LoginPage.Instance.ClickNext();
         }
         
         [When(@"I have entered '(.*)' into the password")]
         public void WhenIHaveEnteredIntoThePassword(string password)
         {
-            LoginPage.Instance.enterPass(password);
+            LoginPage.Instance.EnterPass(password);
         }
         
         [When(@"i click login button")]
         public void WhenIClickLoginButton()
         {
-            LoginPage.Instance.clickSignIn();
+            LoginPage.Instance.ClickSignIn();
         }
         
         [Then(@"the login page display sucessfully with contain '(.*)'")]
         public void ThenTheLoginPageDisplaySucessfullyWithContain(string expected)
         {
-            LoginPage.Instance.Verify().validateLoginSucesfully(expected);
+            LoginPage.Instance.Verify().ValidateLoginSucesfully(expected);
         }
         [Then(@"The username error message display '(.*)'")]
         public void ThenTheUsernameErrorMessageDisplay(string expected)
         {
-            LoginPage.Instance.Verify().validateUserNameErrorMsg(expected);
+            LoginPage.Instance.Verify().ValidateUserNameErrorMsg(expected);
         }
         [Then(@"The login error message display '(.*)'")]
         public void ThenTheLoginErrorMessageDisplay(string expected)
         {
-            LoginPage.Instance.Verify().validatePassErrorMsg(expected);
+            LoginPage.Instance.Verify().ValidatePassErrorMsg(expected);
         }
     }
 }
