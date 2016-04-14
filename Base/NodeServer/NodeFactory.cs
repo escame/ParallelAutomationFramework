@@ -7,7 +7,7 @@ namespace AutomationFrameWork.Driver
     public class NodeFactory
     {
 
-        int portNumber, bootstrapPort, processID;
+        int portNumber, bootstrapPort,chromeDriverPort, processID;
         string addressNumber;
         Process appiumServer;
         /// <summary>
@@ -17,14 +17,14 @@ namespace AutomationFrameWork.Driver
         /// <param name="portNumber"></param>
         /// <param name="bootstrapPort"></param>
         /// <param name="timeOut"></param>
-        public NodeFactory (String addressNumber, int portNumber, int bootstrapPort)
+        public NodeFactory (String addressNumber, int portNumber, int bootstrapPort,int chromeDriverPort)
         {
             this.AddressNumber = addressNumber;
             this.BootstrapPort = bootstrapPort;
             this.PortNumber = portNumber;           
             appiumServer = new Process();
             appiumServer.StartInfo.FileName = "cmd";
-            appiumServer.StartInfo.Arguments = "/c node C:/Users/Minh/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort;
+            appiumServer.StartInfo.Arguments = "/c node C:/Users/Minh/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort+ " --chromedriver-port "+this.ChromeDriverPort;
             appiumServer.StartInfo.UseShellExecute = false;
             appiumServer.StartInfo.RedirectStandardOutput = true;                      
             appiumServer.Start();
@@ -76,7 +76,26 @@ namespace AutomationFrameWork.Driver
             {
                 bootstrapPort = value;
             }
-        }        
+        }
+        /// <summary>
+        /// This set bootstrap port for node server
+        /// </summary>
+        public int ChromeDriverPort
+        {
+            get
+            {
+                return chromeDriverPort;
+            }
+
+            private set
+            {
+                chromeDriverPort = value;
+            }
+        }
+        /// <summary>
+        /// This method is use for
+        /// get and set process id
+        /// </summary>
         public int ProcessId
         {
             get

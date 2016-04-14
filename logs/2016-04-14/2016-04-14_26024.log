@@ -1,0 +1,10 @@
+----------NLog Demo Starting--------
+2016-04-14 17:28:56.0562|INFO|AutomationFrameWork.Base.ReportManager|Before in report Suite: --, from TestNlog.{no method}.
+2016-04-14 17:28:56.0632|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 4
+2016-04-14 17:28:56.0632|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog
+2016-04-14 17:28:56.0832|INFO|AutomationFrameWork.Base.ReportManager|After in report Suite: --, from TestNlog.{no method}.
+2016-04-14 17:28:56.0832|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 4
+2016-04-14 17:28:56.0832|INFO|AutomationFrameWork.Base.ReportManager|Test result Failed
+2016-04-14 17:28:56.0832|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-14 17:28:56.0832|INFO|AutomationFrameWork.Base.ReportManager|Test result mess One or more child tests had errors
+----------NLog Demo Ending-----------

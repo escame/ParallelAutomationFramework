@@ -8,10 +8,12 @@ using NLog;
 using AutomationFrameWork.Base;
 using System.Net;
 using System.Net.NetworkInformation;
+using AutomationFrameWork.Driver.Core;
 
 namespace AutomationFrameWork
 {
-    [TestFixture][ReportManager]
+    
+    [Parallelizable(ParallelScope.Self)]
     public class TestNlog 
     {
         static Logger logger = LogManager.GetCurrentClassLogger();
@@ -26,11 +28,13 @@ namespace AutomationFrameWork
         {
             Console.WriteLine("test log");
             Assert.IsTrue(false);
-        }
+        }       
         [SetUp]
         public void SetUp ()
         {
-            Console.WriteLine(" set up in test");
+            Drivers.FreePort = Helper.DriverHelper.Instance.GetAvailablePort(65514);
+            Helper.DriverHelper.Instance.GetPortToUse();
+            Drivers.FreePort = Drivers.FreePort.Where(item => !Drivers.UsedPort.Contains(item)).ToList();
         }
         [TearDown]
         public void TearDown ()
@@ -38,46 +42,48 @@ namespace AutomationFrameWork
             Console.WriteLine(" tear down in test");
         }
         [Test]
-        public void GetPort ()
+        public void GetPort1 ()
         {
-            List<int> temp=GetAvailablePort(10);
-            foreach (int port in temp)
-                Console.WriteLine("Port: " + port +" is free");
-           
+
+            var temp1 = Helper.DriverHelper.Instance.GetPortToUse();
+            foreach (int port in temp1)
+                Console.WriteLine("Check get port: " + port);
+            Drivers.FreePort = Drivers.FreePort.Where(item => !Drivers.UsedPort.Contains(item)).ToList();
+            foreach (int port in Drivers.FreePort)
+                Console.WriteLine("Free port after use GetPort1: " + port);
+            var temp2 = Helper.DriverHelper.Instance.GetPortToUse();
+            foreach (int port in temp2)
+                Console.WriteLine("Check get port: " + port);
         }
-        public static List<int> GetAvailablePort (int startingPort)
+        [Test]
+        public void GetPort2()
         {
-            IPEndPoint[] endPoints;
-            List<int> portArray = new List<int>();
-            List<int> returnPort=new List<int>();
-            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            var temp1 = Helper.DriverHelper.Instance.GetPortToUse();
+            foreach (int port in temp1)
+                Console.WriteLine("Check get port: " + port);
+            Drivers.FreePort = Drivers.FreePort.Where(item => !Drivers.UsedPort.Contains(item)).ToList();
+            foreach (int port in Drivers.FreePort)
+                Console.WriteLine("Free port after use GetPort2: " + port);
+            var temp2 = Helper.DriverHelper.Instance.GetPortToUse();
+            foreach (int port in temp2)
+                Console.WriteLine("Check get port: " + port);
+        }
+        [OneTimeSetUp]
+        public void RunBeforeAnyTests()
+        {
+            Console.WriteLine("One Time Set Up");
+            Drivers.FreePort = Helper.DriverHelper.Instance.GetAvailablePort(1);
+        }
+    }   
 
-            //getting active connections
-            TcpConnectionInformation[] connections = properties.GetActiveTcpConnections();
-            portArray.AddRange(from n in connections
-                               where n.LocalEndPoint.Port >= startingPort
-                               select n.LocalEndPoint.Port);
-
-            //getting active tcp listners - WCF service listening in tcp
-            endPoints = properties.GetActiveTcpListeners();
-            portArray.AddRange(from n in endPoints
-                               where n.Port >= startingPort
-                               select n.Port);
-
-            //getting active udp listeners
-            endPoints = properties.GetActiveUdpListeners();
-            portArray.AddRange(from n in endPoints
-                               where n.Port >= startingPort
-                               select n.Port);
-
-            portArray.Sort();
-
-            for (int i = startingPort; i < UInt16.MaxValue; i++)
-                if (!portArray.Contains(i))
-                    returnPort.Add(i);
-
-            return returnPort;
+    [SetUpFixture]
+    public class GlobalSetup
+    {
+        [OneTimeSetUp]
+        public void RunBeforeAnyTests()
+        {
+            Console.WriteLine("One Time Set Up");
+            Drivers.FreePort = Helper.DriverHelper.Instance.GetAvailablePort(1);
         }
     }
-   
 }

@@ -1,9 +1,8 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.PhantomJS;
 using System.Threading;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.IE;
+using System.Collections.Generic;
 
 namespace AutomationFrameWork.Driver.Core
 {
@@ -13,6 +12,8 @@ namespace AutomationFrameWork.Driver.Core
         private static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         private static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         private static ThreadLocal<object> OptionStorage = new ThreadLocal<object>();
+        private static ThreadLocal<List<int>> freePort = new ThreadLocal<List<int>>();
+        public static volatile List<int> UsedPort=new List<int>();
         /// <summary>
         /// This method use for close driver 
         /// </summary>
@@ -73,8 +74,10 @@ namespace AutomationFrameWork.Driver.Core
                 Drivers.desiredCapabilities.Value = value;
             }
         }
-        abstract public void StartDriver();
-        abstract public object DriverOption { get; }
+        /// <summary>
+        /// This method is use
+        /// for return DriverOption like ChromeOption, InternetExplorerOption
+        /// </summary>
         public static object DriverOptions
         {
             get
@@ -86,5 +89,23 @@ namespace AutomationFrameWork.Driver.Core
                 OptionStorage.Value = value;
             }
         }
+        /// <summary>
+        /// This method is use 
+        /// for return FreePort for run appium
+        /// </summary>
+        public static List<int> FreePort
+        {
+            get
+            {
+                return freePort.Value;
+            }
+            set
+            {
+                freePort.Value = value;
+            }
+        }
+        abstract public void StartDriver();
+        abstract public object DriverOption { get; }
+        
     }
 }

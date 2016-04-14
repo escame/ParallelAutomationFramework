@@ -28,7 +28,7 @@ namespace AutomationFrameWork.Driver
                 return instance;
             }
         }
-        ThreadLocal<AppiumDriver<AppiumWebElement>> driver = new ThreadLocal<AppiumDriver<AppiumWebElement>>(() =>
+        ThreadLocal<IOSDriver<AppiumWebElement>> driver = new ThreadLocal<IOSDriver<AppiumWebElement>>(() =>
         {
             iOSDriver = new IOSDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), iOS.Instance.DesiredCapabilities);
             return iOSDriver;
