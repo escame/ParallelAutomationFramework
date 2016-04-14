@@ -12,7 +12,7 @@ namespace AutomationFrameWork.Helper
     {
         private static readonly DriverHelper instance = new DriverHelper();
         private static object syncRoot = new Object();
-        static DriverHelper()
+        static DriverHelper ()
         {
         }
         public static DriverHelper Instance
@@ -30,8 +30,8 @@ namespace AutomationFrameWork.Helper
         public string DriverPath
         {
             get
-            {                
-                return Utilities.Instance.GetRelativePath("Base//Driver//Resources");                
+            {
+                return Utilities.Instance.GetRelativePath("Base//Driver//Resources");
             }
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace AutomationFrameWork.Helper
         /// </summary>
         /// <param name="startingPort"></param>
         /// <returns></returns>
-        public List<int> GetAvailablePort(int startingPort)
+        public List<int> GetAvailablePort (int startingPort)
         {
             IPEndPoint[] endPoints;
             List<int> portArray = new List<int>();
@@ -51,17 +51,17 @@ namespace AutomationFrameWork.Helper
             TcpConnectionInformation[] connections = properties.GetActiveTcpConnections();
             portArray.AddRange(from n in connections
                                where n.LocalEndPoint.Port >= startingPort
-                               select n.LocalEndPoint.Port);            
+                               select n.LocalEndPoint.Port);
             //getting active tcp listners - WCF service listening in tcp
             endPoints = properties.GetActiveTcpListeners();
             portArray.AddRange(from n in endPoints
                                where n.Port >= startingPort
-                               select n.Port);            
+                               select n.Port);
             //getting active udp listeners
             endPoints = properties.GetActiveUdpListeners();
             portArray.AddRange(from n in endPoints
                                where n.Port >= startingPort
-                               select n.Port);            
+                               select n.Port);
             portArray.Sort();
 
             for (int i = startingPort; i < UInt16.MaxValue; i++)
@@ -70,11 +70,10 @@ namespace AutomationFrameWork.Helper
 
             return returnPort;
         }
-        public List<int> GetPortToUse()
-        {           
-                Drivers.UsedPort.AddRange(Drivers.FreePort.GetRange(0, 3));
-                return Drivers.FreePort.GetRange(0, 3);
-            
+        public List<int> GetPortToUse ()
+        {
+            Drivers.UsedPort.AddRange(Drivers.FreePort.GetRange(0, 3));
+            return Drivers.FreePort.GetRange(0, 3);
         }
     }
 }

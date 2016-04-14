@@ -11,8 +11,9 @@ namespace AutomationFrameWork.Driver.Core
         private static ThreadLocal<object> driverStored = new ThreadLocal<object>();
         private static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         private static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        private static ThreadLocal<object> OptionStorage = new ThreadLocal<object>();
-        private static ThreadLocal<List<int>> freePort = new ThreadLocal<List<int>>();
+        private static ThreadLocal<object> optionStorage = new ThreadLocal<object>();        
+        private static ThreadLocal<List<int>> portStorage = new ThreadLocal<List<int>>();
+        public static volatile List<int> FreePort = new List<int>();
         public static volatile List<int> UsedPort=new List<int>();
         /// <summary>
         /// This method use for close driver 
@@ -82,13 +83,14 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return OptionStorage.Value;
+                return optionStorage.Value;
             }
             set
             {
-                OptionStorage.Value = value;
+                optionStorage.Value = value;
             }
         }
+        /*
         /// <summary>
         /// This method is use 
         /// for return FreePort for run appium
@@ -102,6 +104,22 @@ namespace AutomationFrameWork.Driver.Core
             set
             {
                 freePort.Value = value;
+            }
+        }
+        */
+        /// <summary>
+        /// This method is use 
+        /// for storeage port in use for run appium
+        /// </summary>
+        public static List<int> PortStorage
+        {
+            get
+            {
+                return portStorage.Value;
+            }
+            set
+            {
+                portStorage.Value = value;
             }
         }
         abstract public void StartDriver();
