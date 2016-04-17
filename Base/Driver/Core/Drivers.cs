@@ -11,10 +11,10 @@ namespace AutomationFrameWork.Driver.Core
         private static ThreadLocal<object> driverStored = new ThreadLocal<object>();
         private static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         private static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        private static ThreadLocal<object> optionStorage = new ThreadLocal<object>();        
-        private static ThreadLocal<List<int>> portStorage = new ThreadLocal<List<int>>();
+        private static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
+        private static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();
         public static volatile List<int> FreePort = new List<int>();
-        public static volatile List<int> UsedPort=new List<int>();
+        public static volatile Dictionary<int, List<int>> UsedPort = new Dictionary<int, List<int>>();
         /// <summary>
         /// This method use for close driver 
         /// </summary>
@@ -111,7 +111,7 @@ namespace AutomationFrameWork.Driver.Core
         /// This method is use 
         /// for storeage port in use for run appium
         /// </summary>
-        public static List<int> PortStorage
+        public static Dictionary<int,List<int>> PortStorage
         {
             get
             {
@@ -119,7 +119,20 @@ namespace AutomationFrameWork.Driver.Core
             }
             set
             {
-                portStorage.Value = value;
+                if (!portStorage.IsValueCreated)
+                    portStorage.Value = new Dictionary<int, List<int>>();
+                foreach (KeyValuePair<int, List<int>> port in value)
+                {
+                    try
+                    {
+                        portStorage.Value.Add(port.Key, port.Value);
+                    }
+                    catch (System.ArgumentException e)
+                    {
+                        portStorage.Value[port.Key].AddRange(port.Value);
+                    }
+
+                }
             }
         }
         abstract public void StartDriver();

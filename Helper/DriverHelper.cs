@@ -46,7 +46,6 @@ namespace AutomationFrameWork.Helper
             List<int> portArray = new List<int>();
             List<int> returnPort = new List<int>();
             IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
-
             //getting active connections
             TcpConnectionInformation[] connections = properties.GetActiveTcpConnections();
             portArray.AddRange(from n in connections
@@ -70,10 +69,29 @@ namespace AutomationFrameWork.Helper
 
             return returnPort;
         }
-        public List<int> GetPortToUse ()
+        public Dictionary<int, List<int>> GetPortToUse ()
         {
-            Drivers.UsedPort.AddRange(Drivers.FreePort.GetRange(0, 3));
-            return Drivers.FreePort.GetRange(0, 3);
+            try
+            {
+                Drivers.UsedPort.Add(System.Threading.Thread.CurrentThread.ManagedThreadId, Drivers.FreePort.GetRange(0, 3).ToList());
+            }
+            catch (System.ArgumentException e)
+            {
+                Drivers.UsedPort[System.Threading.Thread.CurrentThread.ManagedThreadId].AddRange(Drivers.FreePort.GetRange(0, 3).ToList());
+            }
+            var _returnPort = new Dictionary<int, List<int>>();
+            _returnPort.Add(System.Threading.Thread.CurrentThread.ManagedThreadId, Drivers.FreePort.GetRange(0, 3).ToList());
+            Drivers.PortStorage = _returnPort;
+            foreach (KeyValuePair<int, List<int>> port in Drivers.UsedPort)
+            {
+                Drivers.FreePort = Drivers.FreePort.Where(item => !port.Value.Contains((item))).ToList();
+            }
+            return _returnPort;
+
+        }
+        public void RemovePort ()
+        {
+            //Drivers.FreePort = Drivers.FreePort.Where(item => !Drivers.UsedPort.Contains(item)).ToList();
         }
     }
 }
