@@ -3,18 +3,21 @@ using System.Threading;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
+using System;
 
 namespace AutomationFrameWork.Driver.Core
 {
     abstract public class Drivers
     {
-        private static ThreadLocal<object> driverStored = new ThreadLocal<object>();
-        private static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
-        private static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        private static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
-        private static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();
-        public static volatile List<int> FreePort = new List<int>();
-        public static volatile Dictionary<int, List<int>> UsedPort = new Dictionary<int, List<int>>();
+        static readonly object syncRoot = new Object();
+        static ThreadLocal<object> driverStored = new ThreadLocal<object>();
+        static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
+        static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
+        static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();
+        public static List<int> FreePort { get; set; }
+        public static Dictionary<int, List<int>> UsedPort { get; set; }
+       
         /// <summary>
         /// This method use for close driver 
         /// </summary>
@@ -99,14 +102,19 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return freePort.Value;
+                lock (syncRoot)
+                {
+                    return freePort;
+                }
             }
             set
             {
-                freePort.Value = value;
+                lock (syncRoot)
+                {
+                    freePort=(value);
+                }
             }
-        }
-        */
+        }        */
         /// <summary>
         /// This method is use 
         /// for storeage port in use for run appium
@@ -129,6 +137,7 @@ namespace AutomationFrameWork.Driver.Core
                     }
                     catch (System.ArgumentException e)
                     {
+                        System.Console.WriteLine("Catch "+e.Message+" for thread "+ port.Key);
                         portStorage.Value[port.Key].AddRange(port.Value);
                     }
 
