@@ -10,194 +10,90 @@ using System.Net;
 using System.Net.NetworkInformation;
 using AutomationFrameWork.Driver.Core;
 using System.Threading;
+using System.Net.Sockets;
+
 namespace AutomationFrameWork
 {
-    
+    [ReportManager]
+    [TestFixture]   
     [Parallelizable(ParallelScope.Self)]
     public class TestNlog 
     {
-        static Logger logger = LogManager.GetCurrentClassLogger();       
-        [Test]
-        public void TesTNlog1 ()
-        {
-            Console.WriteLine("test log");
-            Assert.IsTrue(true);
-        }
-        /*
-        [Test]        
-        public void TesTNlog2 ()
-        {
-            Console.WriteLine("test log");
-            Assert.IsTrue(false);
-        }       
         [SetUp]
-        public void SetUp ()
+        public void GetPort ()
         {
-            Console.WriteLine("Thread ID in setup: " + System.Threading.Thread.CurrentThread.ManagedThreadId);
-            Drivers.FreePort = Helper.DriverHelper.Instance.GetAvailablePort(65499);
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port set up: " + port);
-            Helper.DriverHelper.Instance.GetPortToUse();           
-            Helper.DriverHelper.Instance.UpdateUsedPort();
-            Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in thread id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in set up: " + portValue);
-            }
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after finish setup: " + port);
+           
+            foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
+                Console.WriteLine(port.Key + "--" + port.Value);
         }
         [TearDown]
-        public void TearDown ()
+        public void GetPortAfter ()
         {
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port before use ReleasePort: " + port);
-            Helper.DriverHelper.Instance.ReleasePort();
-            Helper.DriverHelper.Instance.UpdateFreePort();
-            Helper.DriverHelper.Instance.UpdateUsedPort();
-            Drivers.FreePort.Sort();
-            Console.WriteLine(" tear down in test");
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after use teardown: " + port);
-        }
-        */
-        [SetUp]
-        public void abc ()
-        {
-            Drivers.FreePort=Helper.DriverHelper.Instance.GetAvailablePort(65511);
-        }
-        [TearDown]
-        public void TearDown ()
-        {
-            foreach (KeyValuePair<int, List<int>> port in Drivers.UsedPort)
-            {
-                Console.WriteLine("Get port value in test teardown: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port used in teardown: " + portValue);
-            }
-            Console.WriteLine("---------------------------------------------------");
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port store in test teardown: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port store in teardown: " + portValue);
-            }
-            Helper.DriverHelper.Instance.ReleasePort();
-
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after release: " + port);
+            foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
+                Console.WriteLine(port.Key + "--" + port.Value);
         }
         [Test]
-        public void GetPort1 ()
+        public void Use1 ()
         {
-            Console.WriteLine("Thread ID in test: " + System.Threading.Thread.CurrentThread.ManagedThreadId);         
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 1: " + portValue);
-            }             
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 2: " + portValue);
-            }
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after: "+ port);           
-
+            List<int> use = new List<int>();
+            Console.WriteLine(Drivers.FreePort.Count);
+            int count = 0;
+            for (int n = 0; n < Drivers.FreePort.Count; n++)
+            {                
+                if (Drivers.FreePort.ElementAt(n).Value == true&& count<3)
+                {
+                    use.Add(Drivers.FreePort.ElementAt(n).Key);
+                    Drivers.FreePort[Drivers.FreePort.ElementAt(n).Key] = false;
+                    count = count + 1;
+                }
+            }           
+            foreach (int port in use)
+                Console.WriteLine("Use "+ port);
         }
         [Test]
-        public void GetPort2()
+        public void Use2()
         {
-            Console.WriteLine("Thread ID in test: " + System.Threading.Thread.CurrentThread.ManagedThreadId);
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 1: " + portValue);
+            List<int> use = new List<int>();
+            Console.WriteLine(Drivers.FreePort.Count);
+            int count = 0;
+            for (int n = 0; n < Drivers.FreePort.Count; n++)
+            {              
+                if (Drivers.FreePort.ElementAt(n).Value == true && count < 3)
+                {
+                    use.Add(Drivers.FreePort.ElementAt(n).Key);
+                    Drivers.FreePort[Drivers.FreePort.ElementAt(n).Key] = false;
+                    count = count + 1;
+                }
             }
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 2: " + portValue);
-            }
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after: " + port);
+            foreach (int port in use)
+                Console.WriteLine("Use " + port);
         }
-        [Test]
-        public void GetPort3 ()
+        [OneTimeSetUp]
+        public void Init ()
         {
-            Console.WriteLine("Thread ID in test: " + System.Threading.Thread.CurrentThread.ManagedThreadId);
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
+            
+            List<int> temp = Helper.DriverHelper.Instance.GetAvailablePort(2000, 2025);
+            foreach (int port in temp)
             {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 1: " + portValue);
+                Console.WriteLine(port);
+                Drivers.FreePort = new Dictionary<int, bool>()
+                {
+                    { port
+                    ,true},
+                };
             }
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 2: " + portValue);
-            }
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after: " + port);
-
+            ReportManager.logger.Info("This run one time");
+            ReportManager.logger.Info("Total Pass: " + TestContext.CurrentContext.Result.PassCount);
+            ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
+            ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
         }
-        [Test]
-        public void GetPort4 ()
+        [OneTimeTearDown]
+        public void Clean ()
         {
-            Console.WriteLine("Thread ID in test: " + System.Threading.Thread.CurrentThread.ManagedThreadId);
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 1: " + portValue);
-            }
-            Helper.DriverHelper.Instance.GetPortToUse();
-            Helper.DriverHelper.Instance.UpdatePort();
-            //Helper.DriverHelper.Instance.UpdateUsedPort();
-            //Helper.DriverHelper.Instance.UpdateFreePort();
-            foreach (KeyValuePair<int, List<int>> port in Drivers.PortStorage)
-            {
-                Console.WriteLine("Get port value in test id: " + port.Key);
-                foreach (int portValue in port.Value)
-                    Console.WriteLine("Check get port in 2: " + portValue);
-            }
-            foreach (int port in Drivers.FreePort)
-                Console.WriteLine("Free port after: " + port);
-        }     
-    }      
+            ReportManager.logger.Info("Total Pass: "+TestContext.CurrentContext.Result.PassCount);
+            ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
+            ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
+        }
+    }    
+          
 }

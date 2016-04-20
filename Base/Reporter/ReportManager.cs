@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Base
                    AllowMultiple = true)]
     public class ReportManager : Attribute, ITestListener,ITestAction
     {
-        static Logger logger = LogManager.GetCurrentClassLogger();
+        public static Logger logger = LogManager.GetCurrentClassLogger();
         public ActionTargets Targets
         {
             get

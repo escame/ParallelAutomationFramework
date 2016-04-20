@@ -14,10 +14,8 @@ namespace AutomationFrameWork.Driver.Core
         static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
-        static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();
-        public static List<int> FreePort { get; set; }
-        public static Dictionary<int, List<int>> UsedPort { get; set; }
-       
+        static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();       
+        static Dictionary<int,Boolean> freePort = new Dictionary<int, Boolean>();       
         /// <summary>
         /// This method use for close driver 
         /// </summary>
@@ -93,13 +91,12 @@ namespace AutomationFrameWork.Driver.Core
                 optionStorage.Value = value;
             }
         }
-        /*
         /// <summary>
         /// This method is use 
         /// for return FreePort for run appium
         /// </summary>
-        public static List<int> FreePort
-        {
+        public static Dictionary<int, Boolean> FreePort
+        { 
             get
             {
                 lock (syncRoot)
@@ -111,10 +108,24 @@ namespace AutomationFrameWork.Driver.Core
             {
                 lock (syncRoot)
                 {
-                    freePort=(value);
+                    try
+                    {
+                        foreach (KeyValuePair<int, Boolean> values in value)
+                            for (int port=0; port<Drivers.FreePort.Count||Drivers.FreePort.Count==0;port++)
+                            {
+                                if (!Drivers.FreePort.ContainsKey(values.Key))
+                                    freePort.Add(values.Key, values.Value);
+                                else
+                                    freePort[values.Key] = values.Value;
+                            }
+                    }
+                    catch (ArgumentException e)
+                    {
+                        System.Console.WriteLine(e.Message);
+                    }
                 }
             }
-        }        */
+        }        
         /// <summary>
         /// This method is use 
         /// for storeage port in use for run appium
