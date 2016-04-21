@@ -4,21 +4,14 @@ using OpenQA.Selenium.Chrome;
 using System.Threading;
 using AutomationFrameWork.Helper;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class Chrome : Drivers
     {
-        //private static readonly Chrome instance = new Chrome();        
-        private static IWebDriver WebDriver = null;
+        private static readonly Chrome instance = new Chrome();       
         static Chrome()
         {
-        }
-        static ThreadLocal<Chrome> ChromeInstance = new ThreadLocal<Chrome>(() =>
-        {
-            
-            return new Chrome();
-
-        });
+        }        
         private Chrome()
         {
 
@@ -28,7 +21,8 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return Chrome.ChromeInstance.Value;
+                return instance;
+                //return Chrome.ChromeInstance.Value;
             }
         }
         public override void StartDriver()
@@ -36,7 +30,7 @@ namespace AutomationFrameWork.Driver
             Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.Instance.DriverOption); 
         }
 
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {

@@ -10,8 +10,7 @@ namespace AutomationFrameWork.Driver.Core
     abstract public class Drivers
     {
         static readonly object syncRoot = new Object();
-        static ThreadLocal<object> driverStored = new ThreadLocal<object>();
-        static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
+        static ThreadLocal<object> driverStored = new ThreadLocal<object>();        
         static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
         static Dictionary<int, Boolean> freePort = new Dictionary<int, Boolean>();
@@ -40,24 +39,7 @@ namespace AutomationFrameWork.Driver.Core
             {
                 driverStored.Value = value;
             }
-        }
-        /// <summary>
-        /// This method is use
-        /// for set chrome option in Chrome Driver
-        /// </summary>
-        public static ChromeOptions ChromeOptions
-        {
-            get
-            {
-                if (Drivers.chromeOption.Value == null)
-                    Drivers.chromeOption.Value = new ChromeOptions();
-                return Drivers.chromeOption.Value;
-            }
-            set
-            {
-                Drivers.chromeOption.Value = value;
-            }
-        }
+        }   
         /// <summary>
         /// This method is use 
         /// for setting DesiredCapabilities for Remote Driver, Firefox Driver, PhantomJs Driver
@@ -121,7 +103,7 @@ namespace AutomationFrameWork.Driver.Core
             }
         }
         abstract public void StartDriver ();
-        abstract public object DriverOption
+        abstract protected object DriverOption
         {
             get;
         }

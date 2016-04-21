@@ -3,22 +3,23 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
 using System.Threading;
 using AutomationFrameWork.Helper;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class PhantomJS : Drivers
     {
-        private static readonly PhantomJS instance = new PhantomJS();       
-        private static IWebDriver WebDriver = null;
+        private static readonly PhantomJS instance = new PhantomJS();
         private static PhantomJSDriverService phantomJSDriverService = null;       
         static PhantomJS()
         {
         }
+        /*
         ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
         {
             WebDriver = new PhantomJSDriver(PhantomJS.Instance.PhantomJSDriverService, (PhantomJSOptions)PhantomJS.Instance.DriverOption);
             return WebDriver;
 
         });
+        */
         private PhantomJS()
         {
 
@@ -33,7 +34,7 @@ namespace AutomationFrameWork.Driver
         }
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new PhantomJSDriver(PhantomJS.Instance.PhantomJSDriverService, (PhantomJSOptions)PhantomJS.Instance.DriverOption);
         }
 
         public PhantomJSDriverService PhantomJSDriverService
@@ -49,7 +50,7 @@ namespace AutomationFrameWork.Driver
                 phantomJSDriverService = value;
             }
         }
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using AutomationFrameWork.Base.Driver;
+using AutomationFrameWork.Driver;
 using OpenQA.Selenium.Internal;
 
 namespace AutomationFrameWork.ActionsKeys

@@ -6,12 +6,11 @@ using System.Threading;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class Android : Drivers
     {
-        private static readonly Android instance = new Android();
-        private static AndroidDriver<AppiumWebElement> android=null ;
+        private static readonly Android instance = new Android();     
         public static int port = 0;
         public static string address = string.Empty;
         static Android()
@@ -28,6 +27,7 @@ namespace AutomationFrameWork.Driver
                 return instance;
             }
         }
+        /*
         ThreadLocal<AndroidDriver<AppiumWebElement>> driver = new ThreadLocal<AndroidDriver<AppiumWebElement>>(() =>
         {
             GetInfo();
@@ -35,7 +35,8 @@ namespace AutomationFrameWork.Driver
             return android;
 
         });
-        public override object DriverOption
+        */
+        protected override object DriverOption
         {
             get
             {
@@ -54,8 +55,9 @@ namespace AutomationFrameWork.Driver
             }
         }
         public override void StartDriver()
-        {            
-            Drivers.DriverStorage = driver.Value;
+        {
+            GetInfo();
+            Drivers.DriverStorage = new AndroidDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), Android.Instance.DesiredCapabilities);
         }
 
         private new DesiredCapabilities DesiredCapabilities

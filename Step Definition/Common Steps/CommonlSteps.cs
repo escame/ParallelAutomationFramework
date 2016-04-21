@@ -1,6 +1,6 @@
 ﻿using System;
 using TechTalk.SpecFlow;
-using AutomationFrameWork.Base.Driver;
+using AutomationFrameWork.Driver;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Appium.Enums;
 using NUnit.Framework;

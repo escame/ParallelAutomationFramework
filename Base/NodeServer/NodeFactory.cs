@@ -7,9 +7,9 @@ namespace AutomationFrameWork.Driver
 
     public class NodeFactory
     {        
-        int portNumber, bootstrapPort,chromeDriverPort, processID;
-        string addressNumber;
-        Process appiumServer;
+        private int portNumber, bootstrapPort,chromeDriverPort, processID;
+        private string addressNumber;
+        private Process appiumServer;
         static NodeFactory ()
         {
         }

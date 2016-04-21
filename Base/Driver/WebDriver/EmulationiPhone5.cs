@@ -4,21 +4,22 @@ using AutomationFrameWork.Driver.Core;
 using System.Threading;
 using AutomationFrameWork.Helper;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone5 : Drivers
     {
-        private static readonly EmulationiPhone5 instance = new EmulationiPhone5();     
-        private static IWebDriver WebDriver = null;
+        private static readonly EmulationiPhone5 instance = new EmulationiPhone5();    
         static EmulationiPhone5()
         {
         }
+        /*
         ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
         {
 
             WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone5.Instance.DriverOption);
             return WebDriver;
         });
+        */
         private EmulationiPhone5()
         {
         }
@@ -32,10 +33,9 @@ namespace AutomationFrameWork.Driver
         }
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone5.Instance.DriverOption);
         }
-
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {

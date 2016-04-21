@@ -8,38 +8,49 @@ using NLog;
 using AutomationFrameWork.Base;
 using System.Net;
 using System.Net.NetworkInformation;
-using AutomationFrameWork.Driver.Core;
 using System.Threading;
 using System.Net.Sockets;
-using AutomationFrameWork.Base.Driver;
-using OpenQA.Selenium;
 using AutomationFrameWork.Driver;
-
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 namespace AutomationFrameWork
 {
     
-    [TestFixture("http://www.kbb.com",1,2,3)]
-    [TestFixture("http://www.dantri.com", 4, 5, 6)]
-    [TestFixture("http://vtc.vn", 7, 8, 9)]
-    [TestFixture("http://www.yahoo.com", 11, 12, 13)]
+    [TestFixture("http://www.kbb.com",1,2,3,DriverType.EmulationiPad)]
+    [TestFixture("http://www.kbb.com", 4, 5, 6, DriverType.Chrome)]
+    [TestFixture("http://vtc.vn", 7, 8, 9, DriverType.Firefox)]
+    [TestFixture("http://www.yahoo.com", 11, 12, 13, DriverType.InternetExplore)]
     [Parallelizable(ParallelScope.Self)]
     public class TestNlog
     {
         int P, BP, C;
         string add=string.Empty;
-        public TestNlog (string address,int p,int bp,int c)
+        DriverType T;
+        public TestNlog (string address,int p,int bp,int c,DriverType type)
         {
             add = address;
             P = p;            
             BP = bp;
             C = c;
-        }  
+            T = type;
+        }
+        [SetUp]
+        public void SetUp ()
+        {
+            if (T==DriverType.Chrome)
+            {
+                Console.WriteLine("abc");
+                ChromeOptions op = new ChromeOptions();
+                op.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
+                DriverFactory.Instance.DriverOptions = op;
+            }
+        }
         List<int> use;
         ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();
         [Test]
         public void node1 ()
-        {
-            DriverFactory.Instance.StartDriver(DriverType.Chrome);
+        {   
+            DriverFactory.Instance.StartDriver(T);
             Thread.Sleep(1000);
             DriverFactory.Instance.GetWebDriver.Url = add;
             Thread.Sleep(5000);

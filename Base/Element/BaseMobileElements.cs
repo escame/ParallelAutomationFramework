@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium.Appium;
-using AutomationFrameWork.Base.Driver;
+using AutomationFrameWork.Driver;
 namespace AutomationFrameWork.Base
 /// <summary>
 ///  This class will create MobileDriver for any class extend from it

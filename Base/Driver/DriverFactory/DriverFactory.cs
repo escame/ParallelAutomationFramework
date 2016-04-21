@@ -7,12 +7,13 @@ using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Appium;
 using System.Collections.Generic;
 using System;
+using System.Threading;
 
-namespace AutomationFrameWork.Base.Driver
+namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory
+    public class DriverFactory 
     {
-        private static readonly DriverFactory instance = new DriverFactory();
+        //private static readonly DriverFactory instance = new DriverFactory();
         static DriverFactory ()
         {
         }
@@ -23,9 +24,15 @@ namespace AutomationFrameWork.Base.Driver
         {
             get
             {
-                return instance;
+                return DriverFactory.DriverFactoryInstance.Value;
             }
         }
+        static ThreadLocal<DriverFactory> DriverFactoryInstance = new ThreadLocal<DriverFactory>(() =>
+        {
+
+            return new DriverFactory();
+
+        });
         /// <summary>
         /// This method is use for
         /// return WebDriver ex: Chrome, Firefox, IE
@@ -107,22 +114,7 @@ namespace AutomationFrameWork.Base.Driver
                     break;
 
             }
-        }
-        /// <summary>
-        /// This method is use
-        /// for set up chrome option in chrome driver
-        /// </summary>
-        public ChromeOptions ChromeOption
-        {
-            get
-            {
-                return Drivers.ChromeOptions;
-            }
-            set
-            {
-                Drivers.ChromeOptions = value;
-            }
-        }
+        }       
         /// <summary>
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...

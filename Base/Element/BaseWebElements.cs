@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using AutomationFrameWork.Base.Driver;
+using AutomationFrameWork.Driver;
 namespace AutomationFrameWork.Base
 /// <summary>
 ///  This class will create WebDriver for any class extend from it

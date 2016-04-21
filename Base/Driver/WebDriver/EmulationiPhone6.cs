@@ -3,20 +3,21 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 using AutomationFrameWork.Helper;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone6 : Drivers
     {
-        private static readonly EmulationiPhone6 instance = new EmulationiPhone6();       
-        private static IWebDriver WebDriver = null;
+        private static readonly EmulationiPhone6 instance = new EmulationiPhone6();     
         static EmulationiPhone6()
         {
         }
+        /*
         ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
         {
             WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone6.Instance.DriverOption);
             return WebDriver;
         });
+        */
         private EmulationiPhone6()
         {
         }
@@ -30,10 +31,10 @@ namespace AutomationFrameWork.Driver
         }
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone6.Instance.DriverOption);
         }
 
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {

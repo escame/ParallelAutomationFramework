@@ -6,12 +6,11 @@ using OpenQA.Selenium.Appium;
 using System.Threading;
 using OpenQA.Selenium.Remote;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class iOS : Drivers
     {
-        private static readonly iOS instance = new iOS();
-        private static IOSDriver<AppiumWebElement> iOSDriver = null;
+        private static readonly iOS instance = new iOS();   
         public static int port = 0;
         public static string address = string.Empty;
         static iOS()
@@ -28,13 +27,16 @@ namespace AutomationFrameWork.Driver
                 return instance;
             }
         }
+        /*
         ThreadLocal<IOSDriver<AppiumWebElement>> driver = new ThreadLocal<IOSDriver<AppiumWebElement>>(() =>
         {
+            GetInfo();
             iOSDriver = new IOSDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), iOS.Instance.DesiredCapabilities);
             return iOSDriver;
 
         });
-        public override object DriverOption
+        */
+        protected override object DriverOption
         {
             get
             {
@@ -54,9 +56,8 @@ namespace AutomationFrameWork.Driver
         }
         public override void StartDriver()
         {
-
             GetInfo();
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new IOSDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), iOS.Instance.DesiredCapabilities);
         }
 
         private new DesiredCapabilities DesiredCapabilities

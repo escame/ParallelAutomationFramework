@@ -5,21 +5,22 @@ using System.Threading;
 using OpenQA.Selenium.Remote;
 using AutomationFrameWork.Utils;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class Firefox : Drivers
     {
-        private static readonly Firefox instance = new Firefox();      
-        private static IWebDriver WebDriver = null;       
+        private static readonly Firefox instance = new Firefox();          
         static Firefox()
         {
         }
+        /*
         ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
         {
             WebDriver = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
             return WebDriver;
 
         });
+        */
         private Firefox()
         {
 
@@ -34,12 +35,12 @@ namespace AutomationFrameWork.Driver
         }
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
         }
         /// <summary>
         /// Not implement this method for firefox
         /// </summary>
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {

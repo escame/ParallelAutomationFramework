@@ -4,21 +4,22 @@ using OpenQA.Selenium.IE;
 using System.Threading;
 using AutomationFrameWork.Helper;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Core
 {
     public class InternetExplore : Drivers
     {
-        private static readonly InternetExplore instance = new InternetExplore();        
-        private static IWebDriver WebDriver = null;        
+        private static readonly InternetExplore instance = new InternetExplore();      
         static InternetExplore()
         {
         }
+        /*
         ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
         {
             WebDriver = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
             return WebDriver;
 
         });
+        */
         private InternetExplore()
         {
         }
@@ -33,10 +34,10 @@ namespace AutomationFrameWork.Driver
 
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
         }
 
-        public override object DriverOption
+        protected override object DriverOption
         {
             get
             {
