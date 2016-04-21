@@ -1,0 +1,44 @@
+----------NLog Demo Starting--------
+2016-04-21 16:52:04.3531|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-21 16:52:04.3601|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-21 16:52:04.3601|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-21 16:52:04.3601|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-21 16:52:04.3711|INFO|AutomationFrameWork.Base.ReportManager|Before in report Suite: --, from TestNlog.{no method}.
+2016-04-21 16:52:04.3711|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 2
+2016-04-21 16:52:04.3711|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog
+2016-04-21 16:52:04.3711|INFO|AutomationFrameWork.Base.ReportManager|Before in report Test: --, from TestNlog.Use1.
+2016-04-21 16:52:04.3711|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 16:52:04.3861|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.Use1
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|After in report Test: --, from TestNlog.Use1.
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|Test result Failed
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|Test error    at AutomationFrameWork.Driver.NodeFactory.isNodeServerStart() in D:\Workspace\Git\AutomationFramework\Base\NodeServer\NodeFactory.cs:line 131
+   at AutomationFrameWork.Driver.NodeFactory..ctor(String addressNumber, Int32 portNumber, Int32 bootstrapPort, Int32 chromeDriverPort) in D:\Workspace\Git\AutomationFramework\Base\NodeServer\NodeFactory.cs:line 31
+   at AutomationFrameWork.TestNlog.Use1() in D:\Workspace\Git\AutomationFramework\TestNlog.cs:line 58
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|Test result mess System.NullReferenceException : Object reference not set to an instance of an object.
+2016-04-21 16:53:21.2751|INFO|AutomationFrameWork.Base.ReportManager|Before in report Test: --, from TestNlog.Use2.
+2016-04-21 16:53:21.2931|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 16:53:21.2931|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.Use2
+2016-04-21 16:53:23.0122|INFO|AutomationFrameWork.Base.ReportManager|After in report Test: --, from TestNlog.Use2.
+2016-04-21 16:53:23.0122|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 16:53:23.0122|INFO|AutomationFrameWork.Base.ReportManager|Test result Failed
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|Test error    at AutomationFrameWork.Driver.NodeFactory.isNodeServerStart() in D:\Workspace\Git\AutomationFramework\Base\NodeServer\NodeFactory.cs:line 131
+   at AutomationFrameWork.Driver.NodeFactory..ctor(String addressNumber, Int32 portNumber, Int32 bootstrapPort, Int32 chromeDriverPort) in D:\Workspace\Git\AutomationFramework\Base\NodeServer\NodeFactory.cs:line 31
+   at AutomationFrameWork.TestNlog.Use2() in D:\Workspace\Git\AutomationFramework\TestNlog.cs:line 67
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|Test result mess System.NullReferenceException : Object reference not set to an instance of an object.
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|After in report Suite: --, from TestNlog.{no method}.
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 2
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|Test result Failed
+2016-04-21 16:53:23.0262|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|Test result mess One or more child tests had errors
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--False
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--False
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--False
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--False
+2016-04-21 16:53:23.0422|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--False
+2016-04-21 16:53:23.0582|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--False
+2016-04-21 16:53:23.0582|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--True
+2016-04-21 16:53:23.0582|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-21 16:53:23.0582|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 2
+2016-04-21 16:53:23.0582|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+----------NLog Demo Ending-----------

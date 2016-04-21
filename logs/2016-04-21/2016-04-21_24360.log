@@ -1,0 +1,40 @@
+----------NLog Demo Starting--------
+2016-04-21 17:05:19.2290|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Before in report Suite: --, from TestNlog.{no method}.
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 2
+2016-04-21 17:05:19.2360|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog
+2016-04-21 17:05:22.3631|INFO|AutomationFrameWork.Base.ReportManager|Before in report Test: --, from TestNlog.Use1.
+2016-04-21 17:05:22.3631|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 17:05:22.3631|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.Use1
+2016-04-21 17:05:22.3631|INFO|AutomationFrameWork.Base.ReportManager|After in report Test: --, from TestNlog.Use1.
+2016-04-21 17:05:22.3631|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 17:05:22.3761|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-21 17:05:22.3761|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-21 17:05:22.3761|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+2016-04-21 17:05:26.0030|INFO|AutomationFrameWork.Base.ReportManager|Before in report Test: --, from TestNlog.Use2.
+2016-04-21 17:05:26.0030|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 17:05:26.0030|INFO|AutomationFrameWork.Base.ReportManager|Start test AutomationFrameWork.TestNlog.Use2
+2016-04-21 17:05:26.0030|INFO|AutomationFrameWork.Base.ReportManager|After in report Test: --, from TestNlog.Use2.
+2016-04-21 17:05:26.0030|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 1
+2016-04-21 17:05:26.0160|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-21 17:05:26.0160|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-21 17:05:26.0160|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+2016-04-21 17:05:26.3540|INFO|AutomationFrameWork.Base.ReportManager|After in report Suite: --, from TestNlog.{no method}.
+2016-04-21 17:05:26.3650|INFO|AutomationFrameWork.Base.ReportManager|Total Test Case: 2
+2016-04-21 17:05:26.3650|INFO|AutomationFrameWork.Base.ReportManager|Test result Passed
+2016-04-21 17:05:26.3650|INFO|AutomationFrameWork.Base.ReportManager|Test error 
+2016-04-21 17:05:26.3650|INFO|AutomationFrameWork.Base.ReportManager|Test result mess 
+2016-04-21 17:05:26.3650|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--True
+2016-04-21 17:05:26.3870|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--True
+2016-04-21 17:05:26.3870|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--True
+2016-04-21 17:05:26.3920|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--True
+2016-04-21 17:05:26.3920|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--True
+2016-04-21 17:05:26.3920|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--True
+2016-04-21 17:05:26.4070|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--True
+2016-04-21 17:05:26.4070|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 2
+2016-04-21 17:05:26.4070|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-21 17:05:26.4070|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+----------NLog Demo Ending-----------

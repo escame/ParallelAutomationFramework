@@ -153,6 +153,7 @@
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailInMobile.cs" />
+    <Compile Include="TestNlog - Copy.cs" />
     <Compile Include="TestNlog.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />
     <Compile Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature.cs">

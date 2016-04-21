@@ -13,8 +13,7 @@ namespace AutomationFrameWork.Driver.Core
         static ThreadLocal<object> driverStored = new ThreadLocal<object>();
         static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
-        static ThreadLocal<Dictionary<int, List<int>>> portStorage=new ThreadLocal<Dictionary<int, List<int>>>();       
+        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();             
         static Dictionary<int,Boolean> freePort = new Dictionary<int, Boolean>();       
         /// <summary>
         /// This method use for close driver 
@@ -126,35 +125,6 @@ namespace AutomationFrameWork.Driver.Core
                 }
             }
         }        
-        /// <summary>
-        /// This method is use 
-        /// for storeage port in use for run appium
-        /// </summary>
-        public static Dictionary<int,List<int>> PortStorage
-        {
-            get
-            {
-                return portStorage.Value;
-            }
-            set
-            {
-                if (!portStorage.IsValueCreated)
-                    portStorage.Value = new Dictionary<int, List<int>>();
-                foreach (KeyValuePair<int, List<int>> port in value)
-                {
-                    try
-                    {
-                        portStorage.Value.Add(port.Key, port.Value);
-                    }
-                    catch (System.ArgumentException e)
-                    {
-                        System.Console.WriteLine("Catch "+e.Message+" for thread "+ port.Key);
-                        portStorage.Value[port.Key].AddRange(port.Value);
-                    }
-
-                }
-            }
-        }
         abstract public void StartDriver();
         abstract public object DriverOption { get; }
         

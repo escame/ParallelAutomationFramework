@@ -20,7 +20,7 @@ namespace AutomationFrameWork
     [ReportManager]
     [TestFixture]
     [Parallelizable(ParallelScope.Self)]
-    public class TestNlog
+    public class TestNlog2
     {
         static NodeFactory node;
         static List<int> use;
@@ -28,7 +28,7 @@ namespace AutomationFrameWork
         [SetUp]
         public void GetPort()
         {
-            TestNlog.use = new List<int>();
+            TestNlog2.use = new List<int>();
             if (Helper.DriverHelper.UsedPort.Count == 0 || Helper.DriverHelper.UsedPort == null)
                 Console.WriteLine("User port is null free port full");
             else
@@ -60,7 +60,7 @@ namespace AutomationFrameWork
         {
             Thread.Sleep(45000);
             Console.WriteLine(Drivers.FreePort.Count);
-            foreach (int port in TestNlog.use)
+            foreach (int port in TestNlog2.use)
                 Console.WriteLine("Use " + port);              
         }
         [Test]
@@ -68,14 +68,14 @@ namespace AutomationFrameWork
         {
             
             Console.WriteLine(Drivers.FreePort.Count);
-            foreach (int port in TestNlog.use)
+            foreach (int port in TestNlog2.use)
                 Console.WriteLine("Use " + port);
             Thread.Sleep(30000);
         }
         [OneTimeSetUp]
         public void Init()
         {
-            Dictionary<int, Boolean> temp = Helper.DriverHelper.Instance.GetAvailablePort(75, 82);
+            Dictionary<int, Boolean> temp = Helper.DriverHelper.Instance.GetAvailablePort(79, 89);
             foreach (KeyValuePair<int, Boolean> port in temp)
             {
                 Console.WriteLine(port);

@@ -24,13 +24,12 @@ namespace AutomationFrameWork.Driver
             this.PortNumber = portNumber;           
             appiumServer = new Process();
             appiumServer.StartInfo.FileName = "cmd";
-            appiumServer.StartInfo.Arguments = "/c node C:/Users/Minh/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort+ " --chromedriver-port "+this.ChromeDriverPort;
+            appiumServer.StartInfo.Arguments = "/c node C:/Users/minhhoang/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort+ " --chromedriver-port "+this.ChromeDriverPort;
             appiumServer.StartInfo.UseShellExecute = false;
             appiumServer.StartInfo.RedirectStandardOutput = true;                      
             appiumServer.Start();
             while (!isNodeServerStart()) ;
-            this.ProcessId = appiumServer.Id;
-            Console.WriteLine(this.ProcessId);
+            this.ProcessId = appiumServer.Id;            
         }
         /// <summary>
         /// This set port number for appium can listen
@@ -126,7 +125,7 @@ namespace AutomationFrameWork.Driver
         /// </summary>
         /// <returns></returns>
         private Boolean isNodeServerStart ()
-        {          
+        {           
             return (appiumServer == null || appiumServer.StandardOutput.ReadLine().Contains("started on"));
         }
     }
