@@ -13,17 +13,17 @@ namespace AutomationFrameWork.Driver.Core
         static ThreadLocal<object> driverStored = new ThreadLocal<object>();
         static ThreadLocal<ChromeOptions> chromeOption = new ThreadLocal<ChromeOptions>();
         static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();             
-        static Dictionary<int,Boolean> freePort = new Dictionary<int, Boolean>();       
+        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
+        static Dictionary<int, Boolean> freePort = new Dictionary<int, Boolean>();
         /// <summary>
         /// This method use for close driver 
         /// </summary>
-        public static void CloseDriver()
+        public static void CloseDriver ()
         {
             IWebDriver driver = (IWebDriver)driverStored.Value;
             driver.Quit();
             driver.Dispose();
-            driverStored.Value = null;            
+            driverStored.Value = null;
         }
         /// <summary>
         /// This method is use 
@@ -95,38 +95,36 @@ namespace AutomationFrameWork.Driver.Core
         /// for return FreePort for run appium
         /// </summary>
         public static Dictionary<int, Boolean> FreePort
-        { 
+        {
             get
             {
-                lock (syncRoot)
-                {
-                    return freePort;
-                }
+                return freePort;
             }
             set
             {
-                lock (syncRoot)
+                try
                 {
-                    try
-                    {
-                        foreach (KeyValuePair<int, Boolean> values in value)
-                            for (int port=0; port<Drivers.FreePort.Count||Drivers.FreePort.Count==0;port++)
-                            {
-                                if (!Drivers.FreePort.ContainsKey(values.Key))
-                                    freePort.Add(values.Key, values.Value);
-                                else
-                                    freePort[values.Key] = values.Value;
-                            }
-                    }
-                    catch (ArgumentException e)
-                    {
-                        System.Console.WriteLine(e.Message);
-                    }
+                    foreach (KeyValuePair<int, Boolean> values in value)
+                        for (int port = 0; port < Drivers.FreePort.Count || Drivers.FreePort.Count == 0; port++)
+                        {
+                            if (!Drivers.FreePort.ContainsKey(values.Key))
+                                freePort.Add(values.Key, values.Value);
+                            else
+                                freePort[values.Key] = values.Value;
+                        }
                 }
+                catch (ArgumentException e)
+                {
+                    System.Console.WriteLine(e.Message);
+                }
+
             }
-        }        
-        abstract public void StartDriver();
-        abstract public object DriverOption { get; }
-        
+        }
+        abstract public void StartDriver ();
+        abstract public object DriverOption
+        {
+            get;
+        }
+
     }
 }

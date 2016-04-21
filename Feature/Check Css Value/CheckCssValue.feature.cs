@@ -76,7 +76,7 @@ namespace AutomationFrameWork.Feature.CheckCSSValue
 #line 9
  testRunner.Given("I start \'ipad\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
- testRunner.And("I navigate to \'dsadsa\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I navigate to \'google\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -91,7 +91,7 @@ namespace AutomationFrameWork.Feature.CheckCSSValue
 #line 14
  testRunner.Given("I start \'iphone5\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 15
- testRunner.And("I navigate to \'sadsa\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I navigate to \'google\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

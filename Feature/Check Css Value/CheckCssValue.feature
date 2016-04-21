@@ -7,9 +7,9 @@
 
 	Scenario: Check CSS ipad
 	Given I start 'ipad' browser to run
-	And I navigate to 'dsadsa'
+	And I navigate to 'google'
 
 
 		Scenario: Check CSS iphone5
 	Given I start 'iphone5' browser to run
-	And I navigate to 'sadsa'
+	And I navigate to 'google'

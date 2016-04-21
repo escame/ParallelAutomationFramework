@@ -8,15 +8,15 @@ namespace AutomationFrameWork.Driver
 {
     public class Chrome : Drivers
     {
-        private static readonly Chrome instance = new Chrome();        
+        //private static readonly Chrome instance = new Chrome();        
         private static IWebDriver WebDriver = null;
         static Chrome()
         {
         }
-        ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
+        static ThreadLocal<Chrome> ChromeInstance = new ThreadLocal<Chrome>(() =>
         {
-            WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.Instance.DriverOption);
-            return WebDriver;
+            
+            return new Chrome();
 
         });
         private Chrome()
@@ -28,12 +28,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return instance;
+                return Chrome.ChromeInstance.Value;
             }
         }
         public override void StartDriver()
         {
-            Drivers.DriverStorage = driver.Value;
+            Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.Instance.DriverOption); 
         }
 
         public override object DriverOption

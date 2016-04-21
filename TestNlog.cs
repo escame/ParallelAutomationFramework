@@ -17,18 +17,51 @@ using AutomationFrameWork.Driver;
 
 namespace AutomationFrameWork
 {
-    [ReportManager]
-    [TestFixture]
+    
+    [TestFixture("http://www.kbb.com",1,2,3)]
+    [TestFixture("http://www.dantri.com", 4, 5, 6)]
+    [TestFixture("http://vtc.vn", 7, 8, 9)]
+    [TestFixture("http://www.yahoo.com", 11, 12, 13)]
     [Parallelizable(ParallelScope.Self)]
     public class TestNlog
     {
-        static NodeFactory node;
-        static List<int> use;
+        int P, BP, C;
+        string add=string.Empty;
+        public TestNlog (string address,int p,int bp,int c)
+        {
+            add = address;
+            P = p;            
+            BP = bp;
+            C = c;
+        }  
+        List<int> use;
         ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();
+        [Test]
+        public void node1 ()
+        {
+            DriverFactory.Instance.StartDriver(DriverType.Chrome);
+            Thread.Sleep(1000);
+            DriverFactory.Instance.GetWebDriver.Url = add;
+            Thread.Sleep(5000);
+            DriverFactory.Instance.CloseDriver();
+            //NodeFactory node = new NodeFactory();
+            //Console.WriteLine(add + " " + P + " " + BP + " " + C);
+            //NodeFactory.Instance.strartNode(add, P, BP, C);
+            //NodeFactory.Instance.strartNode(add,P,BP,C);
+            //Thread.Sleep(5000);
+            //Console.WriteLine(NodeFactory.Instance.PortNumber);
+            //Console.WriteLine(NodeFactory.Instance.BootstrapPort);
+            //Console.WriteLine(NodeFactory.Instance.ChromeDriverPort);
+            //Console.WriteLine(NodeFactory.Instance.AddressNumber);
+            //NodeFactory.Instance.closeNodeServer();
+            //NodeFactory.Instance.closeNodeServer();
+        }
+       
+        /*
         [SetUp]
         public void GetPort()
         {
-            TestNlog.use = new List<int>();
+            use = new List<int>();
             if (Helper.DriverHelper.UsedPort.Count == 0 || Helper.DriverHelper.UsedPort == null)
                 Console.WriteLine("User port is null free port full");
             else
@@ -38,7 +71,7 @@ namespace AutomationFrameWork
                 }
             foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
                 Console.WriteLine("Free port set up " + port.Key + "--" + port.Value);
-            List<int> use = Helper.DriverHelper.Instance.GetPort();
+            use = Helper.DriverHelper.Instance.GetPort();
             portstored.Value = use;
             foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
                 Console.WriteLine("Free port after get port in set up: "+port.Key + "--" + port.Value);
@@ -57,21 +90,20 @@ namespace AutomationFrameWork
         }
         [Test]
         public void Use1()
-        {
-            Thread.Sleep(45000);
+        {          
             Console.WriteLine(Drivers.FreePort.Count);
-            foreach (int port in TestNlog.use)
+            foreach (int port in use)
                 Console.WriteLine("Use " + port);              
         }
         [Test]
         public void Use2()
-        {
-            
+        {            
             Console.WriteLine(Drivers.FreePort.Count);
-            foreach (int port in TestNlog.use)
+            foreach (int port in use)
                 Console.WriteLine("Use " + port);
-            Thread.Sleep(30000);
+            
         }
+        /*
         [OneTimeSetUp]
         public void Init()
         {
@@ -90,6 +122,7 @@ namespace AutomationFrameWork
             ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
             ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
         }
+        /*
         [OneTimeTearDown]
         public void Clean()
         {
@@ -99,7 +132,8 @@ namespace AutomationFrameWork
             ReportManager.logger.Info("Total Pass: " + TestContext.CurrentContext.Result.PassCount);
             ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
             ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
-        }       
+        }  
+        */
     }
 
 }
