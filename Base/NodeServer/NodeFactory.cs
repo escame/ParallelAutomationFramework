@@ -31,7 +31,7 @@ namespace AutomationFrameWork.Driver
         /// <param name="portNumber"></param>
         /// <param name="bootstrapPort"></param>
         /// <param name="timeOut"></param>
-        public void  strartNode (String addressNumber, int portNumber, int bootstrapPort,int chromeDriverPort)
+        public void  StrartNodeServer (String addressNumber, int portNumber, int bootstrapPort,int chromeDriverPort)
         {
             this.AddressNumber = addressNumber;
             this.BootstrapPort = bootstrapPort;
@@ -40,10 +40,10 @@ namespace AutomationFrameWork.Driver
             appiumServer = new Process();
             appiumServer.StartInfo.FileName = "cmd";
             appiumServer.StartInfo.Arguments = "/c node C:/Users/minh/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort+ " --chromedriver-port "+this.ChromeDriverPort;
-            appiumServer.StartInfo.UseShellExecute = true;
-            appiumServer.StartInfo.RedirectStandardOutput = false;                      
+            appiumServer.StartInfo.UseShellExecute = false;
+            appiumServer.StartInfo.RedirectStandardOutput = true;                      
             appiumServer.Start();
-            //while (!isNodeServerStart()) ;
+            while (!isNodeServerStart()) ;
             this.ProcessId = appiumServer.Id;            
         }
         /// <summary>
@@ -125,7 +125,7 @@ namespace AutomationFrameWork.Driver
         /// <summary>
         /// This close node server with has PID 
         /// </summary>
-        public void closeNodeServer ()
+        public void CloseNodeServer ()
         {            
             Process closeNodeServer = new Process();
             closeNodeServer.StartInfo.FileName = "Taskkill";

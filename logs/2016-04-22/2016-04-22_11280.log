@@ -1,0 +1,98 @@
+----------NLog Demo Starting--------
+2016-04-22 08:05:39.9342|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-22 08:05:39.9342|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-22 08:05:39.9342|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-22 08:05:39.9342|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-22 08:05:39.9427|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:39.9427|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:39.9427|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:39.9427|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:39.9577|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-22 08:05:39.9577|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-22 08:05:39.9577|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-22 08:05:39.9577|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-22 08:05:39.9577|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:39.9707|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:39.9707|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:39.9707|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 75--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--False
+2016-04-22 08:05:40.0022|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--False
+2016-04-22 08:05:40.0202|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--False
+2016-04-22 08:05:40.0202|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 76--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--False
+2016-04-22 08:05:40.0202|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--False
+2016-04-22 08:05:40.0202|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--False
+2016-04-22 08:05:40.0202|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 77--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 78--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--False
+2016-04-22 08:05:40.0342|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--False
+2016-04-22 08:05:40.0502|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--False
+2016-04-22 08:05:40.0502|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 79--False
+2016-04-22 08:05:40.0502|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--False
+2016-04-22 08:05:40.0502|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 83--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 81--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 83--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 84--False
+2016-04-22 08:05:40.0642|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 82--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 83--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 83--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 84--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 85--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 84--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 85--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 84--False
+2016-04-22 08:05:40.0799|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 85--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 86--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 85--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 86--False
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 87--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 86--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 87--False
+2016-04-22 08:05:40.0975|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 86--False
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 88--True
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 87--False
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 87--False
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 88--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 88--True
+2016-04-22 08:05:40.1130|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 89--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 88--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 89--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 89--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 90--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 90--True
+2016-04-22 08:05:40.1280|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 89--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 90--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 90--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 91--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 91--True
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 92--True
+2016-04-22 08:05:40.1440|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 91--True
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 91--True
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 92--True
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 92--True
+2016-04-22 08:05:40.1585|INFO|AutomationFrameWork.Base.ReportManager|check onetime teardown: 92--True
+2016-04-22 08:05:40.1750|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 1
+2016-04-22 08:05:40.1750|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:40.1750|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 1
+2016-04-22 08:05:40.1750|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:40.1750|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 08:05:40.1915|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 1
+2016-04-22 08:05:40.1915|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:40.1915|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+2016-04-22 08:05:40.1915|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 1
+2016-04-22 08:05:40.2050|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0
+----------NLog Demo Ending-----------

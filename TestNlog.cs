@@ -10,16 +10,17 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Net.Sockets;
+using AutomationFrameWork.Driver.Core;
 using AutomationFrameWork.Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 namespace AutomationFrameWork
 {
     
-    [TestFixture("http://www.kbb.com",1,2,3,DriverType.EmulationiPad)]
-    [TestFixture("http://www.kbb.com", 4, 5, 6, DriverType.Chrome)]
-    [TestFixture("http://vtc.vn", 7, 8, 9, DriverType.Firefox)]
-    [TestFixture("http://www.yahoo.com", 11, 12, 13, DriverType.InternetExplore)]
+    [TestFixture("127.0.0.1",1,2,3,DriverType.EmulationiPad)]
+    [TestFixture("127.0.0.1", 4, 5, 6, DriverType.Chrome)]
+    [TestFixture("127.0.0.1", 7, 8, 9, DriverType.Firefox)]
+    [TestFixture("127.0.0.1", 11, 12, 13, DriverType.InternetExplore)]
     [Parallelizable(ParallelScope.Self)]
     public class TestNlog
     {
@@ -33,31 +34,29 @@ namespace AutomationFrameWork
             BP = bp;
             C = c;
             T = type;
-        }
-        [SetUp]
-        public void SetUp ()
-        {
-            if (T==DriverType.Chrome)
-            {
-                Console.WriteLine("abc");
-                ChromeOptions op = new ChromeOptions();
-                op.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
-                DriverFactory.Instance.DriverOptions = op;
-            }
-        }
+        }      
         List<int> use;
         ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();
         [Test]
         public void node1 ()
-        {   
-            DriverFactory.Instance.StartDriver(T);
-            Thread.Sleep(1000);
-            DriverFactory.Instance.GetWebDriver.Url = add;
-            Thread.Sleep(5000);
-            DriverFactory.Instance.CloseDriver();
+        {
+            /*
+             Console.WriteLine(add + " " + P + " " + BP + " " + C);
+             DriverFactory.Instance.StartDriver(T);
+             Thread.Sleep(1000);
+             DriverFactory.Instance.GetWebDriver.Url = add;
+             Thread.Sleep(5000);
+             //Console.WriteLine(DriverFactory.Instance.GetWebDriver.Title);
+             DriverFactory.Instance.CloseDriver();
+             */
             //NodeFactory node = new NodeFactory();
-            //Console.WriteLine(add + " " + P + " " + BP + " " + C);
-            //NodeFactory.Instance.strartNode(add, P, BP, C);
+            
+            List<int> temp=Helper.DriverHelper.Instance.GetPort();
+            Console.WriteLine(add + " " + temp
+            .ElementAt(0) + " " + temp.ElementAt(1) + " " + temp.ElementAt(2));
+            NodeFactory.Instance.StrartNodeServer(add, temp.ElementAt(0), temp.ElementAt(1), temp.ElementAt(2));
+            Thread.Sleep(1000);
+            NodeFactory.Instance.CloseNodeServer();
             //NodeFactory.Instance.strartNode(add,P,BP,C);
             //Thread.Sleep(5000);
             //Console.WriteLine(NodeFactory.Instance.PortNumber);
@@ -114,11 +113,12 @@ namespace AutomationFrameWork
                 Console.WriteLine("Use " + port);
             
         }
-        /*
+        */
+        
         [OneTimeSetUp]
         public void Init()
         {
-            Dictionary<int, Boolean> temp = Helper.DriverHelper.Instance.GetAvailablePort(75, 82);
+            Dictionary<int, Boolean> temp = Helper.DriverHelper.Instance.GetAvailablePort(75, 92);
             foreach (KeyValuePair<int, Boolean> port in temp)
             {
                 Console.WriteLine(port);
@@ -133,7 +133,7 @@ namespace AutomationFrameWork
             ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
             ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
         }
-        /*
+        
         [OneTimeTearDown]
         public void Clean()
         {
@@ -144,7 +144,7 @@ namespace AutomationFrameWork
             ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
             ReportManager.logger.Info("Total Error: " + TestContext.CurrentContext.Result.SkipCount);
         }  
-        */
+        
     }
 
 }
