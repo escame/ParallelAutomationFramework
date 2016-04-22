@@ -1,8 +1,6 @@
-﻿using AutomationFrameWork.Driver.Core;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Drawing;
-using System.Threading;
 using AutomationFrameWork.Helper;
 namespace AutomationFrameWork.Driver.Core
 {
@@ -12,15 +10,7 @@ namespace AutomationFrameWork.Driver.Core
         private static IWebDriver WebDriver = null;
         static EmulationiPad()
         {
-        }
-        /*
-        ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
-        {
-            WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPad.Instance.DriverOption);
-            WebDriver.Manage().Window.Size = new Size(1024, 768);
-            return WebDriver;
-        });
-        */
+        }      
         private EmulationiPad()
         {
         }
@@ -32,7 +22,7 @@ namespace AutomationFrameWork.Driver.Core
                 return instance;
             }
         }
-        public override void StartDriver()
+        protected override void StartDriver()
         {
             WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPad.Instance.DriverOption);
             WebDriver.Manage().Window.Size = new Size(1024, 768);

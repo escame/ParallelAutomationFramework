@@ -1,7 +1,4 @@
-﻿using AutomationFrameWork.Driver.Core;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
+﻿using OpenQA.Selenium.Chrome;
 using AutomationFrameWork.Helper;
 
 namespace AutomationFrameWork.Driver.Core
@@ -16,20 +13,18 @@ namespace AutomationFrameWork.Driver.Core
         {
 
         }
-
+        
         public static Chrome Instance
         {
             get
             {
-                return instance;
-                //return Chrome.ChromeInstance.Value;
+                return instance;               
             }
         }
-        public override void StartDriver()
+        protected override void StartDriver()
         {
-            Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.Instance.DriverOption); 
-        }
-
+            Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.instance.DriverOption); 
+        }     
         protected override object DriverOption
         {
             get

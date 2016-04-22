@@ -1,8 +1,6 @@
-﻿using AutomationFrameWork.Driver.Core;
-using System;
+﻿using System;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
-using System.Threading;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 
@@ -15,9 +13,8 @@ namespace AutomationFrameWork.Driver.Core
         public static string address = string.Empty;
         static Android()
         {
-
         }
-        private Android()
+        private Android ()
         {
         }
         public static Android Instance
@@ -26,16 +23,7 @@ namespace AutomationFrameWork.Driver.Core
             {
                 return instance;
             }
-        }
-        /*
-        ThreadLocal<AndroidDriver<AppiumWebElement>> driver = new ThreadLocal<AndroidDriver<AppiumWebElement>>(() =>
-        {
-            GetInfo();
-            android = new AndroidDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), Android.Instance.DesiredCapabilities);
-            return android;
-
-        });
-        */
+        }       
         protected override object DriverOption
         {
             get
@@ -47,16 +35,16 @@ namespace AutomationFrameWork.Driver.Core
         {
             Dictionary<string, string> info = (Dictionary<string, string>)Drivers.DriverOptions;         
             if (info == null)
-                throw new ArgumentException("Please add appium information for connect to server in DriverFactory.Instance.AppiumInfo(String address,int port)");
+                throw new ArgumentException("Please add Appium Server information for connect to server in DriverFactory.Instance.RemoteInfo(String address,int port)");
             else
             {
                 address = info["address"];
                 port=Int32.Parse(info["port"]);
             }
         }
-        public override void StartDriver()
+        protected override void StartDriver()
         {
-            GetInfo();
+            GetInfo ();
             Drivers.DriverStorage = new AndroidDriver<AppiumWebElement>(new Uri("http://" + address + ":" + port + "/wd/hub"), Android.Instance.DesiredCapabilities);
         }
 

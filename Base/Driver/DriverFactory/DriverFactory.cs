@@ -79,40 +79,8 @@ namespace AutomationFrameWork.Driver
          /// </summary>
          /// <param name="driverType"></param>
         public void StartDriver (DriverType driverType)
-        {
-            switch (driverType)
-            {
-                case DriverType.Chrome:
-                    Chrome.Instance.StartDriver();
-                    break;
-                case DriverType.EmulationiPad:
-                    EmulationiPad.Instance.StartDriver();
-                    break;
-                case DriverType.EmulationiPhone6:
-                    EmulationiPhone6.Instance.StartDriver();
-                    break;
-                case DriverType.EmulationiPhone5:
-                    EmulationiPhone5.Instance.StartDriver();
-                    break;
-                case DriverType.EmulationiPhone4:
-                    EmulationiPhone4.Instance.StartDriver();
-                    break;
-                case DriverType.InternetExplore:
-                    InternetExplore.Instance.StartDriver();
-                    break;
-                case DriverType.Firefox:
-                    Firefox.Instance.StartDriver();
-                    break;
-                case DriverType.PhantomJS:
-                    PhantomJS.Instance.StartDriver();
-                    break;
-                case DriverType.Android:
-                    Android.Instance.StartDriver();
-                    break;
-                case DriverType.iOS:
-                    iOS.Instance.StartDriver();
-                    break;
-            }
+        {           
+            Drivers.StartDrivers(driverType);
         }       
         /// <summary>
         /// This method is use for
@@ -134,7 +102,7 @@ namespace AutomationFrameWork.Driver
         /// </summary>
         /// <param name="address"></param>
         /// <param name="port"></param>
-        public void AppiumInfo (string address, int port)
+        public void RemoteInfo (string address, int port)
         {           
             Dictionary<string, string> info = new Dictionary<string, string>();
             info.Add("address", address);

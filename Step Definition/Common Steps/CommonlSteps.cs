@@ -118,7 +118,7 @@ namespace MobileFrameWork.Step_Definition.Common_Steps
         public void GivenAppiumServer(string address, int portListen)
         {
             DriverFactory.Instance.DesiredCapabilities = capabilities;
-            DriverFactory.Instance.AppiumInfo(address, portListen);
+            DriverFactory.Instance.RemoteInfo(address, portListen);
             if (DeviceType.ToLower().Equals("android"))
                 DriverFactory.Instance.StartDriver(DriverType.Android);
             else if (DeviceType.ToLower().Equals("ios"))

@@ -34,6 +34,7 @@ namespace AutomationFrameWork.Driver
         /// <param name="timeOut"></param>
         public void  StrartNodeServer (String addressNumber, int portNumber, int bootstrapPort,int chromeDriverPort)
         {
+            existNodeJS();
             this.AddressNumber = addressNumber;
             this.BootstrapPort = bootstrapPort;
             this.PortNumber = portNumber;
@@ -42,9 +43,9 @@ namespace AutomationFrameWork.Driver
             appiumServer.StartInfo.FileName = "cmd";
             appiumServer.StartInfo.Arguments = "/c node \""+ Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js") + "\" -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort + " --chromedriver-port " + this.ChromeDriverPort;
             appiumServer.StartInfo.UseShellExecute = false;
-            appiumServer.StartInfo.RedirectStandardOutput = false;                      
+            appiumServer.StartInfo.RedirectStandardOutput = true;                      
             appiumServer.Start();
-            //while (!isNodeServerStart()) ;
+            while (!isNodeServerStart()) ;
             this.ProcessId = appiumServer.Id;            
         }
         /// <summary>
@@ -144,6 +145,11 @@ namespace AutomationFrameWork.Driver
         private Boolean isNodeServerStart ()
         {           
             return (appiumServer == null || appiumServer.StandardOutput.ReadLine().Contains("started on"));
+        }
+        private void existNodeJS ()
+        {
+            if (Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js").Contains("%APPIUM%"))
+                throw new OperationCanceledException("Can not find Nodejs.exe in environment, please check environment");
         }
     }
 }

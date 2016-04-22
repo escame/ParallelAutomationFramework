@@ -14,4 +14,3 @@
         Remote,
         PhantomJS,
     }
-

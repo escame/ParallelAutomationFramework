@@ -132,6 +132,7 @@
     <Compile Include="ActionKeywords\MobileKeywords.cs" />
     <Compile Include="ActionKeywords\WebKeywords.cs" />
     <Compile Include="Base\Driver\Core\DriverType.cs" />
+    <Compile Include="Base\Driver\RemoteDriver\Remote.cs" />
     <Compile Include="Base\Driver\WebDriver\EmulationiPhone4.cs" />
     <Compile Include="Base\Driver\WebDriver\EmulationiPhone5.cs" />
     <Compile Include="Base\Driver\WebDriver\EmulationiPhone6.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Base\Reporter\ReportManager.cs" />
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
+    <Compile Include="Feature\Login Mail In Mobile\LoginMailParalell.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailInMobile.cs" />
     <Compile Include="TestNlog.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />

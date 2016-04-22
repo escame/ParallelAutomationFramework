@@ -1,0 +1,5 @@
+----------NLog Demo Starting--------
+2016-04-22 23:29:20.9915|INFO|AutomationFrameWork.Base.ReportManager|This run one time
+2016-04-22 23:29:21.0160|INFO|AutomationFrameWork.Base.ReportManager|Total Pass: 0
+2016-04-22 23:29:21.0255|INFO|AutomationFrameWork.Base.ReportManager|Total Fail: 0
+2016-04-22 23:29:21.0440|INFO|AutomationFrameWork.Base.ReportManager|Total Error: 0

@@ -4,15 +4,40 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    abstract public class Drivers
+    public class Drivers 
     {
         static readonly object syncRoot = new Object();
-        static ThreadLocal<object> driverStored = new ThreadLocal<object>();
-        static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        static ThreadLocal<object> optionStorage = new ThreadLocal<object>();        
+        protected static ThreadLocal<object> driverStored = new ThreadLocal<object>();
+        protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>(); 
+        /// <summary>
+        /// This method is use for
+        /// scan all class driver with correct name via DriverType 
+        /// and invoke mehod StartDriver
+        /// </summary>
+        /// <param name="driverType"></param>
+        protected static void StartDrivers (DriverType driverType)
+        {
+            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(t => t.Namespace == "AutomationFrameWork.Driver.Core")
+                      .ToList();
+            foreach (Type className in listClass)
+            {
+                if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
+                {
+                    MethodInfo method = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo field = className.GetField("instance",
+                        BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+                    object instance = field.GetValue(null);
+                    method.Invoke(instance, Type.EmptyTypes);
+                }
+            }
+        }
         /// <summary>
         /// This method use for close driver 
         /// </summary>
@@ -71,11 +96,10 @@ namespace AutomationFrameWork.Driver.Core
                 optionStorage.Value = value;
             }
         }        
-        virtual public void StartDriver() { }
+        virtual protected void StartDriver() { }
         virtual protected object DriverOption
         {
             get;
-        }
-
+        }       
     }
 }

@@ -1,9 +1,5 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using AutomationFrameWork.Driver.Core;
-using System.Threading;
+﻿using OpenQA.Selenium.Chrome;
 using AutomationFrameWork.Helper;
-
 namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone5 : Drivers
@@ -11,15 +7,7 @@ namespace AutomationFrameWork.Driver.Core
         private static readonly EmulationiPhone5 instance = new EmulationiPhone5();    
         static EmulationiPhone5()
         {
-        }
-        /*
-        ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(() =>
-        {
-
-            WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone5.Instance.DriverOption);
-            return WebDriver;
-        });
-        */
+        }       
         private EmulationiPhone5()
         {
         }
@@ -31,7 +19,7 @@ namespace AutomationFrameWork.Driver.Core
                 return instance;
             }
         }
-        public override void StartDriver()
+        protected override void StartDriver()
         {
             Drivers.DriverStorage = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone5.Instance.DriverOption);
         }
