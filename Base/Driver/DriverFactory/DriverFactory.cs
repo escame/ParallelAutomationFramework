@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory 
+    public class DriverFactory : Drivers
     {
         //private static readonly DriverFactory instance = new DriverFactory();
         static DriverFactory ()
@@ -70,7 +70,7 @@ namespace AutomationFrameWork.Driver
         /// This method use for
         /// close driver
         /// </summary>
-        public void CloseDriver ()
+        public new void CloseDriver ()
         {
             Drivers.CloseDriver();
         }/// <summary>
@@ -112,14 +112,13 @@ namespace AutomationFrameWork.Driver
                 case DriverType.iOS:
                     iOS.Instance.StartDriver();
                     break;
-
             }
         }       
         /// <summary>
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...
         /// </summary>
-        public object DriverOptions
+        public new object DriverOptions
         {
             get
             {
@@ -146,7 +145,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
         /// </summary>
-        public DesiredCapabilities DesiredCapabilities
+        public new DesiredCapabilities DesiredCapabilities
         {
             get
             {

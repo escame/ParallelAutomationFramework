@@ -10,6 +10,7 @@ namespace AutomationFrameWork.Driver
         private int portNumber, bootstrapPort,chromeDriverPort, processID;
         private string addressNumber;
         private Process appiumServer;
+        string nodePath = Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js");
         static NodeFactory ()
         {
         }
@@ -39,11 +40,11 @@ namespace AutomationFrameWork.Driver
             this.ChromeDriverPort = chromeDriverPort;         
             appiumServer = new Process();
             appiumServer.StartInfo.FileName = "cmd";
-            appiumServer.StartInfo.Arguments = "/c node C:/Users/minh/AppData/Roaming/npm/node_modules/appium/build/lib/main.js " + " -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort+ " --chromedriver-port "+this.ChromeDriverPort;
+            appiumServer.StartInfo.Arguments = "/c node \""+ Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js") + "\" -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort + " --chromedriver-port " + this.ChromeDriverPort;
             appiumServer.StartInfo.UseShellExecute = false;
-            appiumServer.StartInfo.RedirectStandardOutput = true;                      
+            appiumServer.StartInfo.RedirectStandardOutput = false;                      
             appiumServer.Start();
-            while (!isNodeServerStart()) ;
+            //while (!isNodeServerStart()) ;
             this.ProcessId = appiumServer.Id;            
         }
         /// <summary>
@@ -130,6 +131,8 @@ namespace AutomationFrameWork.Driver
             Process closeNodeServer = new Process();
             closeNodeServer.StartInfo.FileName = "Taskkill";
             closeNodeServer.StartInfo.Arguments = "/PID " + this.ProcessId;
+            closeNodeServer.StartInfo.CreateNoWindow = true;
+            closeNodeServer.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             closeNodeServer.Start();                 
         }
         /// <summary>

@@ -8,11 +8,12 @@ using System.Net.NetworkInformation;
 
 namespace AutomationFrameWork.Helper
 {
-    public class DriverHelper
+    public class DriverHelper 
     {
         private static readonly DriverHelper instance = new DriverHelper();
         public static List<int> UsedPort = new List<int>();
         static readonly object syncRoot = new Object();
+        static Dictionary<int, Boolean> freePort = new Dictionary<int, Boolean>();
         static DriverHelper ()
         {
         }
@@ -78,42 +79,63 @@ namespace AutomationFrameWork.Helper
         }
         public List<int> GetPort ()
         {
-            if (Helper.DriverHelper.UsedPort.Count == 0 || Helper.DriverHelper.UsedPort == null)
-                Console.WriteLine("User port is null free port full in before Get port to use");
-            else
-                foreach (int port in Helper.DriverHelper.UsedPort)
-                {
-                    Console.WriteLine("Used port  before get port to use: " + port);
-                }
-            foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
-                Console.WriteLine("Free port before get port: "+port.Key + "--" + port.Value);
-            List<int> returnPort = new List<int>();
-            Console.WriteLine(Drivers.FreePort.Count);
-            int count = 0;
-            for (int n = 0; n < Drivers.FreePort.Count; n++)
+            lock (syncRoot)
             {
-                if (Drivers.FreePort.ElementAt(n).Value == true && count < 3)
+                List<int> returnPort = new List<int>();
+                int count = 0;
+                for (int n = 0; n < DriverHelper.Instance.FreePort.Count; n++)
                 {
-                    returnPort.Add(Drivers.FreePort.ElementAt(n).Key);
-                    UsedPort.Add(Drivers.FreePort.ElementAt(n).Key);
-                    Drivers.FreePort[Drivers.FreePort.ElementAt(n).Key] = false;
-                    count = count + 1;
+                    if (DriverHelper.Instance.FreePort.ElementAt(n).Value == true && count < 3)
+                    {
+                        returnPort.Add(DriverHelper.Instance.FreePort.ElementAt(n).Key);
+                        UsedPort.Add(DriverHelper.Instance.FreePort.ElementAt(n).Key);
+                        DriverHelper.Instance.FreePort[DriverHelper.Instance.FreePort.ElementAt(n).Key] = false;
+                        count = count + 1;
+                    }
                 }
+                return returnPort;
             }
-            return returnPort;
         }
 
         public void ReleasePort(List<int> portRelease)
-        {
-            foreach (int port in UsedPort)
-                Console.WriteLine("Use port before release: " + port);
+        {           
             for (int n = 0; n < portRelease.Count; n++)
             {
                 UsedPort.Remove(portRelease.ElementAt(n));
-                Drivers.FreePort[portRelease.ElementAt(n)] = true;
+                DriverHelper.Instance.FreePort[portRelease.ElementAt(n)] = true;
+            }           
+        }
+
+        public Dictionary<int, Boolean> FreePort
+        {
+            get
+            {
+                lock (syncRoot)
+                {
+                    return freePort;
+                }
             }
-            foreach (int port in UsedPort)
-                Console.WriteLine("Use port after release: " + port);
-        }   
+            set
+            {
+                lock (syncRoot)
+                {
+                    try
+                    {
+                        foreach (KeyValuePair<int, Boolean> values in value)
+                            for (int port = 0; port < DriverHelper.Instance.FreePort.Count || DriverHelper.Instance.FreePort.Count == 0; port++)
+                            {
+                                if (!DriverHelper.Instance.FreePort.ContainsKey(values.Key))
+                                    freePort.Add(values.Key, values.Value);
+                                else
+                                    freePort[values.Key] = values.Value;
+                            }
+                    }
+                    catch (ArgumentException e)
+                    {
+                        System.Console.WriteLine(e.Message);
+                    }
+                }
+            }
+        }
     }
 }

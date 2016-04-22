@@ -38,6 +38,14 @@ namespace AutomationFrameWork
         List<int> use;
         ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();
         [Test]
+        public void ABC()
+        {   
+            string temp = System.Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js");
+            Console.WriteLine(  System.Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js"));
+            string path = System.IO.Path.GetFullPath(temp);
+            Console.WriteLine(path);
+        }
+        [Test]
         public void node1 ()
         {
             /*
@@ -55,7 +63,7 @@ namespace AutomationFrameWork
             Console.WriteLine(add + " " + temp
             .ElementAt(0) + " " + temp.ElementAt(1) + " " + temp.ElementAt(2));
             NodeFactory.Instance.StrartNodeServer(add, temp.ElementAt(0), temp.ElementAt(1), temp.ElementAt(2));
-            Thread.Sleep(1000);
+            Thread.Sleep(15000);
             NodeFactory.Instance.CloseNodeServer();
             //NodeFactory.Instance.strartNode(add,P,BP,C);
             //Thread.Sleep(5000);
@@ -117,12 +125,12 @@ namespace AutomationFrameWork
         
         [OneTimeSetUp]
         public void Init()
-        {
+        { 
             Dictionary<int, Boolean> temp = Helper.DriverHelper.Instance.GetAvailablePort(75, 92);
             foreach (KeyValuePair<int, Boolean> port in temp)
             {
                 Console.WriteLine(port);
-                Drivers.FreePort = new Dictionary<int, bool>()
+                Helper.DriverHelper.Instance.FreePort = new Dictionary<int, bool>()
                 {
                     { port.Key
                     ,port.Value},
@@ -138,7 +146,7 @@ namespace AutomationFrameWork
         public void Clean()
         {
             Console.WriteLine("=======================================");
-            foreach (KeyValuePair<int, Boolean> port in Drivers.FreePort)
+            foreach (KeyValuePair<int, Boolean> port in Helper.DriverHelper.Instance.FreePort)
                 ReportManager.logger.Info("check onetime teardown: "+port.Key + "--" + port.Value);
             ReportManager.logger.Info("Total Pass: " + TestContext.CurrentContext.Result.PassCount);
             ReportManager.logger.Info("Total Fail: " + TestContext.CurrentContext.Result.FailCount);
