@@ -17,7 +17,7 @@ namespace AutomationFrameWork.Demo
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]
     [TestFixture(DriverType.EmulationiPhone4)]
-    [Parallelizable(ParallelScope.Self)]
+    //[Parallelizable(ParallelScope.Self)]
     class LoginMailParalell
     {
         DriverType driver;
@@ -28,8 +28,7 @@ namespace AutomationFrameWork.Demo
         [SetUp]
         public void SetUp()
         {
-            DriverFactory.Instance.StartDriver(driver);
-            //Chrome.Instance.StartDriver();
+            DriverFactory.Instance.StartDriver(driver);            
         }
         [Test]      
         public void LoginMailSucessfullyParalell()

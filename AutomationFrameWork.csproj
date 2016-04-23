@@ -155,6 +155,11 @@
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailParalell.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailInMobile.cs" />
+    <Compile Include="Feature\Login Mail\Login Mail Firefox.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login Mail Firefox.feature</DependentUpon>
+    </Compile>
     <Compile Include="TestNlog.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />
     <Compile Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature.cs">
@@ -167,10 +172,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckCssValue.feature</DependentUpon>
     </Compile>
-    <Compile Include="Feature\Login Mail\Login Mail.feature.cs">
+    <Compile Include="Feature\Login Mail\Login Mail Chrome.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Login Mail.feature</DependentUpon>
+      <DependentUpon>Login Mail Chrome.feature</DependentUpon>
     </Compile>
     <Compile Include="Helper\CSSHelper.cs" />
     <Compile Include="POM\HomePageSingleton\LoginElementS.cs" />
@@ -199,14 +204,18 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CheckCssValue.feature.cs</LastGenOutput>
     </None>
-    <None Include="Feature\Login Mail\Login Mail.feature">
+    <None Include="Feature\Login Mail\Login Mail Chrome.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Login Mail.feature.cs</LastGenOutput>
+      <LastGenOutput>Login Mail Chrome.feature.cs</LastGenOutput>
     </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Feature\Login Mail\Login Mail Firefox.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Login Mail Firefox.feature.cs</LastGenOutput>
+    </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

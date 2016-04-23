@@ -18,20 +18,20 @@ namespace AutomationFrameWork.Feature.LoginMail
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Login Mail")]
-    public partial class LoginMailFeature
+    [NUnit.Framework.DescriptionAttribute("Login Mail Firefox")]
+    public partial class LoginMailFirefoxFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Login Mail.feature"
+#line 1 "Login Mail Firefox.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Login Mail", "\tIn order to send mail\r\n\tI want to be login to mail mail account", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Login Mail Firefox", "\tIn order to send mail\r\n\tI want to be login to mail mail account", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -71,7 +71,7 @@ namespace AutomationFrameWork.Feature.LoginMail
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("I start \'Chrome\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I start \'Firefox\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
  testRunner.Given("I have entered \'https://accounts.google.com/ServiceLogin?service=mail&passive=tru" +
                     "e&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmpl" +
@@ -98,7 +98,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
 this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.Given("I start \'Chrome\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I start \'Firefox\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 19
  testRunner.Given("I have entered \'https://accounts.google.com/ServiceLogin?service=mail&passive=tru" +
                     "e&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmpl" +
@@ -122,7 +122,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 23
 this.ScenarioSetup(scenarioInfo);
 #line 24
- testRunner.Given("I start \'Chrome\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I start \'Firefox\' browser to run", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
  testRunner.Given("I have entered \'https://accounts.google.com/ServiceLogin?service=mail&passive=tru" +
                     "e&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmpl" +
