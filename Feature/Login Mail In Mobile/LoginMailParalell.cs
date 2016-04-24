@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using AutomationFrameWork.Driver;
 using AutomationFrameWork.ActionsKeys;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Appium.Enums;
 using AutomationFrameWork.POM.HomePage;
-using AutomationFrameWork.Driver.Core;
+using OpenQA.Selenium.Chrome;
 
 namespace AutomationFrameWork.Demo
 {
@@ -17,7 +10,7 @@ namespace AutomationFrameWork.Demo
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]
     [TestFixture(DriverType.EmulationiPhone4)]
-    //[Parallelizable(ParallelScope.Self)]
+    [Parallelizable(ParallelScope.Self)]
     class LoginMailParalell
     {
         DriverType driver;
@@ -28,12 +21,19 @@ namespace AutomationFrameWork.Demo
         [SetUp]
         public void SetUp()
         {
+            
+            if (driver == DriverType.Chrome)
+            {
+                ChromeOptions op = new ChromeOptions();
+                op.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
+                DriverFactory.Instance.DriverOptions = op;
+            }
             DriverFactory.Instance.StartDriver(driver);            
         }
         [Test]      
         public void LoginMailSucessfullyParalell()
         {            
-            WebKeywords.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");
+            WebKeywords.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");         
             LoginPage.Instance.EnterUserName("specflowdemo@gmail.com");
             LoginPage.Instance.ClickNext();
             LoginPage.Instance.EnterPass("0934058877");

@@ -29,9 +29,7 @@ namespace AutomationFrameWork.Driver
         }
         static ThreadLocal<DriverFactory> DriverFactoryInstance = new ThreadLocal<DriverFactory>(() =>
         {
-
             return new DriverFactory();
-
         });
         /// <summary>
         /// This method is use for

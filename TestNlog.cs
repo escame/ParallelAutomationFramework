@@ -36,15 +36,7 @@ namespace AutomationFrameWork
             T = type;
         }      
         List<int> use;
-        ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();
-        [Test]
-        public void ABC()
-        {   
-            string temp = System.Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js");
-            Console.WriteLine(  System.Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js"));
-            string path = System.IO.Path.GetFullPath(temp);
-            Console.WriteLine(path);
-        }
+        ThreadLocal<List<int>> portstored = new ThreadLocal<List<int>>();       
         [Test]
         public void node1 ()
         {
