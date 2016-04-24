@@ -109,7 +109,7 @@ namespace AutomationFrameWork.ActionsKeys
         {
             try
             {
-                WebDriverWait wait = new WebDriverWait(DriverFactory.Instance.GetWebDriver, TimeSpan.FromSeconds(timeOut));
+                WebDriverWait wait = new WebDriverWait(WebDriver.Value, TimeSpan.FromSeconds(timeOut));
                 wait.Until(ExpectedConditions.ElementToBeClickable(locatorValue));
             }
             catch (WebDriverTimeoutException e)
