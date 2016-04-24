@@ -35,6 +35,7 @@ namespace AutomationFrameWork.Driver.Core
                         BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
                     object instance = field.GetValue(null);
                     method.Invoke(instance, Type.EmptyTypes);
+                    break;
                 }
             }
         }

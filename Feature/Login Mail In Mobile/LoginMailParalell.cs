@@ -3,13 +3,17 @@ using AutomationFrameWork.Driver;
 using AutomationFrameWork.ActionsKeys;
 using AutomationFrameWork.POM.HomePage;
 using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
+using System.Collections;
+using System;
 
 namespace AutomationFrameWork.Demo
 {
     [TestFixture(DriverType.Chrome)]
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]
-    [TestFixture(DriverType.EmulationiPhone4)]
+    [TestFixture(DriverType.EmulationiPad)]
+    [TestFixture(DriverType.EmulationiPhone6)]
     [Parallelizable(ParallelScope.Self)]
     class LoginMailParalell
     {
@@ -20,14 +24,7 @@ namespace AutomationFrameWork.Demo
         }      
         [SetUp]
         public void SetUp()
-        {
-            
-            if (driver == DriverType.Chrome)
-            {
-                ChromeOptions op = new ChromeOptions();
-                op.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
-                DriverFactory.Instance.DriverOptions = op;
-            }
+        {           
             DriverFactory.Instance.StartDriver(driver);            
         }
         [Test]      
@@ -40,10 +37,26 @@ namespace AutomationFrameWork.Demo
             LoginPage.Instance.ClickSignIn();
             LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com - Gmail");
         }
+        [Test, TestCaseSource("GetTestData")]
+        public void TestDataDriven (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")),search);
+            System.Threading.Thread.Sleep(3000);
+        }
         [TearDown]
         public void TearDown()
         {
             DriverFactory.Instance.CloseDriver();
+        }
+
+        private static IEnumerable<String> GetTestData ()
+        {
+            String[] data = { "Samsung Galaxy Note 5", "Apple iPhone 6+", "QA Automation", "Selenium and Nunit", "FaceBook"};
+            foreach (String temp in data)
+            {
+                yield return temp;
+            }
         }
     }
 }

@@ -12,8 +12,7 @@ using System.Threading;
 namespace AutomationFrameWork.Driver
 {
     public class DriverFactory : Drivers
-    {
-        //private static readonly DriverFactory instance = new DriverFactory();
+    {       
         static DriverFactory ()
         {
         }
