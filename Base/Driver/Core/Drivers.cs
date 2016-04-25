@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System.Threading;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
 using System;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace AutomationFrameWork.Driver.Core
     public class Drivers 
     {
         static readonly object syncRoot = new Object();
-        protected static ThreadLocal<object> driverStored = new ThreadLocal<object>();
+        protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>(); 
         /// <summary>
@@ -44,11 +43,21 @@ namespace AutomationFrameWork.Driver.Core
         /// </summary>
         protected static void CloseDriver()
         {
-            IWebDriver driver = (IWebDriver)driverStored.Value;
+            RemoteWebDriver driver = (RemoteWebDriver)driverStored.Value;            
+            driver.Close();
             driver.Quit();
-            driver.Dispose();
-            driverStored.Value = null;
-        }
+            driver.Dispose();            
+            driver = (RemoteWebDriver)driverStored.Value;            
+            /*
+             * This is use for ensure driver is closed
+             * both in browser/application and driver executable path(Ex:chromedriver.exe, IEDriverServer.exe)
+            */
+            if (driver.SessionId != null)
+            {
+                driver.Quit();
+                driver.Dispose();
+            }
+        }        
         /// <summary>
         /// This method is use 
         /// for return object with can be MobileDriver or WebDriver
@@ -96,8 +105,16 @@ namespace AutomationFrameWork.Driver.Core
             {
                 optionStorage.Value = value;
             }
-        }        
+        }
+        /// <summary>
+        /// This method is use for
+        /// Start driver for any class extend Drivers
+        /// </summary>    
         virtual protected void StartDriver() { }
+        /// <summary>
+        /// This method is use for
+        /// Get DriverOption for any class extend Drivers
+        /// </summary>
         virtual protected object DriverOption
         {
             get;

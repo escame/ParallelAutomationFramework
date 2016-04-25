@@ -55,6 +55,7 @@ namespace AutomationFrameWork.Base
         public void TestFinished (ITestResult result)
         {
             Console.WriteLine("MINH HOANG TEST "+result);
+            WriteToConsole("abc",null);
             System.IO.File.WriteAllText(@"D:\WriteLines"+result.ToString()+".txt", "abc");
         }
 
