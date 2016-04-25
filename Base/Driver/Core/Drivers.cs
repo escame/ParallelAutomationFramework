@@ -9,31 +9,30 @@ using System.Reflection;
 namespace AutomationFrameWork.Driver.Core
 {
     public class Drivers 
-    {
-        static readonly object syncRoot = new Object();
+    {      
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>(); 
         /// <summary>
         /// This method is use for
         /// scan all class driver with correct name via DriverType 
-        /// and invoke mehod StartDriver
+        /// and invoke method StartDriver
         /// </summary>
         /// <param name="driverType"></param>
         protected static void StartDrivers (DriverType driverType)
         {
             List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(t => t.Namespace == "AutomationFrameWork.Driver.Core")
+                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
                       .ToList();
             foreach (Type className in listClass)
             {
                 if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
                 {
-                    MethodInfo method = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                    FieldInfo field = className.GetField("instance",
-                        BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-                    object instance = field.GetValue(null);
-                    method.Invoke(instance, Type.EmptyTypes);
+                    MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo instance = className.GetField("instance",
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    object instanceDriver = instance.GetValue(null);
+                    startDriver.Invoke(instanceDriver, Type.EmptyTypes);
                     break;
                 }
             }
@@ -50,7 +49,8 @@ namespace AutomationFrameWork.Driver.Core
             driver = (RemoteWebDriver)driverStored.Value;            
             /*
              * This is use for ensure driver is closed
-             * both in browser/application and driver executable path(Ex:chromedriver.exe, IEDriverServer.exe)
+             * both in browser/application and driver executable path
+             * (Ex:chromedriver.exe, IEDriverServer.exe)
             */
             if (driver.SessionId != null)
             {

@@ -29,8 +29,8 @@ namespace AutomationFrameWork.Demo
         }
         [Test]      
         public void LoginMailSucessfullyParalell()
-        {            
-            WebKeywords.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");         
+        {
+            LoginPage.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");        
             LoginPage.Instance.EnterUserName("specflowdemo@gmail.com");
             LoginPage.Instance.ClickNext();
             LoginPage.Instance.EnterPass("0934058877");
