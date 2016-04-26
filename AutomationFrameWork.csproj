@@ -178,9 +178,6 @@
       <DependentUpon>Login Mail Chrome.feature</DependentUpon>
     </Compile>
     <Compile Include="Helper\CSSHelper.cs" />
-    <Compile Include="POM\HomePageSingleton\LoginElementS.cs" />
-    <Compile Include="POM\HomePageSingleton\LoginPageS.cs" />
-    <Compile Include="POM\HomePageSingleton\LoginValidateS.cs" />
     <Compile Include="POM\HomePage\LoginElement.cs" />
     <Compile Include="POM\HomePage\LoginPage.cs" />
     <Compile Include="POM\HomePage\LoginValidate.cs" />
