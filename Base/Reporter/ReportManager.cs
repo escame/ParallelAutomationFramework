@@ -16,7 +16,7 @@ namespace AutomationFrameWork.Base
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class |
                    AttributeTargets.Interface | AttributeTargets.Assembly,
                    AllowMultiple = true)]
-    public class ReportManager : Attribute, ITestListener,ITestAction
+    public class ReportManager : Attribute,ITestAction
     {
         public static Logger logger = LogManager.GetCurrentClassLogger();
         public ActionTargets Targets
@@ -51,17 +51,6 @@ namespace AutomationFrameWork.Base
                 test.Method != null ? test.Method.Name : "{no method}");
             logger.Info("Total Test Case: "+ test.TestCaseCount);
                 
-        }
-        public void TestFinished (ITestResult result)
-        {
-            Console.WriteLine("MINH HOANG TEST "+result);
-            WriteToConsole("abc",null);
-            System.IO.File.WriteAllText(@"D:\WriteLines"+result.ToString()+".txt", "abc");
-        }
-
-        public void TestStarted (ITest test)
-        {
-            Console.WriteLine("MINH HOANG TEST Start " + test.Parent); System.IO.File.WriteAllText(@"D:\WriteLines"+test.Name+".txt", "abc");
-        }
+        }       
     }
 }
