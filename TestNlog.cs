@@ -16,14 +16,23 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 namespace AutomationFrameWork.Log
 {
-
-    public class TestNlog
-    {
+    [ReportManager]
+    [TestFixture]
+    public class NLOG
+    {   
         [Test]
-        public void LogFile()
+        public void LogFilePass()
         {
             ReportManager.logger.Info("This info log");
             ReportManager.logger.Error("This error log");
+            Assert.IsTrue(true);
+        }
+        [Test]
+        public void LogFileFailed ()
+        {
+            ReportManager.logger.Info("This info log");
+            ReportManager.logger.Error("This error log");
+            Assert.IsTrue(false);
         }
     }
 

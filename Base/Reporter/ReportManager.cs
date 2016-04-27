@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Base
                    AllowMultiple = true)]
     public class ReportManager : Attribute,ITestAction
     {
-        public static Logger logger = LogManager.GetCurrentClassLogger();
+        public static Logger logger = LogManager.GetLogger("NLOG");
         public ActionTargets Targets
         {
             get
@@ -29,16 +29,34 @@ namespace AutomationFrameWork.Base
 
         public void AfterTest (ITest test)
         {
-            WriteToConsole("After in report",test);
-            logger.Info("Test result "+TestContext.CurrentContext.Result.Outcome.Status);
-            logger.Info("Test error " + TestContext.CurrentContext.Result.StackTrace);
-            logger.Info("Test result mess " + TestContext.CurrentContext.Result.Message);
+            if (!test.IsSuite)
+            {                
+                logger.Info( test.MethodName + " is " + TestContext.CurrentContext.Result.Outcome.Status.ToString().ToUpper());
+                if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+                {
+                    logger.Info(test.MethodName+ " failed " + TestContext.CurrentContext.Result.StackTrace);
+                    logger.Info(TestContext.CurrentContext.Result.Message);
+                }
+                logger.Info("========================================================");
+            }
+            else
+            {
+                logger.Info("Passed " + TestContext.CurrentContext.Result.PassCount);
+                logger.Info("Failed " + TestContext.CurrentContext.Result.FailCount);
+                logger.Info("Error " + TestContext.CurrentContext.Result.SkipCount);
+            }
         }
 
         public void BeforeTest (ITest test)
         {
-            WriteToConsole("Before in report", test);
-            logger.Info("Start test " + test.FullName);           
+            //WriteToConsole("Before in report", test);
+            if (test.IsSuite)
+            {
+                logger.Info("Total " + test
+                .TestCaseCount);
+            }
+            else
+            logger.Info("Start test " + test.MethodName);           
         }
         private void WriteToConsole (string eventMessage, ITest test)
         {
