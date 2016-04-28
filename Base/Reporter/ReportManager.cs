@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Base
                    AllowMultiple = true)]
     public class ReportManager : Attribute,ITestAction
     {
-        public static Logger logger = LogManager.GetLogger("NLOG");
+        public static Logger logger = LogManager.GetCurrentClassLogger();
         public ActionTargets Targets
         {
             get
@@ -49,11 +49,13 @@ namespace AutomationFrameWork.Base
 
         public void BeforeTest (ITest test)
         {
-            //WriteToConsole("Before in report", test);
+            
             if (test.IsSuite)
             {
                 logger.Info("Total " + test
                 .TestCaseCount);
+                logger.Info("Total"+ test
+                .Tests);
             }
             else
             logger.Info("Start test " + test.MethodName);           

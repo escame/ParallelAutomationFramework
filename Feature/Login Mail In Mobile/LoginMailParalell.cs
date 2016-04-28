@@ -6,19 +6,21 @@ using OpenQA.Selenium.Chrome;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using AutomationFrameWork.Base;
 
 namespace AutomationFrameWork.Demo
 {
+    [ReportManager]
     [TestFixture(DriverType.Chrome)]
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]
     [TestFixture(DriverType.EmulationiPad)]
     [TestFixture(DriverType.EmulationiPhone6)]
     [Parallelizable(ParallelScope.Self)]
-    class LoginMailParalell
+    class TestParalell
     {
         DriverType driver;
-        public LoginMailParalell (DriverType type)
+        public TestParalell (DriverType type)
         {
             driver = type;       
         }      
@@ -41,8 +43,7 @@ namespace AutomationFrameWork.Demo
         public void TestDataDriven (string search)
         {
             WebKeywords.Instance.Navigate("https://google.com");
-            WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")),search);
-            System.Threading.Thread.Sleep(3000);
+            WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")),search);           
         }
         [TearDown]
         public void TearDown()

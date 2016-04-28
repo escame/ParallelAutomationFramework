@@ -38,7 +38,10 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return (IWebDriver)Drivers.DriverStorage;
+                IWebDriver _Driver = (IWebDriver)Drivers.DriverStorage;
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                return _Driver;
             }
         }
         /// <summary>
@@ -49,7 +52,10 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return (PhantomJSDriver)Drivers.DriverStorage;
+                PhantomJSDriver _Driver = (PhantomJSDriver)Drivers.DriverStorage;
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                return _Driver;
             }
         }
         /// <summary>
@@ -60,7 +66,10 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
+                AppiumDriver<AppiumWebElement> _Driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                return _Driver;
             }
         }
         /// <summary>

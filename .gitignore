@@ -52,7 +52,7 @@ Temporary Items
 *.suo
 bin/*
 obj/*
-
+logs/*
 # Ignore NuGet Packages
 *.nupkg
 # Ignore the packages folder

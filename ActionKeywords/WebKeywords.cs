@@ -9,21 +9,19 @@ namespace AutomationFrameWork.ActionsKeys
 {
     public class WebKeywords
     {
-        private static readonly WebKeywords instance = new WebKeywords();        
+        private static readonly WebKeywords instance = new WebKeywords();
+        static IWebDriver _Driver;    
         private WebKeywords()
         {            
         }
         static WebKeywords()
         {
-        }
-        ThreadLocal<IWebDriver> WebDriver = new ThreadLocal<IWebDriver>(() =>
-        {
-            return DriverFactory.Instance.GetWebDriver;
-        });
+        }      
         public static WebKeywords Instance
         {
             get
-            {                
+            {
+                _Driver = DriverFactory.Instance.GetWebDriver;
                 return instance;
             }
         }
@@ -35,7 +33,7 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="url"></param>
         public void Navigate(String url)
         {
-            WebDriver.Value.Navigate().GoToUrl(url);
+            _Driver.Navigate().GoToUrl(url);
         }
         /// <summary>
         /// This method will naviagte to URL 
@@ -45,7 +43,7 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="url"></param>
         public void OpenUrl(String url)
         {
-            WebDriver.Value.Url = url;
+            _Driver.Url = url;
         }
         /// <summary>
         /// This method is use for
@@ -109,7 +107,7 @@ namespace AutomationFrameWork.ActionsKeys
         {
             try
             {
-                WebDriverWait wait = new WebDriverWait(WebDriver.Value, TimeSpan.FromSeconds(timeOut));
+                WebDriverWait wait = new WebDriverWait(_Driver, TimeSpan.FromSeconds(timeOut));
                 wait.Until(ExpectedConditions.ElementToBeClickable(locatorValue));
             }
             catch (WebDriverTimeoutException e)
@@ -127,7 +125,7 @@ namespace AutomationFrameWork.ActionsKeys
         {
             try
             {
-                WebDriverWait wait = new WebDriverWait(WebDriver.Value, TimeSpan.FromSeconds(timeOut));
+                WebDriverWait wait = new WebDriverWait(_Driver, TimeSpan.FromSeconds(timeOut));
                 wait.Until(ExpectedConditions.ElementIsVisible(locatorValue));
             }
             catch (WebDriverTimeoutException e)
@@ -144,12 +142,12 @@ namespace AutomationFrameWork.ActionsKeys
         public void WaitTitleContains(string title, int timeOut)
         {
             try { 
-            WebDriverWait wait = new WebDriverWait(WebDriver.Value, TimeSpan.FromSeconds(timeOut));
+            WebDriverWait wait = new WebDriverWait(_Driver, TimeSpan.FromSeconds(timeOut));
             wait.Until(ExpectedConditions.TitleContains(title));
             }
             catch (WebDriverTimeoutException e)
             {
-                throw new OperationCanceledException("Get " + e.Message + ", [" + title + "] is not displayed in WebPage title [" +WebDriver.Value.Title+"]");
+                throw new OperationCanceledException("Get " + e.Message + ", [" + title + "] is not displayed in WebPage title [" + _Driver.Title+"]");
             }
         }
         /// <summary>
@@ -180,8 +178,8 @@ namespace AutomationFrameWork.ActionsKeys
         public void WaitForPageToLoad(int time)
         {
             TimeSpan timeout = new TimeSpan(0, 0, time);
-            WebDriverWait wait = new WebDriverWait(WebDriver.Value, timeout);
-            IJavaScriptExecutor javascript = WebDriver as IJavaScriptExecutor;
+            WebDriverWait wait = new WebDriverWait(_Driver, timeout);
+            IJavaScriptExecutor javascript = _Driver as IJavaScriptExecutor;
             if (javascript == null)
                 throw new ArgumentException("driver", "Driver must support javascript execution");
             wait.Until((d) =>
@@ -269,25 +267,25 @@ namespace AutomationFrameWork.ActionsKeys
             switch (LocatorType.ToLower())
             {
                 case "id":
-                    element = WebDriver.Value.FindElement(By.Id(LocatorValue));
+                    element = _Driver.FindElement(By.Id(LocatorValue));
                     break;
                 case "name":
-                    element = WebDriver.Value.FindElement(By.Name(LocatorValue));
+                    element = _Driver.FindElement(By.Name(LocatorValue));
                     break;
                 case "xpath":
-                    element = WebDriver.Value.FindElement(By.XPath(LocatorValue));
+                    element = _Driver.FindElement(By.XPath(LocatorValue));
                     break;
                 case "tag":
-                    element = WebDriver.Value.FindElement(By.TagName(LocatorValue));
+                    element = _Driver.FindElement(By.TagName(LocatorValue));
                     break;
                 case "link":
-                    element = WebDriver.Value.FindElement(By.LinkText(LocatorValue));
+                    element = _Driver.FindElement(By.LinkText(LocatorValue));
                     break;
                 case "css":
-                    element = WebDriver.Value.FindElement(By.CssSelector(LocatorValue));
+                    element = _Driver.FindElement(By.CssSelector(LocatorValue));
                     break;
                 case "class":
-                    element = WebDriver.Value.FindElement(By.ClassName(LocatorValue));
+                    element = _Driver.FindElement(By.ClassName(LocatorValue));
                     break;
                 default:
                     throw new ArgumentException("Support FindElement with 'id' 'name' 'xpath' 'tag' 'link' 'css' 'class'");
