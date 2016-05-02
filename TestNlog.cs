@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Log
 {
     [ReportManager]
     [TestFixture]
-    public class NLOG
+    public class NLOG 
     {   
         [Test]
         public void LogFilePass()
