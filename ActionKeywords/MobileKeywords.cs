@@ -8,8 +8,8 @@ namespace AutomationFrameWork.ActionsKeys
 {
     public class MobileKeywords
     {       
-        private static readonly MobileKeywords instance = new MobileKeywords();
-        static AppiumDriver<AppiumWebElement> _MobileDriver;
+        private static readonly MobileKeywords _instance = new MobileKeywords();
+        private static AppiumDriver<AppiumWebElement> _mobileDriver;
         private MobileKeywords ()
         {            
         }
@@ -18,38 +18,38 @@ namespace AutomationFrameWork.ActionsKeys
         }         
         public static MobileKeywords Instance ()
         {
-            _MobileDriver = DriverFactory.Instance.GetMobileDriver;
-            return instance;
+            _mobileDriver = DriverFactory.Instance.GetMobileDriver;
+            return _instance;
         }
         public void ScroolToClick (string text)
         {
-            _MobileDriver.ScrollToExact(text).Click();
+            _mobileDriver.ScrollToExact(text).Click();
         }
         public AppiumWebElement FindElementByAndroidUIAutomator(string value)
         {            
-            var _AndroidDriver = (AndroidDriver<AppiumWebElement>)_MobileDriver;   
+            var _AndroidDriver = (AndroidDriver<AppiumWebElement>)_mobileDriver;   
             return _AndroidDriver.FindElementByAndroidUIAutomator(value);
         }
         public AppiumWebElement FindElementByIosUIAutomation(string value)
         {            
-            var _IOsDriver = (IOSDriver<AppiumWebElement>)_MobileDriver;           
+            var _IOsDriver = (IOSDriver<AppiumWebElement>)_mobileDriver;           
             return _IOsDriver.FindElementByIosUIAutomation(value);
         }
         public void Swipe(int startX, int startY, int endX, int endY, int duration)
         {
-            _MobileDriver.Swipe(startX, startY, endX, endY, duration);
+            _mobileDriver.Swipe(startX, startY, endX, endY, duration);
         }
         public void SwipeInVertical(int startY, int endY, int duration)
         {
-            _MobileDriver.Swipe(0, startY, 0, endY, duration);
+            _mobileDriver.Swipe(0, startY, 0, endY, duration);
         }
         public void SwipeInHorizontal(int startX, int endX, int duration)
         {
-            _MobileDriver.Swipe(startX, 0, endX, 0, duration);
+            _mobileDriver.Swipe(startX, 0, endX, 0, duration);
         }
         public void SwipeToElement(AppiumWebElement elementFrom,AppiumWebElement elementTo,int duration)
         {
-            _MobileDriver.Swipe(elementFrom.Location.X,elementFrom.Location.Y,elementTo.LocationOnScreenOnceScrolledIntoView.X,elementTo.LocationOnScreenOnceScrolledIntoView.X,duration);
+            _mobileDriver.Swipe(elementFrom.Location.X,elementFrom.Location.Y,elementTo.LocationOnScreenOnceScrolledIntoView.X,elementTo.LocationOnScreenOnceScrolledIntoView.X,duration);
         }
     }
 }

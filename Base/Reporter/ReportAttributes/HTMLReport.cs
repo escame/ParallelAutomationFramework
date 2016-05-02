@@ -9,7 +9,7 @@ using System.IO;
 
 namespace AutomationFrameWork.Reporter.ReportAttributes
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
     public class HTMLReport : Attribute, ITestAction
     {
         private static string _outputPath;

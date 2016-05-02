@@ -4,8 +4,8 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class PhantomJS : Drivers
     {
-        private static readonly PhantomJS instance = new PhantomJS();
-        private static PhantomJSDriverService phantomJSDriverService = null;       
+        private static readonly PhantomJS _instance = new PhantomJS();
+        private static PhantomJSDriverService _phantomJSDriverService = null;       
         static PhantomJS()
         {
         }     
@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         protected override void StartDriver()
@@ -30,13 +30,13 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                if (phantomJSDriverService == null)
-                    phantomJSDriverService = PhantomJSDriverService.CreateDefaultService(DriverHelper.Instance.DriverPath);
-                return phantomJSDriverService;
+                if (_phantomJSDriverService == null)
+                    _phantomJSDriverService = PhantomJSDriverService.CreateDefaultService(DriverHelper.Instance.DriverPath);
+                return _phantomJSDriverService;
             }
             set
             {
-                phantomJSDriverService = value;
+                _phantomJSDriverService = value;
             }
         }
         protected override object DriverOption

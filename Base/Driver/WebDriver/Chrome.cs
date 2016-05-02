@@ -5,7 +5,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class Chrome : Drivers
     {
-        private static readonly Chrome instance = new Chrome();       
+        private static readonly Chrome _instance = new Chrome();       
         static Chrome()
         {
         }        
@@ -18,12 +18,12 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return instance;               
+                return _instance;               
             }
         }
         protected override void StartDriver()
         {
-            Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.instance.DriverOption); 
+            Drivers.DriverStorage =  new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)Chrome.Instance.DriverOption); 
         }     
         protected override object DriverOption
         {

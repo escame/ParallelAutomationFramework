@@ -6,7 +6,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPad : Drivers
     {
-        private static readonly EmulationiPad instance = new EmulationiPad();       
+        private static readonly EmulationiPad _instance = new EmulationiPad();       
         private static IWebDriver WebDriver = null;
         static EmulationiPad()
         {
@@ -19,7 +19,7 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         protected override void StartDriver()

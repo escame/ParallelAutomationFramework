@@ -7,10 +7,9 @@ namespace AutomationFrameWork.Driver
 
     public class NodeFactory
     {        
-        private int portNumber, bootstrapPort,chromeDriverPort, processID;
-        private string addressNumber;
-        private Process appiumServer;
-        string nodePath = Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js");
+        private int _portNumber, _bootstrapPort, _chromeDriverPort, _processID;
+        private string _addressNumber;
+        private Process _appiumServer;        
         static NodeFactory ()
         {
         }
@@ -39,14 +38,14 @@ namespace AutomationFrameWork.Driver
             this.BootstrapPort = bootstrapPort;
             this.PortNumber = portNumber;
             this.ChromeDriverPort = chromeDriverPort;         
-            appiumServer = new Process();
-            appiumServer.StartInfo.FileName = "cmd";
-            appiumServer.StartInfo.Arguments = "/c node \""+ Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js") + "\" -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort + " --chromedriver-port " + this.ChromeDriverPort;
-            appiumServer.StartInfo.UseShellExecute = false;
-            appiumServer.StartInfo.RedirectStandardOutput = true;                      
-            appiumServer.Start();
+            _appiumServer = new Process();
+            _appiumServer.StartInfo.FileName = "cmd";
+            _appiumServer.StartInfo.Arguments = "/c node \""+ Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js") + "\" -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort + " --chromedriver-port " + this.ChromeDriverPort;
+            _appiumServer.StartInfo.UseShellExecute = false;
+            _appiumServer.StartInfo.RedirectStandardOutput = true;
+            _appiumServer.Start();
             while (!isNodeServerStart()) ;
-            this.ProcessId = appiumServer.Id;            
+            this.ProcessId = _appiumServer.Id;            
         }
         /// <summary>
         /// This set port number for appium can listen
@@ -55,12 +54,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return portNumber;
+                return _portNumber;
             }
 
             private set
             {
-                portNumber = value;
+                _portNumber = value;
             }
         }
         /// <summary>
@@ -70,12 +69,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return addressNumber;
+                return _addressNumber;
             }
 
             private set
             {
-                addressNumber = value;
+                _addressNumber = value;
             }
         }
         /// <summary>
@@ -85,12 +84,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return bootstrapPort;
+                return _bootstrapPort;
             }
 
             private set
             {
-                bootstrapPort = value;
+                _bootstrapPort = value;
             }
         }
         /// <summary>
@@ -100,12 +99,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return chromeDriverPort;
+                return _chromeDriverPort;
             }
 
             private set
             {
-                chromeDriverPort = value;
+                _chromeDriverPort = value;
             }
         }
         /// <summary>
@@ -116,12 +115,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return processID;
+                return _processID;
             }
 
             private set
             {
-                processID = value;
+                _processID = value;
             }
         }
         /// <summary>
@@ -144,7 +143,7 @@ namespace AutomationFrameWork.Driver
         /// <returns></returns>
         private Boolean isNodeServerStart ()
         {           
-            return (appiumServer == null || appiumServer.StandardOutput.ReadLine().Contains("started on"));
+            return (_appiumServer == null || _appiumServer.StandardOutput.ReadLine().Contains("started on"));
         }
         private void existNodeJS ()
         {

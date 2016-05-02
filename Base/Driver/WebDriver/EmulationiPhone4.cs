@@ -5,7 +5,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone4 : Drivers
     {
-        private static readonly EmulationiPhone4 instance = new EmulationiPhone4();    
+        private static readonly EmulationiPhone4 _instance = new EmulationiPhone4();    
         static EmulationiPhone4()
         {
         }        
@@ -17,7 +17,7 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         protected override void StartDriver()

@@ -10,8 +10,7 @@ using AutomationFrameWork.Base;
 
 
 namespace AutomationFrameWork.Demo
-{
-    [ReportManager]
+{   
     [TestFixture(DriverType.Chrome)]
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]

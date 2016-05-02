@@ -4,7 +4,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class InternetExplore : Drivers
     {
-        private static readonly InternetExplore instance = new InternetExplore();      
+        private static readonly InternetExplore _instance = new InternetExplore();      
         static InternetExplore()
         {
         }      
@@ -16,7 +16,7 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
 
