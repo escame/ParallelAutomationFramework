@@ -82,7 +82,7 @@
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
-	  <SpecificVersion>True</SpecificVersion>
+      <SpecificVersion>True</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -179,6 +179,12 @@
     <Compile Include="Base\Element\BaseMobileElements.cs" />
     <Compile Include="Base\Element\BaseWebElements.cs" />
     <Compile Include="Base\Reporter\ReportAttributes\HTMLReport.cs" />
+    <Compile Include="Base\Reporter\ReportManager\ReportItems\ReportConfiguration.cs" />
+    <Compile Include="Base\Reporter\ReportManager\ReportItems\TestInformation.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Screenshots\Screenshot.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Screenshots\ScreenshotTaker.cs" />
+    <Compile Include="Base\Reporter\ReportManager\TestEvents\TestEvent.cs" />
+    <Compile Include="Base\Reporter\ReportUtils\ReportColor.cs" />
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailParalell.cs" />
