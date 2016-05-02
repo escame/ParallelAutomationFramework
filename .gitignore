@@ -53,6 +53,7 @@ Temporary Items
 bin/*
 obj/*
 logs/*
+.vs/*
 # Ignore NuGet Packages
 *.nupkg
 # Ignore the packages folder
