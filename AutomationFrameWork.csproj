@@ -129,6 +129,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TechTalk.SpecFlow, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
@@ -179,7 +180,11 @@
     <Compile Include="Base\Element\BaseMobileElements.cs" />
     <Compile Include="Base\Element\BaseWebElements.cs" />
     <Compile Include="Base\Reporter\ReportAttributes\HTMLReport.cs" />
-    <Compile Include="Base\Reporter\ReportManager\Notifications\Address.cs" />
+    <Compile Include="Base\Reporter\ReportHelper\ReportXMLHelper.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Notifications\EmailExtensions.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Notifications\EmailHelper.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Notifications\EmailInformations.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Notifications\EmailGenerator.cs" />
     <Compile Include="Base\Reporter\ReportManager\ReportItems\ReportConfiguration.cs" />
     <Compile Include="Base\Reporter\ReportManager\ReportItems\SuiteInformations.cs" />
     <Compile Include="Base\Reporter\ReportManager\ReportItems\TestInformations.cs" />
@@ -189,6 +194,8 @@
     <Compile Include="Base\Reporter\ReportManager\TestEvents\EventDurationSubscription.cs" />
     <Compile Include="Base\Reporter\ReportManager\TestEvents\TestEvent.cs" />
     <Compile Include="Base\Reporter\ReportUtils\ReportColor.cs" />
+    <Compile Include="Base\Reporter\Utils\InternalLogs.cs" />
+    <Compile Include="Base\Reporter\Utils\ReportColor.cs" />
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />
     <Compile Include="Base\Validation\BaseWebValidation.cs" />
     <Compile Include="Feature\Login Mail In Mobile\LoginMailParalell.cs" />
@@ -198,6 +205,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Login Mail Firefox.feature</DependentUpon>
     </Compile>
+    <Compile Include="Base\Reporter\ReportHelper\ReportHelper.cs" />
     <Compile Include="TestNlog.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />
     <Compile Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature.cs">
@@ -226,6 +234,7 @@
     <Compile Include="Step Definition\Common Steps\CommonlSteps.cs" />
     <Compile Include="Step Definition\Login Steps\LoginMailSteps.cs" />
     <Compile Include="Helper\DriverHelper.cs" />
+    <Compile Include="Utils\HTMLTextWriter.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="Helper\ValidateHelper.cs" />
   </ItemGroup>
@@ -268,7 +277,6 @@
     <Content Include="Resources\Font.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Base\Reporter\Utils\" />
     <Folder Include="Feature\Change Date Time In Note 5\" />
   </ItemGroup>
   <Choose>

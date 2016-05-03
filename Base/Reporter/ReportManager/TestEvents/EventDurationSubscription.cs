@@ -6,6 +6,6 @@ namespace AutomationFrameWork.Reporter.TestEvents
     public class EventDurationSubscription
     {
         public string Name;
-        public List<Address> TargetEmails;
+        public List<EmailInformations> TargetEmails;
     }
 }
