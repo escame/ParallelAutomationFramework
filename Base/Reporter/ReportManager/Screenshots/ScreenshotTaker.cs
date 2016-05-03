@@ -24,7 +24,7 @@ namespace AutomationFrameWork.Reporter.Screenshots
             return path + @"\_Screenshots";
         }
 
-        public static string TakeScreenshot (string screenPath, DateTime creationTime = default(DateTime),ImageFormat formatType)
+        public static string TakeScreenshot (string screenPath, DateTime creationTime = default(DateTime),ImageFormat formatType = null )
         {
             var format = formatType ?? ImageFormat.Png;
             var now = DateTime.Now;

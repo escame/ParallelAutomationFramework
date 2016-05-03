@@ -179,10 +179,14 @@
     <Compile Include="Base\Element\BaseMobileElements.cs" />
     <Compile Include="Base\Element\BaseWebElements.cs" />
     <Compile Include="Base\Reporter\ReportAttributes\HTMLReport.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Notifications\Address.cs" />
     <Compile Include="Base\Reporter\ReportManager\ReportItems\ReportConfiguration.cs" />
-    <Compile Include="Base\Reporter\ReportManager\ReportItems\TestInformation.cs" />
+    <Compile Include="Base\Reporter\ReportManager\ReportItems\SuiteInformations.cs" />
+    <Compile Include="Base\Reporter\ReportManager\ReportItems\TestInformations.cs" />
     <Compile Include="Base\Reporter\ReportManager\Screenshots\Screenshot.cs" />
+    <Compile Include="Base\Reporter\ReportManager\Screenshots\ScreenshotHelper.cs" />
     <Compile Include="Base\Reporter\ReportManager\Screenshots\ScreenshotTaker.cs" />
+    <Compile Include="Base\Reporter\ReportManager\TestEvents\EventDurationSubscription.cs" />
     <Compile Include="Base\Reporter\ReportManager\TestEvents\TestEvent.cs" />
     <Compile Include="Base\Reporter\ReportUtils\ReportColor.cs" />
     <Compile Include="Base\Validation\BaseMobileValidation.cs" />

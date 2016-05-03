@@ -12,10 +12,10 @@ namespace AutomationFrameWork.Helper
 {
     public class DriverHelper 
     {
-        private static readonly DriverHelper instance = new DriverHelper();
+        private static readonly DriverHelper _instance = new DriverHelper();
         public static List<int> UsedPort = new List<int>();
-        static readonly object syncRoot = new Object();
-        static Dictionary<int, Boolean> freePort = new Dictionary<int, Boolean>();
+        private static readonly object _syncRoot = new Object();
+        private static Dictionary<int, Boolean> _freePort = new Dictionary<int, Boolean>();
         static DriverHelper ()
         {
         }
@@ -23,7 +23,7 @@ namespace AutomationFrameWork.Helper
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         /// <summary>
@@ -81,7 +81,7 @@ namespace AutomationFrameWork.Helper
         }
         public List<int> GetPort ()
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
                 List<int> returnPort = new List<int>();
                 int count = 0;
@@ -112,14 +112,14 @@ namespace AutomationFrameWork.Helper
         {
             get
             {
-                lock (syncRoot)
+                lock (_syncRoot)
                 {
-                    return freePort;
+                    return _freePort;
                 }
             }
             set
             {
-                lock (syncRoot)
+                lock (_syncRoot)
                 {
                     try
                     {
@@ -127,9 +127,9 @@ namespace AutomationFrameWork.Helper
                             for (int port = 0; port < DriverHelper.Instance.FreePort.Count || DriverHelper.Instance.FreePort.Count == 0; port++)
                             {
                                 if (!DriverHelper.Instance.FreePort.ContainsKey(values.Key))
-                                    freePort.Add(values.Key, values.Value);
+                                    _freePort.Add(values.Key, values.Value);
                                 else
-                                    freePort[values.Key] = values.Value;
+                                    _freePort[values.Key] = values.Value;
                             }
                     }
                     catch (ArgumentException e)

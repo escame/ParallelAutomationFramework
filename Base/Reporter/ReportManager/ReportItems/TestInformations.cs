@@ -5,7 +5,7 @@ using AutomationFrameWork.Reporter.Screenshots;
 using AutomationFrameWork.Reporter.ReportUtils;
 namespace AutomationFrameWork.Reporter.ReportItems
 {
-    public class TestInformation
+    public class TestInformations
     {
         public string Name;
         public string FullName;
@@ -26,7 +26,7 @@ namespace AutomationFrameWork.Reporter.ReportItems
         public List<Screenshot> Screenshots;
         public List<TestEvent> Events;
 
-        public TestInformation ()
+        public TestInformations ()
         {
             Name = string.Empty;
             FullName = string.Empty;

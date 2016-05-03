@@ -10,7 +10,7 @@ namespace AutomationFrameWork.Utils
 {
     public class Utilities
     {
-        private static readonly Utilities instance = new Utilities();
+        private static readonly Utilities _instance = new Utilities();
         static Utilities()
         {
         }
@@ -18,7 +18,7 @@ namespace AutomationFrameWork.Utils
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         /// <summary>

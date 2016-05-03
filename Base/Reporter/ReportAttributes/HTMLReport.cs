@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using System.IO;
@@ -24,7 +20,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         private static string _attachmentsPath;
 
         private MethodInfo _methodInfo;
-        private TestInformation _testInformation;
+        private TestInformations _testInformation;
         private DateTime _start;
         private DateTime _finish;
         private string _testOutput;

@@ -12,10 +12,8 @@ namespace AutomationFrameWork.Helper
 {
 
     public class ValidateHelper
-    {
-        //static CSSHelper CssValue = new CSSHelper();
-        //static CSSHelper CssHelper = new CSSHelper();
-        private static readonly ValidateHelper instance = new ValidateHelper();
+    {      
+        private static readonly ValidateHelper _instance = new ValidateHelper();
         static ValidateHelper()
         {
         }
@@ -23,7 +21,7 @@ namespace AutomationFrameWork.Helper
         {
             get
             {
-                return instance;
+                return _instance;
             }
         }
         /// <summary>
