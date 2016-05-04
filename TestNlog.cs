@@ -14,20 +14,23 @@ using AutomationFrameWork.Driver.Core;
 using AutomationFrameWork.Driver;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using AutomationFrameWork.Reporter.ReportAttributes;
+
 namespace AutomationFrameWork.Log
-{   
-    [TestFixture]
+{   [HTML]
+    [Parallelizable(ParallelScope.Self)]
+    [TestFixture]    
     public class NLOG 
-    {   
+    {
         [Test]
-        public void LogFilePass()
-        {            
-            Assert.IsTrue(true);
+        public void TestReport1 ()
+        {
+            Assert.IsTrue(false);
         }
         [Test]
-        public void LogFileFailed ()
-        {        
-            Assert.IsTrue(false);
+        public void TestReport2 ()
+        {
+            Assert.IsTrue(true);
         }
     }
 

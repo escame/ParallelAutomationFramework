@@ -29,7 +29,7 @@ namespace AutomationFrameWork.Driver.Core
                 if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
                 {
                     MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                    FieldInfo instance = className.GetField("instance",
+                    FieldInfo instance = className.GetField("_instance",
                         BindingFlags.Static | BindingFlags.NonPublic);
                     object instanceDriver = instance.GetValue(null);
                     startDriver.Invoke(instanceDriver, Type.EmptyTypes);
@@ -42,20 +42,19 @@ namespace AutomationFrameWork.Driver.Core
         /// </summary>
         protected static void CloseDriver()
         {
-            RemoteWebDriver driver = (RemoteWebDriver)driverStored.Value;            
-            driver.Close();
-            driver.Quit();
-            driver.Dispose();            
-            driver = (RemoteWebDriver)driverStored.Value;            
+            IWebDriver _driver = (IWebDriver)driverStored.Value;
+            _driver.Quit();
+            _driver.Dispose();
             /*
-             * This is use for ensure driver is closed
-             * both in browser/application and driver executable path
-             * (Ex:chromedriver.exe, IEDriverServer.exe)
-            */
-            if (driver.SessionId != null)
+            * This is use for ensure driver is closed
+            * both in browser/application and driver executable path
+            * (Ex:chromedriver.exe, IEDriverServer.exe)
+           */
+           var _isCloseDriver= (RemoteWebDriver)driverStored.Value;
+            if (_isCloseDriver.SessionId != null)
             {
-                driver.Quit();
-                driver.Dispose();
+                _isCloseDriver.Quit();
+                _isCloseDriver.Dispose();
             }
         }        
         /// <summary>

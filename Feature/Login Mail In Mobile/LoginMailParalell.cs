@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using AutomationFrameWork.Base;
-
+using AutomationFrameWork.Reporter.ReportAttributes;
 
 namespace AutomationFrameWork.Demo
-{   
+{  
     [TestFixture(DriverType.Chrome)]
     [TestFixture(DriverType.InternetExplore)]
     [TestFixture(DriverType.Firefox)]
@@ -37,7 +37,7 @@ namespace AutomationFrameWork.Demo
             LoginPage.Instance.ClickNext();
             LoginPage.Instance.EnterPass("0934058877");
             LoginPage.Instance.ClickSignIn();
-            LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com - Gmail");
+            LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com");
         }
         [Test, TestCaseSource("GetTestData")]
         public void TestDataDriven (string search)
