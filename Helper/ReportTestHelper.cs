@@ -95,10 +95,10 @@ namespace AutomationFrameWork.Reporter.ReportHelpers
             return tests.OrderBy(x => x.DateTimeFinish).Last().DateTimeFinish;
         }
 
-        public static TimeSpan Duration (this List<TestInformations> tests)
+        public static TimeSpan Duration (this List<TestInformations> tests,DateTime startDate)
         {
-            //return (GetFinishDate(tests) - startDate);
-            return (GetFinishDate(tests) - GetStartDate(tests));
+            return (GetFinishDate(tests) - startDate);
+            //return (GetFinishDate(tests) - GetStartDate(tests));
         }
     }
 }

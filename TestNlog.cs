@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using NLog;
 using AutomationFrameWork.Base;
 using System.Net;
 using System.Net.NetworkInformation;

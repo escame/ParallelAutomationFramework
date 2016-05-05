@@ -24,7 +24,7 @@ namespace AutomationFrameWork.Reporter.ReportUtils
         public string EndDate;
         public string Duration;
 
-        public MainStatistics (List<TestInformations> tests)
+        public MainStatistics (List<TestInformations> tests, System.DateTime startDate)
         {
             TotalAll = tests.Count;
             TotalIgnored = tests.Count(x => x.IsIgnored());
@@ -37,15 +37,12 @@ namespace AutomationFrameWork.Reporter.ReportUtils
             TotalSuccessTrue = tests.Count(x => x.IsSuccess());
             TotalSuccessFalse = tests.Count(x => !x.IsSuccess());
 
-            TotalExecuted = TotalAll;
-            var _startDate = System.DateTime.Now;
-            StartDate = tests.GetStartDate().ToString("dd.MM.yyyy HH:mm:ss.ff");
-            /*if (StartDate == null)
-            {
-                StartDate = _startDate.ToString("dd.MM.yy HH:mm:ss");
-            }    */           
+            TotalExecuted = TotalAll;           
+            //StartDate = tests.GetStartDate().ToString("dd.MM.yyyy HH:mm:ss.ff");
+           
+            StartDate = startDate.ToString("dd.MM.yyyy HH:mm:ss");                      
             EndDate = tests.GetFinishDate().ToString("dd.MM.yyyy HH:mm:ss.ff");
-            Duration = tests.Duration().ToString(@"hh\:mm\:ss\:fff");
+            Duration = tests.Duration(startDate).ToString(@"hh\:mm\:ss\:fff");
         }
     }
 }

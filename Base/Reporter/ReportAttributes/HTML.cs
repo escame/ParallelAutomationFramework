@@ -28,14 +28,14 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         private string _testName;
         private readonly string _projectName;
         private readonly string _className;
-        private static ReportConfiguration _configuration;
-
+        private static ReportConfiguration _configuration;        
         private static string _outputPath;
         private static string _screenshotsPath;
         private static string _attachmentsPath;
 
         private MethodInfo _methodInfo;
         private TestInformations _test;
+        private static DateTime _startSuite;
         private DateTime _start;
         private DateTime _finish;
         private string _testOutput;
@@ -50,31 +50,37 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             _className = className;
             _testName = testName;
             _configuration = ReportHelper.Configuration;
-
             _outputPath = _configuration.LocalOutputPath;
             _screenshotsPath = Output.GetScreenshotsPath(_outputPath);
             _attachmentsPath = Output.GetAttachmentsPath(_outputPath);
+            if (_startSuite.Date== default(DateTime))
+            {
+                _startSuite = DateTime.Now;
+            }
         }
 
         public void BeforeTest (ITest test)
         {
-            CreateDirectories();          
-            Report.SetUp();
-            _start = DateTime.Now;
-            _methodInfo = test.Method.MethodInfo;
-            if (!IsExistResources(_outputPath))
+            lock (_syncRoot)
             {
-                lock (_syncRoot)
+                CreateDirectories();
+                Report.SetUp();               
+                _start = DateTime.Now;
+                _methodInfo = test.Method.MethodInfo;
+                if (!IsExistResources(_outputPath))
                 {
-                    var primerName = Output.Files.PrimerStyleFile;
-                    ExtractResource(primerName, _outputPath);
+                    lock (_syncRoot)
+                    {
+                        var primerName = Output.Files.PrimerStyleFile;
+                        ExtractResource(primerName, _outputPath);
 
-                    var octiconsName = Output.Files.OcticonsStyleFiles;
-                    ExtractResources(octiconsName, _outputPath);
+                        var octiconsName = Output.Files.OcticonsStyleFiles;
+                        ExtractResources(octiconsName, _outputPath);
 
-                    //jquery - 1.11.0.min.js
-                    var jqueryName = Output.Files.JQueryScriptFile;
-                    ExtractResource(jqueryName, _outputPath);
+                        //jquery - 1.11.0.min.js
+                        var jqueryName = Output.Files.JQueryScriptFile;
+                        ExtractResource(jqueryName, _outputPath);
+                    }
                 }
             }
         }
@@ -410,10 +416,9 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
                 //jquery - 1.11.0.min.js
                 var jqueryName = Output.Files.JQueryScriptFile;
                 ExtractResource(jqueryName, _outputPath);
-                */
-
+                */                
                 var tests = ReportTestHelper.GetNewestTests(_attachmentsPath).OrderBy(x => x.DateTimeFinish).ToList();
-                var stats = new MainStatistics(tests);
+                var stats = new MainStatistics(tests, _startSuite);
                 var statsChart = new MainInfoChart(stats, Output.GetStatsPieId());
                 statsChart.SaveScript(_outputPath);
                 tests.GenerateTimelinePage(Path.Combine(_outputPath, Output.Files.TimelineFile));
