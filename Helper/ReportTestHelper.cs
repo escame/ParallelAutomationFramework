@@ -86,7 +86,7 @@ namespace AutomationFrameWork.Reporter.ReportHelpers
         }
 
         public static DateTime GetStartDate (this List<TestInformations> tests)
-        {
+        {            
             return tests.OrderBy(x => x.DateTimeStart).First().DateTimeStart;
         }
 
@@ -97,6 +97,7 @@ namespace AutomationFrameWork.Reporter.ReportHelpers
 
         public static TimeSpan Duration (this List<TestInformations> tests)
         {
+            //return (GetFinishDate(tests) - startDate);
             return (GetFinishDate(tests) - GetStartDate(tests));
         }
     }

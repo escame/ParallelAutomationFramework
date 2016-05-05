@@ -22,7 +22,8 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple =false)]
     public class HTML : Attribute,ITestAction
-    {      
+    {
+        private static readonly object _syncRoot = new Object();
         private Guid _guid;
         private string _testName;
         private readonly string _projectName;
@@ -61,57 +62,65 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             Report.SetUp();
             _start = DateTime.Now;
             _methodInfo = test.Method.MethodInfo;
-            var primerName = Output.Files.PrimerStyleFile;
-            ExtractResource(primerName, _outputPath);
+            if (!IsExistResources(_outputPath))
+            {
+                lock (_syncRoot)
+                {
+                    var primerName = Output.Files.PrimerStyleFile;
+                    ExtractResource(primerName, _outputPath);
 
-            var octiconsName = Output.Files.OcticonsStyleFiles;
-            ExtractResources(octiconsName, _outputPath);
+                    var octiconsName = Output.Files.OcticonsStyleFiles;
+                    ExtractResources(octiconsName, _outputPath);
 
-            //jquery - 1.11.0.min.js
-            var jqueryName = Output.Files.JQueryScriptFile;
-            ExtractResource(jqueryName, _outputPath);
+                    //jquery - 1.11.0.min.js
+                    var jqueryName = Output.Files.JQueryScriptFile;
+                    ExtractResource(jqueryName, _outputPath);
+                }
+            }
         }
 
         public void AfterTest (ITest test)
-        {
-            _finish = DateTime.Now;
-            _guid = _guid.Equals(Guid.Empty)
-                ? (Report.TestGuid.Equals(Guid.Empty) ? GuidConverter.ToMd5HashGuid(test.FullName) : Report.TestGuid)
-                : _guid;
-            _testOutput = TestContext.Out.ToString();
-            _testName = _testName.Equals("") ? Report.TestName : _testName;
-
-            var context = TestContext.CurrentContext;
-            var relativeTestHref = "Attachments" + @"/" + _guid + @"/" + Output.Files.GetTestHtmlName(_finish);
-
-            _test = new TestInformations
+        {lock (_syncRoot)
             {
-                DateTimeStart = _start,
-                DateTimeFinish = _finish,
-                TestDuration = (_finish - _start).TotalSeconds,
-                FullName = test.FullName,
-                ProjectName = _projectName.Equals("") ? test.FullName.Split('.').First() : _projectName,
-                ClassName = _className.Equals("") ? test.FullName.Split('.').Skip(1).First() : _className,
-                Name = _testName.Equals("") ? test.Name : _testName,
-                TestStackTrace = context.Result.StackTrace ?? "",
-                TestMessage = context.Result.Message ?? "",
-                Result = context.Result.Outcome?.ToString() ?? "Unknown",
-                Guid = _guid,
-                HasOutput = !_testOutput.Equals(string.Empty),
-                AttachmentsPath = _attachmentsPath + _guid + @"\",
-                TestHrefRelative = relativeTestHref,
-                TestHrefAbsolute = _configuration.ServerLink + relativeTestHref,
-                Events = Report.GetEvents()
-            };
+                _finish = DateTime.Now;
+                _guid = _guid.Equals(Guid.Empty)
+                    ? (Report.TestGuid.Equals(Guid.Empty) ? GuidConverter.ToMd5HashGuid(test.FullName) : Report.TestGuid)
+                    : _guid;
+                _testOutput = TestContext.Out.ToString();
+                _testName = _testName.Equals("") ? Report.TestName : _testName;
 
-            TakeScreenshotIfFailed();
-            AddScreenshots();
-            CleanUpTestFiles();
-            SaveTestFiles();
-            SendEmails(_test.IsSuccess());
-            SendEmailsForEvents();
-            GenerateReport();
-            Flush();
+                var context = TestContext.CurrentContext;
+                var relativeTestHref = "Attachments" + @"/" + _guid + @"/" + Output.Files.GetTestHtmlName(_finish);
+
+                _test = new TestInformations
+                {
+                    DateTimeStart = _start,
+                    DateTimeFinish = _finish,
+                    TestDuration = (_finish - _start).TotalSeconds,
+                    FullName = test.FullName,
+                    ProjectName = _projectName.Equals("") ? test.FullName.Split('.').First() : _projectName,
+                    ClassName = _className.Equals("") ? test.FullName.Split('.').Skip(1).First() : _className,
+                    Name = _testName.Equals("") ? test.Name : _testName,
+                    TestStackTrace = context.Result.StackTrace ?? "",
+                    TestMessage = context.Result.Message ?? "",
+                    Result = context.Result.Outcome?.ToString() ?? "Unknown",
+                    Guid = _guid,
+                    HasOutput = !_testOutput.Equals(string.Empty),
+                    AttachmentsPath = _attachmentsPath + _guid + @"\",
+                    TestHrefRelative = relativeTestHref,
+                    TestHrefAbsolute = _configuration.ServerLink + relativeTestHref,
+                    Events = Report.GetEvents()
+                };
+
+                TakeScreenshotIfFailed();
+                AddScreenshots();
+                CleanUpTestFiles();
+                SaveTestFiles();
+                SendEmails(_test.IsSuccess());
+                SendEmailsForEvents();
+                GenerateReport();
+                Flush();
+            }
         }
 
         public ActionTargets Targets => ActionTargets.Test;
@@ -456,6 +465,19 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             _finish = default(DateTime);
             Report.TearDown();
         }
-
+        private Boolean IsExistResources (string destinationPath)
+        {
+            Boolean _isExist = false;
+            var primerName = Output.Files.PrimerStyleFile;            
+            var octiconsName = Output.Files.OcticonsStyleFiles;
+            var jqueryName = Output.Files.JQueryScriptFile;            
+            foreach (var embeddedFileName in octiconsName)
+            {
+                _isExist = _isExist && (!File.Exists(destinationPath + "\\" + embeddedFileName));
+                    
+            }
+            _isExist = _isExist && (!File.Exists(destinationPath + "\\" + primerName)) && (!File.Exists(destinationPath + "\\" + jqueryName));
+            return _isExist;
+        }
     }
 }

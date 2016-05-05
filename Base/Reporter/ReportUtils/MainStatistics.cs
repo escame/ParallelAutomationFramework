@@ -38,8 +38,12 @@ namespace AutomationFrameWork.Reporter.ReportUtils
             TotalSuccessFalse = tests.Count(x => !x.IsSuccess());
 
             TotalExecuted = TotalAll;
-
+            var _startDate = System.DateTime.Now;
             StartDate = tests.GetStartDate().ToString("dd.MM.yyyy HH:mm:ss.ff");
+            /*if (StartDate == null)
+            {
+                StartDate = _startDate.ToString("dd.MM.yy HH:mm:ss");
+            }    */           
             EndDate = tests.GetFinishDate().ToString("dd.MM.yyyy HH:mm:ss.ff");
             Duration = tests.Duration().ToString(@"hh\:mm\:ss\:fff");
         }

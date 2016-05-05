@@ -43,8 +43,7 @@ namespace AutomationFrameWork.Driver.Core
         protected static void CloseDriver()
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
-            _driver.Quit();
-            _driver.Dispose();
+            _driver.Quit();            
             /*
             * This is use for ensure driver is closed
             * both in browser/application and driver executable path
@@ -53,8 +52,7 @@ namespace AutomationFrameWork.Driver.Core
            var _isCloseDriver= (RemoteWebDriver)driverStored.Value;
             if (_isCloseDriver.SessionId != null)
             {
-                _isCloseDriver.Quit();
-                _isCloseDriver.Dispose();
+                _isCloseDriver.Quit();                
             }
         }        
         /// <summary>
