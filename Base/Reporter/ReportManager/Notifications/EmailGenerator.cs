@@ -61,7 +61,7 @@ namespace AutomationFrameWork.Reporter.Notifications
                     {"content", @"IE=edge"},
                     {"charset", "utf-8"}
                 });
-                writer.Tag(HtmlTextWriterTag.Title, "NUnitGo Email");
+                writer.Tag(HtmlTextWriterTag.Title, "Automation Email");
                 writer.Tag(HtmlTextWriterTag.Style, new Dictionary<HtmlTextWriterAttribute, string>
                 {
                     {HtmlTextWriterAttribute.Type, @"text/css"}

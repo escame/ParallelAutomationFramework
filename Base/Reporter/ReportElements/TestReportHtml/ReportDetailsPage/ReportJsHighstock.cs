@@ -30,13 +30,13 @@ namespace AutomationFrameWork.Reporter.ReportElements.TestReportHtml
 
             var testsData = orderedList
                 .Aggregate("",
-                (current, nunitGoTest) => current +
-                                          $@"{{ x: {nunitGoTest.DateTimeFinish.ToJsString()}, y: {nunitGoTest.TestDuration.ToJsString()}, marker:{{ fillColor: '{nunitGoTest
+                (current, _test) => current +
+                                          $@"{{ x: {_test.DateTimeFinish.ToJsString()}, y: {_test.TestDuration.ToJsString()}, marker:{{ fillColor: '{_test
                                                       .GetColor()}'}}, url: '{Output.Files.GetTestHtmlName(
-                                                          nunitGoTest.DateTimeFinish)}'}},");
+                                                          _test.DateTimeFinish)}'}},");
             var testsScreenshotsData = orderedList
                 .Aggregate("",
-                (current1, nunitGoTest) => nunitGoTest
+                (current1, _test) => _test
                     .Screenshots
                     .Aggregate(current1,
                     (current, screenshot) => current +
@@ -44,9 +44,9 @@ namespace AutomationFrameWork.Reporter.ReportElements.TestReportHtml
             var lastTestEvents = lastTest.Events;
             var allEvents = lastTestEvents
                 .Select(testEvent =>
-                    (from nunitGoTest in orderedList
-                     where nunitGoTest.Events.Any(x => x.Name.Equals(testEvent.Name))
-                     select nunitGoTest.Events.First(x => x.Name.Equals(testEvent.Name))).ToList()).ToList();
+                    (from _test in orderedList
+                     where _test.Events.Any(x => x.Name.Equals(testEvent.Name))
+                     select _test.Events.First(x => x.Name.Equals(testEvent.Name))).ToList()).ToList();
             var testEventsData = "";
             foreach (var eventList in allEvents)
             {

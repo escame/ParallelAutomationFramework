@@ -136,7 +136,7 @@ namespace AutomationFrameWork.Reporter.ReportElements.ReportElementsCore
                 var mainTitle = new SectionName("Test Run Report");
                 var mainInformation = new MainInformationSection(mainStats);
                 var reportMenu = new MenuSection(menuElements, "main-menu", "Report menu");
-                var report = new HtmlPage("NUnitGo Report")
+                var report = new HtmlPage("Automation Report")
                 {
                     ScriptFilePaths = new List<string>
                     {
