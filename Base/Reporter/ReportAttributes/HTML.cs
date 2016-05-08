@@ -20,15 +20,15 @@ using AutomationFrameWork.Reporter.TestEvents;
 
 namespace AutomationFrameWork.Reporter.ReportAttributes
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple =false)]
-    public class HTML : Attribute,ITestAction
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
+    public class HTML : Attribute, ITestAction
     {
         private static readonly object _syncRoot = new Object();
         private Guid _guid;
         private string _testName;
         private readonly string _projectName;
         private readonly string _className;
-        private static ReportConfiguration _configuration;        
+        private static ReportConfiguration _configuration;
         private static string _outputPath;
         private static string _screenshotsPath;
         private static string _attachmentsPath;
@@ -36,8 +36,8 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         private MethodInfo _methodInfo;
         private TestInformations _test;
         private static DateTime _startSuite;
-        private DateTime _start;
-        private DateTime _finish;
+        private DateTime _start = default(DateTime);
+        private DateTime _finish = default(DateTime);
         private string _testOutput;
 
         public HTML (string testGuidString = "", string projectName = "", string className = "",
@@ -53,7 +53,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             _outputPath = _configuration.LocalOutputPath;
             _screenshotsPath = Output.GetScreenshotsPath(_outputPath);
             _attachmentsPath = Output.GetAttachmentsPath(_outputPath);
-            if (_startSuite.Date== default(DateTime))
+            if (_startSuite.Date == default(DateTime))
             {
                 _startSuite = DateTime.Now;
             }
@@ -64,7 +64,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             lock (_syncRoot)
             {
                 CreateDirectories();
-                Report.SetUp();               
+                Report.SetUp();
                 _start = DateTime.Now;
                 _methodInfo = test.Method.MethodInfo;
                 if (!IsExistResources(_outputPath))
@@ -86,7 +86,8 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         }
 
         public void AfterTest (ITest test)
-        {lock (_syncRoot)
+        {
+            lock (_syncRoot)
             {
                 _finish = DateTime.Now;
                 _guid = _guid.Equals(Guid.Empty)
@@ -159,8 +160,8 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
                 var highstockHistory = new ReportJsHighstock(testVersions, testRemarks, chartId);
                 highstockHistory.SaveScript(_test.AttachmentsPath);
 
-                var testPath = _test.AttachmentsPath + Output.Files.GetTestHtmlName(_test.DateTimeFinish);               
-                    _test.GenerateTestPage(testPath, _testOutput, Output.Files.GetTestHistoryScriptName(_test.DateTimeFinish));      
+                var testPath = _test.AttachmentsPath + Output.Files.GetTestHtmlName(_test.DateTimeFinish);
+                _test.GenerateTestPage(testPath, _testOutput, Output.Files.GetTestHistoryScriptName(_test.DateTimeFinish));
             }
             catch (Exception ex)
             {
@@ -364,11 +365,11 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
 
         private void ExtractResource (string embeddedFileName, string destinationPath)
         {
-          
+
             var currentAssembly = GetType().Assembly;
             var arrResources = GetType().Assembly.GetManifestResourceNames();
             var destinationFullPath = Path.Combine(destinationPath, embeddedFileName);
-            if (!File.Exists(destinationFullPath)&& !File.Exists(destinationPath + "\\" + embeddedFileName))
+            if (!File.Exists(destinationFullPath) && !File.Exists(destinationPath + "\\" + embeddedFileName))
             {
                 foreach (var resourceName in arrResources
                     .Where(resourceName => resourceName.ToUpper().EndsWith(embeddedFileName.ToUpper())))
@@ -389,8 +390,8 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         {
             foreach (var embeddedFileName in embeddedFileNames)
             {
-                if(!File.Exists(destinationPath + "\\" + embeddedFileName))
-                ExtractResource(embeddedFileName, destinationPath);
+                if (!File.Exists(destinationPath + "\\" + embeddedFileName))
+                    ExtractResource(embeddedFileName, destinationPath);
             }
         }
 
@@ -416,7 +417,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
                 //jquery - 1.11.0.min.js
                 var jqueryName = Output.Files.JQueryScriptFile;
                 ExtractResource(jqueryName, _outputPath);
-                */                
+                */
                 var tests = ReportTestHelper.GetNewestTests(_attachmentsPath).OrderBy(x => x.DateTimeFinish).ToList();
                 var stats = new MainStatistics(tests, _startSuite);
                 var statsChart = new MainInfoChart(stats, Output.GetStatsPieId());
@@ -465,23 +466,21 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         private void Flush ()
         {
             _guid = Guid.Empty;
-            _test = new TestInformations();
-            _start = default(DateTime);
-            _finish = default(DateTime);
+            _test = new TestInformations();          
             Report.TearDown();
         }
         private Boolean IsExistResources (string destinationPath)
         {
-            Boolean _isExist = false;
-            var primerName = Output.Files.PrimerStyleFile;            
+            Boolean _isExist = true;
+            var primerName = Output.Files.PrimerStyleFile;
             var octiconsName = Output.Files.OcticonsStyleFiles;
-            var jqueryName = Output.Files.JQueryScriptFile;            
+            var jqueryName = Output.Files.JQueryScriptFile;
             foreach (var embeddedFileName in octiconsName)
             {
-                _isExist = _isExist && (!File.Exists(destinationPath + "\\" + embeddedFileName));
-                    
+                _isExist = _isExist && (File.Exists(destinationPath + "\\" + embeddedFileName));
+
             }
-            _isExist = _isExist && (!File.Exists(destinationPath + "\\" + primerName)) && (!File.Exists(destinationPath + "\\" + jqueryName));
+            _isExist = _isExist && (File.Exists(destinationPath + "\\" + primerName)) && (File.Exists(destinationPath + "\\" + jqueryName));
             return _isExist;
         }
     }
