@@ -5,11 +5,11 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone4 : Drivers
     {
-        private static readonly EmulationiPhone4 _instance = new EmulationiPhone4();    
-        static EmulationiPhone4()
+        private static readonly EmulationiPhone4 _instance = new EmulationiPhone4();
+        static EmulationiPhone4 ()
         {
-        }        
-        private EmulationiPhone4()
+        }
+        private EmulationiPhone4 ()
         {
         }
 
@@ -20,7 +20,7 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             Drivers.DriverStorage = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone4.Instance.DriverOption);
         }

@@ -8,11 +8,11 @@ using System.Reflection;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Drivers 
-    {      
+    public class Drivers
+    {
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>(); 
+        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
         /// <summary>
         /// This method is use for
         /// scan all class driver with correct name via DriverType 
@@ -40,21 +40,21 @@ namespace AutomationFrameWork.Driver.Core
         /// <summary>
         /// This method use for close driver 
         /// </summary>
-        protected static void CloseDriver()
+        protected static void CloseDriver ()
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
-            _driver.Quit();            
+            _driver.Quit();
             /*
             * This is use for ensure driver is closed
             * both in browser/application and driver executable path
             * (Ex:chromedriver.exe, IEDriverServer.exe)
            */
-           var _isCloseDriver= (RemoteWebDriver)driverStored.Value;
+            var _isCloseDriver = (RemoteWebDriver)driverStored.Value;
             if (_isCloseDriver.SessionId != null)
             {
-                _isCloseDriver.Quit();                
+                _isCloseDriver.Quit();
             }
-        }        
+        }
         /// <summary>
         /// This method is use 
         /// for return object with can be MobileDriver or WebDriver
@@ -107,7 +107,9 @@ namespace AutomationFrameWork.Driver.Core
         /// This method is use for
         /// Start driver for any class extend Drivers
         /// </summary>    
-        virtual protected void StartDriver() { }
+        virtual protected void StartDriver ()
+        {
+        }
         /// <summary>
         /// This method is use for
         /// Get DriverOption for any class extend Drivers
@@ -115,6 +117,6 @@ namespace AutomationFrameWork.Driver.Core
         virtual protected object DriverOption
         {
             get;
-        }       
+        }
     }
 }

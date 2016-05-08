@@ -12,7 +12,7 @@ using System.Threading;
 namespace AutomationFrameWork.Driver
 {
     public class DriverFactory : Drivers
-    {       
+    {
         static DriverFactory ()
         {
         }
@@ -76,7 +76,7 @@ namespace AutomationFrameWork.Driver
         /// This method use for
         /// close driver
         /// </summary>
-        public new void CloseDriver ()
+        public void CloseDriver ()
         {
             Drivers.CloseDriver();
         }/// <summary>
@@ -85,9 +85,9 @@ namespace AutomationFrameWork.Driver
          /// </summary>
          /// <param name="driverType"></param>
         public void StartDriver (DriverType driverType)
-        {           
+        {
             Drivers.StartDrivers(driverType);
-        }       
+        }
         /// <summary>
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...
@@ -109,10 +109,10 @@ namespace AutomationFrameWork.Driver
         /// <param name="address"></param>
         /// <param name="port"></param>
         public void RemoteInfo (string address, int port)
-        {           
+        {
             Dictionary<string, string> info = new Dictionary<string, string>();
             info.Add("address", address);
-            info.Add("port", port.ToString());       
+            info.Add("port", port.ToString());
             DriverFactory.Instance.DriverOptions = info;
         }
         /// <summary>

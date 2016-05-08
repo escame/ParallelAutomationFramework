@@ -4,11 +4,11 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPhone5 : Drivers
     {
-        private static readonly EmulationiPhone5 _instance = new EmulationiPhone5();    
-        static EmulationiPhone5()
+        private static readonly EmulationiPhone5 _instance = new EmulationiPhone5();
+        static EmulationiPhone5 ()
         {
-        }       
-        private EmulationiPhone5()
+        }
+        private EmulationiPhone5 ()
         {
         }
 
@@ -19,7 +19,7 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             Drivers.DriverStorage = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPhone5.Instance.DriverOption);
         }
