@@ -5,10 +5,10 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class Firefox : Drivers
     {
-        private static readonly Firefox _instance = new Firefox();          
-        static Firefox()
+        private static readonly Firefox _instance = new Firefox();
+        static Firefox ()
         {
-        }       
+        }
         private Firefox ()
         {
 
@@ -21,7 +21,7 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             Drivers.DriverStorage = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
         }

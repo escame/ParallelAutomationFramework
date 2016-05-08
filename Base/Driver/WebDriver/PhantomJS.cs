@@ -5,10 +5,10 @@ namespace AutomationFrameWork.Driver.Core
     public class PhantomJS : Drivers
     {
         private static readonly PhantomJS _instance = new PhantomJS();
-        private static PhantomJSDriverService _phantomJSDriverService = null;       
-        static PhantomJS()
+        private static PhantomJSDriverService _phantomJSDriverService = null;
+        static PhantomJS ()
         {
-        }     
+        }
         private PhantomJS ()
         {
 
@@ -21,7 +21,7 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             Drivers.DriverStorage = new PhantomJSDriver(PhantomJS.Instance.PhantomJSDriverService, (PhantomJSOptions)PhantomJS.Instance.DriverOption);
         }

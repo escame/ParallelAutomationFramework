@@ -11,7 +11,7 @@ namespace AutomationFrameWork.Driver.Core
         private static readonly iOS _instance = new iOS();
         private static int _port = 0;
         private static string _address = string.Empty;
-        static iOS()
+        static iOS ()
         {
 
         }
@@ -24,7 +24,7 @@ namespace AutomationFrameWork.Driver.Core
             {
                 return _instance;
             }
-        }       
+        }
         protected override object DriverOption
         {
             get
@@ -32,7 +32,7 @@ namespace AutomationFrameWork.Driver.Core
                 return 1;
             }
         }
-        private static void GetInfo()
+        private static void GetInfo ()
         {
             Dictionary<string, string> info = (Dictionary<string, string>)Drivers.DriverOptions;
             if (info == null)
@@ -43,7 +43,7 @@ namespace AutomationFrameWork.Driver.Core
                 _port = Int32.Parse(info["port"]);
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             GetInfo();
             Drivers.DriverStorage = new IOSDriver<AppiumWebElement>(new Uri("http://" + _address + ":" + _port + "/wd/hub"), iOS.Instance.DesiredCapabilities);

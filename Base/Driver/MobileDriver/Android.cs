@@ -8,10 +8,10 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class Android : Drivers
     {
-        private static readonly Android _instance = new Android();     
+        private static readonly Android _instance = new Android();
         private static int _port = 0;
         private static string _address = string.Empty;
-        static Android()
+        static Android ()
         {
         }
         private Android ()
@@ -23,7 +23,7 @@ namespace AutomationFrameWork.Driver.Core
             {
                 return _instance;
             }
-        }       
+        }
         protected override object DriverOption
         {
             get
@@ -31,20 +31,20 @@ namespace AutomationFrameWork.Driver.Core
                 return 1;
             }
         }
-        private static void GetInfo()
+        private static void GetInfo ()
         {
-            Dictionary<string, string> info = (Dictionary<string, string>)Drivers.DriverOptions;         
+            Dictionary<string, string> info = (Dictionary<string, string>)Drivers.DriverOptions;
             if (info == null)
                 throw new ArgumentException("Please add Appium Server information for connect to server in DriverFactory.Instance.RemoteInfo(String address,int port)");
             else
             {
                 _address = info["address"];
-                _port=Int32.Parse(info["port"]);
+                _port = Int32.Parse(info["port"]);
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
-            GetInfo ();
+            GetInfo();
             Drivers.DriverStorage = new AndroidDriver<AppiumWebElement>(new Uri("http://" + _address + ":" + _port + "/wd/hub"), Android.Instance.DesiredCapabilities);
         }
 

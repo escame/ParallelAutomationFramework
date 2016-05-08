@@ -6,12 +6,12 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class EmulationiPad : Drivers
     {
-        private static readonly EmulationiPad _instance = new EmulationiPad();       
+        private static readonly EmulationiPad _instance = new EmulationiPad();
         private static IWebDriver WebDriver = null;
-        static EmulationiPad()
+        static EmulationiPad ()
         {
-        }      
-        private EmulationiPad()
+        }
+        private EmulationiPad ()
         {
         }
 
@@ -22,7 +22,7 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPad.Instance.DriverOption);
             WebDriver.Manage().Window.Size = new Size(1024, 768);
@@ -37,7 +37,7 @@ namespace AutomationFrameWork.Driver.Core
                 if (op == null)
                     op = new ChromeOptions();
                 op.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
-                return op;               
+                return op;
             }
         }
     }

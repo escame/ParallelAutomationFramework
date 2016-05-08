@@ -4,10 +4,10 @@ namespace AutomationFrameWork.Driver.Core
 {
     public class InternetExplore : Drivers
     {
-        private static readonly InternetExplore _instance = new InternetExplore();      
-        static InternetExplore()
+        private static readonly InternetExplore _instance = new InternetExplore();
+        static InternetExplore ()
         {
-        }      
+        }
         private InternetExplore ()
         {
         }
@@ -20,7 +20,7 @@ namespace AutomationFrameWork.Driver.Core
             }
         }
 
-        protected override void StartDriver()
+        protected override void StartDriver ()
         {
             Drivers.DriverStorage = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
         }
