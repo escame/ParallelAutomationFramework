@@ -154,7 +154,22 @@
     <EmbeddedResource Include="Base\Reporter\EmbeddedResources\JQuery\jquery-1.11.0.min.js" />
     <Content Include="ReportConfig.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\chromedriver.exe">
+      <SubType>Designer</SubType>
+      <Link>chromedriver.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\IEDriverServer.exe">
+      <SubType>Designer</SubType>
+      <Link>IEDriverServer.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\phantomjs.exe">
+      <SubType>Designer</SubType>
+      <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Base\Reporter\EmbeddedResources\Primer\primer.css" />
   </ItemGroup>
@@ -165,6 +180,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Base\Driver\Resources\" />
     <Folder Include="Base\Reporter\EmbeddedResources\Highstock\" />
     <Folder Include="Feature\Change Date Time In Note 5\" />
   </ItemGroup>
@@ -264,7 +280,6 @@
     <Compile Include="Helper\ReportHelper.cs" />
     <Compile Include="Helper\ReportTestHelper.cs" />
     <Compile Include="Helper\TestSuiteReportHelper.cs" />
-    <Compile Include="TestNlog.cs" />
     <Compile Include="Base\NodeServer\NodeFactory.cs" />
     <Compile Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature.cs">
       <AutoGen>True</AutoGen>
@@ -297,7 +312,9 @@
     <Compile Include="Helper\ValidateHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Feature\Change Date Time In Nexus 7\ChangeDateTime.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChangeDateTime.feature.cs</LastGenOutput>

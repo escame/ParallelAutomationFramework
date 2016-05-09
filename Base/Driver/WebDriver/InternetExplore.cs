@@ -2,7 +2,7 @@
 using AutomationFrameWork.Helper;
 namespace AutomationFrameWork.Driver.Core
 {
-    public class InternetExplore : Drivers
+    class InternetExplore : Drivers
     {
         private static readonly InternetExplore _instance = new InternetExplore();
         static InternetExplore ()

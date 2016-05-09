@@ -2,7 +2,7 @@
 using AutomationFrameWork.Helper;
 namespace AutomationFrameWork.Driver.Core
 {
-    public class EmulationiPhone5 : Drivers
+    class EmulationiPhone5 : Drivers
     {
         private static readonly EmulationiPhone5 _instance = new EmulationiPhone5();
         static EmulationiPhone5 ()

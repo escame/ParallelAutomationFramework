@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Android : Drivers
+    class Android : Drivers
     {
         private static readonly Android _instance = new Android();
         private static int _port = 0;

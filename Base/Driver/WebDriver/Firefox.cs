@@ -3,7 +3,7 @@ using OpenQA.Selenium.Remote;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Firefox : Drivers
+    class Firefox : Drivers
     {
         private static readonly Firefox _instance = new Firefox();
         static Firefox ()

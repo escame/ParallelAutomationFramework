@@ -1,6 +1,4 @@
-﻿using AutomationFrameWork.Driver;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
 using AutomationFrameWork.Driver.Core;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.PhantomJS;
@@ -11,8 +9,10 @@ using System.Threading;
 
 namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory : Drivers
+    class DriverFactory : Drivers
     {
+        private int _pageLoadTimeout;
+        private int _scriptTimeout;
         static DriverFactory ()
         {
         }
@@ -39,8 +39,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 IWebDriver _Driver = (IWebDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
                 return _Driver;
             }
         }
@@ -53,8 +53,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 PhantomJSDriver _Driver = (PhantomJSDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
                 return _Driver;
             }
         }
@@ -67,8 +67,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 AppiumDriver<AppiumWebElement> _Driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(60));
+                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
                 return _Driver;
             }
         }
@@ -78,14 +78,16 @@ namespace AutomationFrameWork.Driver
         /// </summary>
         public void CloseDriver ()
         {
-            Drivers.CloseDriver();
+            Drivers.CloseDrivers();
         }/// <summary>
          /// This method is use for
          /// start driver
          /// </summary>
          /// <param name="driverType"></param>
-        public void StartDriver (DriverType driverType)
+        public void StartDriver (DriverType driverType,int pageLoadTimeout=60, int scriptTimeout=60)
         {
+            _pageLoadTimeout = pageLoadTimeout;
+            _scriptTimeout = scriptTimeout;
             Drivers.StartDrivers(driverType);
         }
         /// <summary>

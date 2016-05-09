@@ -4,7 +4,7 @@ using System.Drawing;
 using AutomationFrameWork.Helper;
 namespace AutomationFrameWork.Driver.Core
 {
-    public class EmulationiPad : Drivers
+    class EmulationiPad : Drivers
     {
         private static readonly EmulationiPad _instance = new EmulationiPad();
         private static IWebDriver WebDriver = null;

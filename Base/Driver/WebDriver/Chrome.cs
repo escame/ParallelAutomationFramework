@@ -3,7 +3,7 @@ using AutomationFrameWork.Helper;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Chrome : Drivers
+    class Chrome : Drivers
     {
         private static readonly Chrome _instance = new Chrome();
         static Chrome ()

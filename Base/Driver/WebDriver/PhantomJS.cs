@@ -2,7 +2,7 @@
 using AutomationFrameWork.Helper;
 namespace AutomationFrameWork.Driver.Core
 {
-    public class PhantomJS : Drivers
+    class PhantomJS : Drivers
     {
         private static readonly PhantomJS _instance = new PhantomJS();
         private static PhantomJSDriverService _phantomJSDriverService = null;

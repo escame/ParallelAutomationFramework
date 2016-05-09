@@ -35,7 +35,7 @@ namespace AutomationFrameWork.Helper
         {
             get
             {
-                return Utilities.Instance.GetRelativePath("Base//Driver//Resources");
+                return System.IO.Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
             }
         }
         /// <summary>

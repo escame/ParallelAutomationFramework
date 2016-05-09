@@ -3,7 +3,7 @@ using AutomationFrameWork.Helper;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class EmulationiPhone4 : Drivers
+    class EmulationiPhone4 : Drivers
     {
         private static readonly EmulationiPhone4 _instance = new EmulationiPhone4();
         static EmulationiPhone4 ()

@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Drivers
+    abstract class Drivers
     {
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
@@ -40,7 +40,7 @@ namespace AutomationFrameWork.Driver.Core
         /// <summary>
         /// This method use for close driver 
         /// </summary>
-        protected static void CloseDriver ()
+        protected static void CloseDrivers ()
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
             _driver.Quit();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class Remote : Drivers
+    class Remote : Drivers
     {
         private static readonly Remote _instance = new Remote();
         private static int _port = 0;

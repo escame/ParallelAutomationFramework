@@ -6,7 +6,7 @@ using OpenQA.Selenium.Remote;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    public class iOS : Drivers
+    class iOS : Drivers
     {
         private static readonly iOS _instance = new iOS();
         private static int _port = 0;
