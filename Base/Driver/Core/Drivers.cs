@@ -13,6 +13,9 @@ namespace AutomationFrameWork.Driver.Core
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
         protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
+        protected static ThreadLocal<Dictionary<string, string>> remoteInfo = new ThreadLocal<Dictionary<string, string>>();
+        private static readonly object _syncRoot = new Object();
+
         /// <summary>
         /// This method is use for
         /// scan all class driver with correct name via DriverType 
@@ -21,19 +24,22 @@ namespace AutomationFrameWork.Driver.Core
         /// <param name="driverType"></param>
         protected static void StartDrivers (DriverType driverType)
         {
-            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
-                      .ToList();
-            foreach (Type className in listClass)
+            lock (_syncRoot)
             {
-                if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
+                List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                          .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
+                          .ToList();
+                foreach (Type className in listClass)
                 {
-                    MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                    FieldInfo instance = className.GetField("_instance",
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    object instanceDriver = instance.GetValue(null);
-                    startDriver.Invoke(instanceDriver, Type.EmptyTypes);
-                    break;
+                    if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
+                    {
+                        MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
+                        FieldInfo instance = className.GetField("_instance",
+                            BindingFlags.Static | BindingFlags.NonPublic);
+                        object instanceDriver = instance.GetValue(null);
+                        startDriver.Invoke(instanceDriver, Type.EmptyTypes);
+                        break;
+                    }
                 }
             }
         }
@@ -44,16 +50,14 @@ namespace AutomationFrameWork.Driver.Core
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
             _driver.Quit();
-            /*
-            * This is use for ensure driver is closed
-            * both in browser/application and driver executable path
-            * (Ex:chromedriver.exe, IEDriverServer.exe)
-           */
-            var _isCloseDriver = (RemoteWebDriver)driverStored.Value;
-            if (_isCloseDriver.SessionId != null)
-            {
-                _isCloseDriver.Quit();
-            }
+            if (optionStorage.Value != null)
+                optionStorage.Value = null;
+            if (desiredCapabilities.Value != null)
+                desiredCapabilities.Value = null;
+            if (remoteInfo.Value != null)
+                remoteInfo.Value.Clear();
+            if (driverStored.Value != null)
+                driverStored.Value = null;
         }
         /// <summary>
         /// This method is use 
@@ -101,6 +105,21 @@ namespace AutomationFrameWork.Driver.Core
             set
             {
                 optionStorage.Value = value;
+            }
+        }
+        /// <summary>
+        /// This method is use
+        /// for return RemoteInfo like address and port in appium , RemoteDriver
+        /// </summary>
+        protected static Dictionary<string, string> RemoteInfo
+        {
+            get
+            {
+                return remoteInfo.Value;
+            }
+            set
+            {
+                remoteInfo.Value = value;
             }
         }
         /// <summary>

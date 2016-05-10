@@ -31,44 +31,34 @@ namespace MobileFrameWork.Step_Definition.Common_Steps
             switch (browser.ToLower())
             {
                 case "chrome":
-                    DriverFactory.Instance.StartDriver(DriverType.Chrome);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.Chrome);            
                     break;
                 case "ipad":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPad);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPad);     
                     break;
                 case "iphone6":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone6);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone6);  
                     break;
                 case "iphone5":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone5);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone5); 
                     break;
                 case "iphone4":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone4);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone4);  
                     break;
                 case "nexus6":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationNexus6);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.EmulationNexus6);  
                     break;
                 case "firefox":
-                    DriverFactory.Instance.StartDriver(DriverType.Firefox);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.Firefox);          
                     break;
                 case "ie":
-                    DriverFactory.Instance.StartDriver(DriverType.InternetExplore);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.InternetExplore);   
                     break;
                 case "phantomjs":
-                    DriverFactory.Instance.StartDriver(DriverType.PhantomJS);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.PhantomJS);         
                     break;
                 case "remote":
-                    DriverFactory.Instance.StartDriver(DriverType.Remote);
-                    DriverFactory.Instance.GetWebDriver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
+                    DriverFactory.Instance.StartDriver(DriverType.Remote);          
                     break;
                 default:
                     throw new ArgumentException("Invalid browser name, please type 'Chrome' 'Firefox' 'IE' 'iPad' 'Phantomjs' 'Remote' 'Nexus6' 'iPhone6' 'iPhone5' 'iPhone4' for can start browser");
@@ -118,7 +108,7 @@ namespace MobileFrameWork.Step_Definition.Common_Steps
         public void GivenAppiumServer(string address, int portListen)
         {
             DriverFactory.Instance.DesiredCapabilities = capabilities;
-            DriverFactory.Instance.RemoteInfo(address, portListen);
+            DriverFactory.Instance.RemoteInformation(address, portListen);
             if (DeviceType.ToLower().Equals("android"))
                 DriverFactory.Instance.StartDriver(DriverType.Android);
             else if (DeviceType.ToLower().Equals("ios"))

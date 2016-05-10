@@ -9,11 +9,15 @@ using AutomationFrameWork.ActionsKeys;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Appium.Enums;
 using AutomationFrameWork.POM.HomePage;
+using AutomationFrameWork.Reporter.ReportAttributes;
+
 namespace AutomationFrameWork.Demo
 {
+    
     class LoginMailInMobile
     {
-        [SetUp]
+        
+        [SetUp]       
         public void SetUp()
         {
             DesiredCapabilities caps = new DesiredCapabilities();
@@ -21,12 +25,12 @@ namespace AutomationFrameWork.Demo
             caps.SetCapability("udid", "0415313132353234");
             caps.SetCapability("browserName", MobileBrowserType.Chrome);
             DriverFactory.Instance.DesiredCapabilities = caps;
-            DriverFactory.Instance.RemoteInfo("127.0.0.1",6969);
-            DriverFactory.Instance.StartDriver(DriverType.Android);
-        }
+            DriverFactory.Instance.RemoteInformation("127.0.0.1",6969);            
+        }       
         [Test]
         public void LoginMailSucessfullyMobile()
         {
+            DriverFactory.Instance.StartDriver(DriverType.Android);
             WebKeywords.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");
             LoginPage.Instance.EnterUserName("specflowdemo@gmail.com");
             LoginPage.Instance.ClickNext();

@@ -2,7 +2,7 @@
 <ReportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <LocalOutputPath>D:\AutomationReport</LocalOutputPath>
     <TakeScreenshotAfterTestFailed>true</TakeScreenshotAfterTestFailed>
-    <GenerateReport>true</GenerateReport>
+    <GenerateReport>false</GenerateReport>
     <SendEmails>false</SendEmails>
     <AddLinksInsideEmail>true</AddLinksInsideEmail>
     <ServerLink>http://server/folder/</ServerLink>

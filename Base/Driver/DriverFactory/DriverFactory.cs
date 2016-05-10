@@ -110,12 +110,12 @@ namespace AutomationFrameWork.Driver
         /// </summary>
         /// <param name="address"></param>
         /// <param name="port"></param>
-        public void RemoteInfo (string address, int port)
+        public void RemoteInformation (string address, int port)
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
             info.Add("address", address);
             info.Add("port", port.ToString());
-            DriverFactory.Instance.DriverOptions = info;
+            Drivers.RemoteInfo = info;
         }
         /// <summary>
         /// This method is use 

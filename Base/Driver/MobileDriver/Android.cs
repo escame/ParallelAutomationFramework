@@ -33,7 +33,7 @@ namespace AutomationFrameWork.Driver.Core
         }
         private static void GetInfo ()
         {
-            Dictionary<string, string> info = (Dictionary<string, string>)Drivers.DriverOptions;
+            Dictionary<string, string> info = (Dictionary<string, string>)Drivers.RemoteInfo;
             if (info == null)
                 throw new ArgumentException("Please add Appium Server information for connect to server in DriverFactory.Instance.RemoteInfo(String address,int port)");
             else

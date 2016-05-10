@@ -31,7 +31,30 @@ namespace AutomationFrameWork.Driver.Core
             {
                 InternetExplorerOptions op = (InternetExplorerOptions)Drivers.DriverOptions;
                 if (op == null)
-                    op = new InternetExplorerOptions();
+                    op = new InternetExplorerOptions
+                    {
+                        EnsureCleanSession = true,                       
+                        IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                        PageLoadStrategy = InternetExplorerPageLoadStrategy.Eager,
+                        UnexpectedAlertBehavior = InternetExplorerUnexpectedAlertBehavior.Ignore,
+                        IgnoreZoomLevel = true,
+                        EnableNativeEvents = true,
+                        RequireWindowFocus = true,
+                        EnablePersistentHover = true,
+                        ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top,
+                    };
+                else
+                {
+                    op.EnsureCleanSession = true;
+                    op.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+                    op.PageLoadStrategy = InternetExplorerPageLoadStrategy.Eager;
+                    op.UnexpectedAlertBehavior = InternetExplorerUnexpectedAlertBehavior.Ignore;
+                    op.IgnoreZoomLevel = true;
+                    op.EnableNativeEvents = true;
+                    op.RequireWindowFocus = true;
+                    op.EnablePersistentHover = true;
+                    op.ElementScrollBehavior = InternetExplorerElementScrollBehavior.Top;
+                }       
                 return op;
             }
         }
