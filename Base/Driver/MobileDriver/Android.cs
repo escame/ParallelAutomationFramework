@@ -11,6 +11,7 @@ namespace AutomationFrameWork.Driver.Core
         private static readonly Android _instance = new Android();
         private static int _port = 0;
         private static string _address = string.Empty;
+        private static int _timeConnect = 60;
         static Android ()
         {
         }
@@ -40,11 +41,19 @@ namespace AutomationFrameWork.Driver.Core
             {
                 _address = info["address"];
                 _port = Int32.Parse(info["port"]);
+                _timeConnect = Int32.Parse(info["time"])<=60|| Int32.Parse(info["time"])>=10? Int32.Parse(info["time"]): _timeConnect;
             }
         }
         protected override void StartDriver ()
         {
+            
             GetInfo();
+            TimeSpan _maxIdle =  TimeSpan.FromSeconds(_timeConnect);
+            DateTime _startTime= DateTime.UtcNow;          
+            while (_startTime.Add(_maxIdle) > DateTime.UtcNow)
+            {              
+                //loop for make sure appium running
+            }
             Drivers.DriverStorage = new AndroidDriver<AppiumWebElement>(new Uri("http://" + _address + ":" + _port + "/wd/hub"), Android.Instance.DesiredCapabilities);
         }
 

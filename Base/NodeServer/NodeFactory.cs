@@ -41,10 +41,9 @@ namespace AutomationFrameWork.Driver
             _appiumServer = new Process();
             _appiumServer.StartInfo.FileName = "cmd";
             _appiumServer.StartInfo.Arguments = "/c node \""+ Environment.ExpandEnvironmentVariables("%APPIUM%\\node_modules\\appium\\build\\lib\\main.js") + "\" -a " + this.AddressNumber + " -p " + this.PortNumber + " -bp " + this.BootstrapPort + " --chromedriver-port " + this.ChromeDriverPort;
-            _appiumServer.StartInfo.UseShellExecute = false;
-            _appiumServer.StartInfo.RedirectStandardOutput = true;
-            _appiumServer.Start();
-            while (!isNodeServerStart()) ;
+            _appiumServer.StartInfo.UseShellExecute = true;
+            _appiumServer.StartInfo.RedirectStandardOutput = false;
+            _appiumServer.Start();                    
             this.ProcessId = _appiumServer.Id;            
         }
         /// <summary>
@@ -142,7 +141,8 @@ namespace AutomationFrameWork.Driver
         /// </summary>
         /// <returns></returns>
         private Boolean isNodeServerStart ()
-        {           
+        {
+            Thread.Sleep(5000);
             return (_appiumServer == null || _appiumServer.StandardOutput.ReadLine().Contains("started on"));
         }
         private void existNodeJS ()
