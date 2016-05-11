@@ -156,17 +156,17 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\chromedriver.exe">
+    <Content Include="Base\Driver\Resources\chromedriver.exe">
       <SubType>Designer</SubType>
       <Link>chromedriver.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\IEDriverServer.exe">
+    <Content Include="Base\Driver\Resources\IEDriverServer.exe">
       <SubType>Designer</SubType>
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\phantomjs.exe">
+    <Content Include="Base\Driver\Resources\phantomjs.exe">
       <SubType>Designer</SubType>
       <Link>phantomjs.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
