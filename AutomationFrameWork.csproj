@@ -156,17 +156,17 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\chromedriver.exe">
+    <Content Include="Base\Driver\Resources\chromedriver.exe">
       <SubType>Designer</SubType>
       <Link>chromedriver.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\IEDriverServer.exe">
+    <Content Include="Base\Driver\Resources\IEDriverServer.exe">
       <SubType>Designer</SubType>
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="D:\WorkSpace\Git\AutomationFramework\Base\Driver\Resources\phantomjs.exe">
+    <Content Include="Base\Driver\Resources\phantomjs.exe">
       <SubType>Designer</SubType>
       <Link>phantomjs.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -364,6 +364,11 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+   <Target Name="BeforeBuild">   
+   <Exec Command="taskkill /f /im phantomjs.exe" IgnoreExitCode='true'/>
+   <Exec Command="taskkill /f /im chromedriver.exe" IgnoreExitCode='true'/>
+   <Exec Command="taskkill /f /im IEDriverServer.exe" IgnoreExitCode='true'/>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
