@@ -16,9 +16,10 @@ namespace AutomationFrameWork.Demo
     [TestFixture(DriverType.Firefox)]
     [TestFixture(DriverType.EmulationiPad)]
     [TestFixture(DriverType.EmulationiPhone6)]
-    [Parallelizable(ParallelScope.Self)]
+    [Parallelizable(ParallelScope.Self)]   
     class TestParalell
     {
+        
         DriverType driver;
         public TestParalell (DriverType type)
         {
@@ -30,6 +31,7 @@ namespace AutomationFrameWork.Demo
             DriverFactory.Instance.StartDriver(driver);            
         }
         [Test]      
+        [Category("LoginMail")]
         public void LoginMailSucessfullyParalell()
         {
             LoginPage.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");        
@@ -40,6 +42,7 @@ namespace AutomationFrameWork.Demo
             LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com");
         }
         [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
         public void TestDataDriven (string search)
         {
             WebKeywords.Instance.Navigate("https://google.com");
