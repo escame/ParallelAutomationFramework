@@ -45,5 +45,15 @@ namespace AutomationFrameWork.Utils
                 throw new InvalidOperationException("Can not find JSON data with JSON path '" + JSONXPath + "', please input correct JSONXPath, Ex: ['Parrent Root'].['Child Root'] ");          
             return json.SelectToken(JSONXPath).ToString();
         }
+        /// <summary>
+        /// This method is use for
+        /// return data in exel file
+        /// </summary>        /// 
+        /// <returns></returns>
+        public Dictionary<int, List<string>> GetExcelData (string path,string sheet)
+        {
+            return null;
+        }
+
     }
 }
