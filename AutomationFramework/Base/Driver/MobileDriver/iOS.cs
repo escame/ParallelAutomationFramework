@@ -57,11 +57,11 @@ namespace AutomationFrameWork.Driver.Core
             Drivers.DriverStorage = new IOSDriver<AppiumWebElement>(new Uri("http://" + _address + ":" + _port + "/wd/hub"), iOS.Instance.DesiredCapabilities);
         }
 
-        private new DesiredCapabilities DesiredCapabilities
+        private DesiredCapabilities DesiredCapabilities
         {
             get
             {
-                return Drivers.DesiredCapabilities;
+                return Drivers.DesiredCapabilitiesCore;
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace AutomationFrameWork.Driver.Core
 {
-    abstract public class Drivers
+    abstract class Drivers
     {
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
@@ -22,7 +22,7 @@ namespace AutomationFrameWork.Driver.Core
         /// and invoke method StartDriver
         /// </summary>
         /// <param name="driverType"></param>
-        protected static void StartDrivers (DriverType driverType)
+        public static void StartDrivers (DriverType driverType)
         {
             lock (_syncRoot)
             {
@@ -46,7 +46,7 @@ namespace AutomationFrameWork.Driver.Core
         /// <summary>
         /// This method use for close driver 
         /// </summary>
-        protected static void CloseDrivers ()
+        public static void CloseDrivers ()
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
             _driver.Quit();
@@ -64,13 +64,13 @@ namespace AutomationFrameWork.Driver.Core
         /// for return object with can be MobileDriver or WebDriver
         /// </summary>
         /// <returns></returns>
-        protected static object DriverStorage
+        public static object DriverStorage
         {
             get
             {
                 return driverStored.Value;
             }
-            set
+            protected set
             {
                 driverStored.Value = value;
             }
@@ -79,7 +79,7 @@ namespace AutomationFrameWork.Driver.Core
         /// This method is use 
         /// for setting DesiredCapabilities for Remote Driver, Firefox Driver, PhantomJs Driver
         /// </summary>
-        protected static DesiredCapabilities DesiredCapabilities
+        public static DesiredCapabilities DesiredCapabilitiesCore
         {
             get
             {
@@ -96,7 +96,7 @@ namespace AutomationFrameWork.Driver.Core
         /// This method is use
         /// for return DriverOption like ChromeOption, InternetExplorerOption
         /// </summary>
-        protected static object DriverOptions
+        public static object DriverOptions
         {
             get
             {
@@ -111,7 +111,7 @@ namespace AutomationFrameWork.Driver.Core
         /// This method is use
         /// for return RemoteInfo like address and port in appium , RemoteDriver
         /// </summary>
-        protected static Dictionary<string, string> RemoteInfo
+        public static Dictionary<string, string> RemoteInfo
         {
             get
             {

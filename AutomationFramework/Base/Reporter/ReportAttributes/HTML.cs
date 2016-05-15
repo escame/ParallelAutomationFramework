@@ -269,37 +269,37 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
                 foreach (var sub in eventSubs)
                 {
                     var currentTestVersions = ReportTestHelper.GetTestsFromFolder(_test.AttachmentsPath);
-                    var subscription = _configuration.EventDurationSubscriptions.FirstOrDefault(x => x.Name.Equals(sub.Name));
-                    if (currentTestVersions.Count > 1)
-                    {
-                        var previousTest = currentTestVersions
-                            .OrderByDescending(x => x.DateTimeFinish)
-                            .Skip(1)
-                            .First(x => x.Events.Any(e => e.Name.Equals(sub.EventName)));
-                        var previuosEvent = previousTest.Events.First(x => x.Name.Equals(sub.EventName));
-                        var currentEvent = _test.Events.First(x => x.Name.Equals(sub.EventName));
 
-                        if (Math.Abs(currentEvent.Duration - previuosEvent.Duration) > sub.MaxDifference)
+                    if (currentTestVersions.Count <= 1) continue;
+
+                    var previousTest = currentTestVersions
+                        .OrderByDescending(x => x.DateTimeFinish)
+                        .Skip(1)
+                        .First(x => x.Events.Any(e => e.Name.Equals(sub.EventName)));
+                    var previuosEvent = previousTest.Events.First(x => x.Name.Equals(sub.EventName));
+                    var currentEvent = _test.Events.First(x => x.Name.Equals(sub.EventName));
+
+                    if (Math.Abs(currentEvent.Duration - previuosEvent.Duration) > sub.MaxDifference)
+                    {
+                        var subscription = _configuration.EventDurationSubscriptions.FirstOrDefault(x => x.Name.Equals(sub.Name));
+                        if (subscription != null)
                         {
-                            if (subscription != null)
-                            {
-                                ReportEmailHelper.Send(_configuration.SendFromList, subscription.TargetEmails,
-                                    _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
-                                    true, sub.EventName, previuosEvent);
-                            }
-                            else if (sub.FullPath != null)
-                            {
-                                subscription = ReportXMLHelper.Load<EventDurationSubscription>(sub.FullPath);
-                                ReportEmailHelper.Send(_configuration.SendFromList, subscription.TargetEmails,
-                                    _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
-                                    true, sub.EventName, previuosEvent);
-                            }
-                            else if (sub.Targets.Any())
-                            {
-                                ReportEmailHelper.Send(_configuration.SendFromList, sub.Targets,
-                                    _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
-                                    true, sub.EventName, previuosEvent);
-                            }
+                            ReportEmailHelper.Send(_configuration.SendFromList, subscription.TargetEmails,
+                                _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
+                                true, sub.EventName, previuosEvent);
+                        }
+                        else if (sub.FullPath != null)
+                        {
+                            subscription = ReportXMLHelper.Load<EventDurationSubscription>(sub.FullPath);
+                            ReportEmailHelper.Send(_configuration.SendFromList, subscription.TargetEmails,
+                                _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
+                                true, sub.EventName, previuosEvent);
+                        }
+                        else if (sub.Targets.Any())
+                        {
+                            ReportEmailHelper.Send(_configuration.SendFromList, sub.Targets,
+                                _test, _screenshotsPath, _configuration.AddLinksInsideEmail,
+                                true, sub.EventName, previuosEvent);
                         }
                     }
                 }
@@ -386,7 +386,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             }
         }
 
-        private void ExtractResources (List<string> embeddedFileNames, string destinationPath)
+        private void ExtractResources (IEnumerable<string> embeddedFileNames, string destinationPath)
         {
             foreach (var embeddedFileName in embeddedFileNames)
             {
@@ -401,7 +401,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
             {
                 if (!_configuration.GenerateReport) return;
 
-                var cssPageName = Output.Files.ReportStyleFile;
+                const string cssPageName = Output.Files.ReportStyleFile;
                 var cssFullPath = Path.Combine(_outputPath, cssPageName);
                 if (!File.Exists(cssFullPath))
                 {

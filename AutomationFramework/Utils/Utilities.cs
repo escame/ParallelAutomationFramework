@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using AutomationFrameWork.Helper;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,8 +51,9 @@ namespace AutomationFrameWork.Utils
         /// return data in exel file
         /// </summary>        /// 
         /// <returns></returns>
-        public Dictionary<int, List<string>> GetExcelData (string path,string sheet)
+        public DataHelper GetExcelData (string path,string sheet)
         {
+            //Still define Data Type 
             return null;
         }
 

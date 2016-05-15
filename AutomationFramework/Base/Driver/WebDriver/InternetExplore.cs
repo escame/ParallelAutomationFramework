@@ -33,7 +33,7 @@ namespace AutomationFrameWork.Driver.Core
                 if (op == null)
                     op = new InternetExplorerOptions
                     {
-                        EnsureCleanSession = true,                       
+                        EnsureCleanSession = false,                       
                         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
                         PageLoadStrategy = InternetExplorerPageLoadStrategy.Eager,
                         UnexpectedAlertBehavior = InternetExplorerUnexpectedAlertBehavior.Ignore,

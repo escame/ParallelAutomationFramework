@@ -37,11 +37,11 @@ namespace AutomationFrameWork.Driver.Core
         }
 
 
-        private new DesiredCapabilities DesiredCapabilities
+        private DesiredCapabilities DesiredCapabilities
         {
             get
             {
-                return Drivers.DesiredCapabilities;
+                return Drivers.DesiredCapabilitiesCore;
             }
         }
     }

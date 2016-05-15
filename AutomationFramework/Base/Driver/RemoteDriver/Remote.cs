@@ -46,11 +46,11 @@ namespace AutomationFrameWork.Driver.Core
             Drivers.DriverStorage = new RemoteWebDriver(new Uri("http://" + _address + ":" + _port + "/wd/hub"), Remote.Instance.DesiredCapabilities);
         }
 
-        private new DesiredCapabilities DesiredCapabilities
+        private DesiredCapabilities DesiredCapabilities
         {
             get
             {
-                return Drivers.DesiredCapabilities;
+                return Drivers.DesiredCapabilitiesCore;
             }
         }
     }

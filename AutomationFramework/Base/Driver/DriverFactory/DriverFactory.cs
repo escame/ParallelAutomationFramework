@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory : Drivers
+    public class DriverFactory 
     {
         private int _pageLoadTimeout;
         private int _scriptTimeout;
@@ -94,7 +94,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...
         /// </summary>
-        public new object DriverOptions
+        public object DriverOption
         {
             get
             {
@@ -122,15 +122,15 @@ namespace AutomationFrameWork.Driver
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
         /// </summary>
-        public new DesiredCapabilities DesiredCapabilities
+        public DesiredCapabilities DesiredCapabilities
         {
             get
             {
-                return Drivers.DesiredCapabilities;
+                return Drivers.DesiredCapabilitiesCore;
             }
             set
             {
-                Drivers.DesiredCapabilities = value;
+                Drivers.DesiredCapabilitiesCore = value;
             }
         }
     }
