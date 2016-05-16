@@ -54,6 +54,10 @@ bin/*
 obj/*
 logs/*
 .vs/*
+/bin/*
+*.bin/*
+[Bb]in/
+[Oo]bj/
 # Ignore NuGet Packages
 *.nupkg
 # Ignore the packages folder
