@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,16 +47,5 @@ namespace AutomationFrameWork.Utils
                 throw new InvalidOperationException("Can not find JSON data with JSON path '" + JSONXPath + "', please input correct JSONXPath, Ex: ['Parrent Root'].['Child Root'] ");          
             return json.SelectToken(JSONXPath).ToString();
         }
-        /// <summary>
-        /// This method is use for
-        /// return data in exel file
-        /// </summary>        /// 
-        /// <returns></returns>
-        public DataHelper GetExcelData (string path,string sheet)
-        {
-            //Still define Data Type 
-            return null;
-        }
-
     }
 }
