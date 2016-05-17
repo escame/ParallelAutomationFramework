@@ -50,6 +50,7 @@ namespace AutomationFrameWork.Driver.Core
         {
             IWebDriver _driver = (IWebDriver)driverStored.Value;
             _driver.Quit();
+            _driver.Dispose();
             if (optionStorage.Value != null)
                 optionStorage.Value = null;
             if (desiredCapabilities.Value != null)

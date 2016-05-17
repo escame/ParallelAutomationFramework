@@ -5,10 +5,9 @@ using AutomationFrameWork.Driver;
 using AutomationFrameWork.Driver.Core;
 using AutomationFrameWork.Utils;
 using AutomationFrameWork.Reporter.ReportItems;
-
+using Microsoft.Office.Interop.Excel;
 namespace AutomationTesting
-{
-    [HTML]
+{ 
     [TestFixture]
     public class UnitTest1 
     {
@@ -16,8 +15,9 @@ namespace AutomationTesting
         public void TestMapping ()
         {
             DriverFactory.Instance.StartDriver(DriverType.Chrome);
-            DriverFactory.Instance.GetWebDriver.Url = "http://www.google.com";
-            DriverFactory.Instance.CloseDriver();         
+            //DriverFactory.Instance.GetWebDriver.Url = "http://www.google.com";
+            //DriverFactory.Instance.CloseDriver();        
+          
         }
     }
 }
