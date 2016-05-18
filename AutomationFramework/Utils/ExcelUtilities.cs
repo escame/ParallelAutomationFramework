@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
-using System.Data;
+﻿using System.Data;
 using System.IO;
 using AutomationFrameWork.Exceptions;
-
+using Excel;
+using System;
 namespace AutomationFrameWork.Utils
 {
     public class ExcelUtilities
@@ -24,6 +18,7 @@ namespace AutomationFrameWork.Utils
                 return _instance;
             }
         }
+        /*
         /// <summary>
         /// This method is use for
         /// return data in exel file
@@ -46,7 +41,7 @@ namespace AutomationFrameWork.Utils
                     {
                         package.Load(stream);
                     }
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[sheet];
                     _returnDataTable = new DataTable(worksheet.Name);
                     _totalCols = worksheet.Dimension.End.Column;
                     _totalRows = worksheet.Dimension.End.Row;
@@ -62,10 +57,11 @@ namespace AutomationFrameWork.Utils
                         {
                             _dataRow[cell.Start.Column - 1] = cell.Text;
                         }
-                        _returnDataTable.Rows.Add(_dataRow);
+                        _returnDataTable.Rows.Add(_dataRow);                       
                     }
                 }
-                return _returnDataTable;
+                _workSheetRow.Dispose();               
+                return _returnDataTable; 
             }
             catch (FileNotFoundException)
             {
@@ -76,7 +72,51 @@ namespace AutomationFrameWork.Utils
                 throw new StepErrorException("Cannot access excel file in '" + path + "'");
             }
             //Still define Data Type 
-
+        }
+        */
+        /// <summary>
+        /// This method is use for
+        /// return data in exel file
+        /// use Lib ExcelReader
+        /// </summary>        /// 
+        /// <returns></returns>
+        public DataTable GetExcelData(string path, string sheet, bool hasHeader = true)
+        {
+            try
+            {
+                DataTable _returnDataTable = null;
+                FileStream _stream = File.Open(path, FileMode.Open, FileAccess.Read);
+                IExcelDataReader _read = ExcelReaderFactory.CreateOpenXmlReader(_stream);
+                _read.IsFirstRowAsColumnNames = hasHeader;
+                DataSet result = _read.AsDataSet();
+                _read.Close();
+                _read.Dispose();
+                _stream.Close();
+                _stream.Dispose();
+                for (int n = 0; n < result.Tables.Count; n++)
+                {
+                    if(result.Tables[n].TableName.Equals(sheet))
+                    {
+                        _returnDataTable = result.Tables[n];
+                        break;
+                    }
+                }                
+                if (_returnDataTable == null)
+                    throw new NullReferenceException();
+                return _returnDataTable;
+            }
+            catch (FileNotFoundException)
+            {
+                throw new StepErrorException("Cannot found excel file in '" + path + "'");
+            }
+            catch (IOException)
+            {
+                throw new StepErrorException("Cannot access excel file in '" + path + "'");
+            }
+            catch (NullReferenceException)
+            {
+                throw new StepErrorException("Cannot find Sheet Name '" + sheet + "'");
+            }
         }
     }
 }
