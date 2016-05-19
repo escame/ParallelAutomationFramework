@@ -14,6 +14,7 @@ using OpenQA.Selenium.IE;
 using System.Threading;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using AutomationFrameWork.ActionsKeys;
 
 namespace AutomationTesting
 { 
@@ -29,6 +30,12 @@ namespace AutomationTesting
             Console.WriteLine(c);
             Console.WriteLine(d);           
             Console.WriteLine("============================");                      
-        }       
+        }
+        [Test]
+        public void TestKey ()
+        {
+            DriverFactory.Instance.StartDriver(DriverType.Chrome);
+            WebKeywords.Instance.OpenUrl("www.google.com");
+        }    
     }
 }
