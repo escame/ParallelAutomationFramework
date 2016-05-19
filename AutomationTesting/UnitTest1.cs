@@ -15,6 +15,7 @@ using System.Threading;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using AutomationFrameWork.ActionsKeys;
+using AutomationFrameWork.Exceptions;
 
 namespace AutomationTesting
 { 
@@ -22,7 +23,7 @@ namespace AutomationTesting
     public class UnitTest1 
     {
         [Test]   
-        [TestCaseSource(typeof(DataHelper), "DataDrivenExcel", new object[] { "C:\\Users\\minhhoang\\Desktop\\Selenium Semninar\\BigData.xlsx", "Test1", false })]
+        //[TestCaseSource(typeof(DataHelper), "DataDrivenExcel", new object[] { "C:\\Users\\minhhoang\\Desktop\\Selenium Semninar\\BigData.xlsx", "Test1", false })]
         public void TestMapping(string a,string b,string c,string d)
         {            
             Console.WriteLine(a);
@@ -34,8 +35,16 @@ namespace AutomationTesting
         [Test]
         public void TestKey ()
         {
-            DriverFactory.Instance.StartDriver(DriverType.Chrome);
-            WebKeywords.Instance.OpenUrl("www.google.com");
+            string test = "abc12345566 asdsadsdsa dsadsadsad test://abc";
+            try
+            {
+                System.Collections.Generic.List<string> text = Utilities.Instance.FindMatchText(test, "minh");
+                foreach (string temp in text)
+                    Console.WriteLine(temp);
+            }
+            catch (StepErrorException)
+            {
+            }
         }    
     }
 }
