@@ -82,11 +82,21 @@ namespace AutomationFrameWork.Utils
         /// <returns></returns>
         public DataTable GetExcelData(string path, string sheet, bool hasHeader = true)
         {
+            IExcelDataReader _read = null;
             try
             {
                 DataTable _returnDataTable = null;
                 FileStream _stream = File.Open(path, FileMode.Open, FileAccess.Read);
-                IExcelDataReader _read = ExcelReaderFactory.CreateOpenXmlReader(_stream);
+                if (path.Split('.')[1].ToString().ToLower().Equals("xlsx"))
+                {
+                    _read = ExcelReaderFactory.CreateOpenXmlReader(_stream);
+                }
+                else if (path.Split('.')[1].ToString().ToLower().Equals("xls"))
+                {
+                    _read = ExcelReaderFactory.CreateBinaryReader(_stream);
+                }
+                else
+                    throw new StepErrorException("Excel file not correct in file name extensions");
                 _read.IsFirstRowAsColumnNames = hasHeader;
                 DataSet result = _read.AsDataSet();
                 _read.Close();
@@ -116,7 +126,7 @@ namespace AutomationFrameWork.Utils
             catch (NullReferenceException)
             {
                 throw new StepErrorException("Cannot find Sheet Name '" + sheet + "'");
-            }
+            }           
         }
     }
 }
