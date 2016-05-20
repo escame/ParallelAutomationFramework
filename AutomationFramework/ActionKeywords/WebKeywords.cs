@@ -3,7 +3,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using AutomationFrameWork.Driver;
 using OpenQA.Selenium.Internal;
-using System.Threading;
+using System.Collections.ObjectModel;
+using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.ActionsKeys
 {
@@ -31,6 +32,8 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="url"></param>
         public void Navigate(String url)
         {
+            if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                throw new StepErrorException("URL is invalid format and cannot open page");
             DriverFactory.Instance.GetWebDriver.Navigate().GoToUrl(url);
         }
         /// <summary>
@@ -41,6 +44,8 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="url"></param>
         public void OpenUrl(String url)
         {
+            if (!(url.StartsWith("http://") || url.StartsWith("https://")))
+                throw new StepErrorException("URL is invalid format and cannot open page");
             DriverFactory.Instance.GetWebDriver.Url = url;
         }
         /// <summary>
@@ -168,6 +173,26 @@ namespace AutomationFrameWork.ActionsKeys
             return DriverFactory.Instance.GetWebDriver.Title;
         }
         /// <summary>
+        /// This method is use for
+        /// return value of css
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string GetCssValue (IWebElement element, string value)
+        {
+            return element.GetCssValue(value);
+        }
+        /// <summary>
+        /// This method is use for
+        /// return source code of current page
+        /// </summary>
+        /// <returns></returns>
+        public string GetPageSource ()
+        {
+            return DriverFactory.Instance.GetWebDriver.PageSource;
+        }
+        /// <summary>
         /// This method use for 
         /// wait page load completed
         /// </summary>
@@ -239,18 +264,7 @@ namespace AutomationFrameWork.ActionsKeys
         public IJavaScriptExecutor JavaScript(IWebDriver driver)
         {
             return (IJavaScriptExecutor)driver;
-        }
-        /// <summary>
-        /// This method is use for
-        /// return value of css
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public string GetCssValue(IWebElement element, string value)
-        {
-            return element.GetCssValue(value);
-        }
+        }        
         /// <summary>
         /// This method is use for
         /// return element
@@ -289,6 +303,45 @@ namespace AutomationFrameWork.ActionsKeys
                     throw new ArgumentException("Support FindElement with 'id' 'name' 'xpath' 'tag' 'link' 'css' 'class'");
             }
             return element;
+        }
+        /// <summary>
+        /// This method is use for
+        /// return elements in list
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ReadOnlyCollection<IWebElement> FindElements (string value)
+        {
+            ReadOnlyCollection<IWebElement> elements = null;
+            string LocatorType = value.Split(';')[0];
+            string LocatorValue = value.Split(';')[1];
+            switch (LocatorType.ToLower())
+            {
+                case "id":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.Id(LocatorValue));
+                    break;
+                case "name":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.Name(LocatorValue));
+                    break;
+                case "xpath":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.XPath(LocatorValue));
+                    break;
+                case "tag":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.TagName(LocatorValue));
+                    break;
+                case "link":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.LinkText(LocatorValue));
+                    break;
+                case "css":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.CssSelector(LocatorValue));
+                    break;
+                case "class":
+                    elements = DriverFactory.Instance.GetWebDriver.FindElements(By.ClassName(LocatorValue));
+                    break;
+                default:
+                    throw new ArgumentException("Support FindElement with 'id' 'name' 'xpath' 'tag' 'link' 'css' 'class'");
+            }
+            return elements;
         }
     }
 }

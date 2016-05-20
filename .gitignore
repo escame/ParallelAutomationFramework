@@ -58,6 +58,7 @@ logs/*
 *.bin/*
 [Bb]in/
 [Oo]bj/
+Build/*
 # Ignore NuGet Packages
 *.nupkg
 # Ignore the packages folder
