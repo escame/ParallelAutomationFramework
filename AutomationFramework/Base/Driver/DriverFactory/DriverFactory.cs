@@ -6,6 +6,7 @@ using OpenQA.Selenium.Appium;
 using System.Collections.Generic;
 using System;
 using System.Threading;
+using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
@@ -104,20 +105,7 @@ namespace AutomationFrameWork.Driver
             {
                 Drivers.DriverOptions = value;
             }
-        }
-        /// <summary>
-        /// Add information to connect appium server to DriverOption        
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="port"></param>
-        public void RemoteInformation (string address, int port,int timeConnectServer=60)
-        {
-            Dictionary<string, string> info = new Dictionary<string, string>();
-            info.Add("address", address);
-            info.Add("port", port.ToString());
-            info.Add("time", timeConnectServer.ToString());
-            Drivers.RemoteInfo = info;
-        }
+        }       
         /// <summary>
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
@@ -131,6 +119,19 @@ namespace AutomationFrameWork.Driver
             set
             {
                 Drivers.DesiredCapabilitiesCore = value;
+            }
+        }
+        public String RemoteUri
+        {
+            get
+            {
+                if (Drivers.RemoteUriCore == null)
+                    throw new StepErrorException("Please set Uri for Remote Server");
+                return Drivers.RemoteUriCore;
+            }
+            set
+            {
+                Drivers.RemoteUriCore=value;
             }
         }
     }

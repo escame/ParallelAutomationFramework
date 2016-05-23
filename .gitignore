@@ -59,6 +59,7 @@ logs/*
 [Bb]in/
 [Oo]bj/
 Build/*
+AutomationTesting/RealPRJ/*
 # Ignore NuGet Packages
 *.nupkg
 # Ignore the packages folder

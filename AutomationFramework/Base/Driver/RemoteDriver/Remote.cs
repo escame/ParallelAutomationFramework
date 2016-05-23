@@ -6,9 +6,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     class Remote : Drivers
     {
-        private static readonly Remote _instance = new Remote();
-        private static int _port = 0;
-        private static string _address = string.Empty;
+        private static readonly Remote _instance = new Remote();     
         static Remote ()
         {
         }
@@ -28,22 +26,10 @@ namespace AutomationFrameWork.Driver.Core
             {
                 return 1;
             }
-        }
-        private static void GetInfo ()
-        {
-            Dictionary<string, string> info = (Dictionary<string, string>)Drivers.RemoteInfo;
-            if (info == null)
-                throw new ArgumentException("Please add RemoteDriver information for connect to server in DriverFactory.Instance.RemoteInfo(String address,int port)");
-            else
-            {
-                _address = info["address"];
-                _port = Int32.Parse(info["port"]);
-            }
-        }
+        }       
         protected override void StartDriver ()
-        {
-            GetInfo();
-            Drivers.DriverStorage = new RemoteWebDriver(new Uri("http://" + _address + ":" + _port + "/wd/hub"), Remote.Instance.DesiredCapabilities);
+        {         
+            Drivers.DriverStorage = new RemoteWebDriver(new Uri(Drivers.RemoteUriCore), Remote.Instance.DesiredCapabilities);
         }
 
         private DesiredCapabilities DesiredCapabilities

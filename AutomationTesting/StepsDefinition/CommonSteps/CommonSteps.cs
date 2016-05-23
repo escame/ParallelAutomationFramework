@@ -105,7 +105,7 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
         public void GivenAppiumServer (string address, int portListen)
         {
             DriverFactory.Instance.DesiredCapabilities = capabilities;
-            DriverFactory.Instance.RemoteInformation(address, portListen);
+            DriverFactory.Instance.RemoteUri= "http://" + address + ":" + portListen + "/wd/hub";
             if (DeviceType.ToLower().Equals("android"))
                 DriverFactory.Instance.StartDriver(DriverType.Android);
             else if (DeviceType.ToLower().Equals("ios"))

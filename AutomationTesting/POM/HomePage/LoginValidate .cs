@@ -15,7 +15,7 @@ namespace AutomationTesting.POM.HomePage
         public void ValidateUserNameErrorMsg (string expected)
         {
             WebKeywords.Instance.WaitElementVisible(Element.waitLblErrorUserMsg, 15);
-            Assert.IsTrue(WebKeywords.Instance.GetAttribute(Element.lblErrorUserMsg, "innerHTML").Equals(expected), "Actual [" + WebKeywords.Instance.GetAttribute(Element.lblErrorUserMsg, "innerHTML") + "] is not match with expected [" + expected + "]");
+            Assert.IsTrue(WebKeywords.Instance.GetAttribute(Element.lblErrorUserMsg, "innerHTML").Equals(expected), "Actual [" + WebKeywords.Instance.GetAttribute(Element.lblErrorUserMsg, "innerHTML") + "] is not match with expected [" + expected + "]");            
         }
         public void ValidatePassErrorMsg (string expected)
         {

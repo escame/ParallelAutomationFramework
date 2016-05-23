@@ -12,8 +12,8 @@ namespace AutomationFrameWork.Driver.Core
     {
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
-        protected static ThreadLocal<Dictionary<string, string>> remoteInfo = new ThreadLocal<Dictionary<string, string>>();
+        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();       
+        protected static ThreadLocal<String> remoteUri = new ThreadLocal<string>();
         private static readonly object _syncRoot = new Object();
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace AutomationFrameWork.Driver.Core
                 optionStorage.Value = null;
             if (desiredCapabilities.Value != null)
                 desiredCapabilities.Value = null;
-            if (remoteInfo.Value != null)
-                remoteInfo.Value.Clear();
+            if (remoteUri.Value != null)
+                remoteUri.Value=null;
             if (driverStored.Value != null)
                 driverStored.Value = null;
         }
@@ -107,20 +107,20 @@ namespace AutomationFrameWork.Driver.Core
             {
                 optionStorage.Value = value;
             }
-        }
+        }        
         /// <summary>
         /// This method is use
-        /// for return RemoteInfo like address and port in appium , RemoteDriver
+        /// for return Uri of Cloud devices or remote Uri
         /// </summary>
-        public static Dictionary<string, string> RemoteInfo
+        public static String RemoteUriCore
         {
             get
             {
-                return remoteInfo.Value;
+                return remoteUri.Value;
             }
             set
             {
-                remoteInfo.Value = value;
+                remoteUri.Value = value;
             }
         }
         /// <summary>

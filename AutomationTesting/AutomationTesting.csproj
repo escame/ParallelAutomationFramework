@@ -110,6 +110,10 @@
     <Compile Include="POM\HomePage\LoginElement.cs" />
     <Compile Include="POM\HomePage\LoginPage.cs" />
     <Compile Include="POM\HomePage\LoginValidate .cs" />
+    <Compile Include="RealPRJ\Feature\OwnersSLPM1Desktop\OwnersSLP.cs" />
+    <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPElements.cs" />
+    <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPPage.cs" />
+    <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPValidate.cs" />
     <Compile Include="StepsDefinition\CommonSteps\CommonSteps.cs" />
     <Compile Include="StepsDefinition\LoginSteps\LoginSteps.cs" />
     <Compile Include="UnitTest1.cs" />
@@ -152,6 +156,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

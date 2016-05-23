@@ -18,32 +18,32 @@ using AutomationFrameWork.ActionsKeys;
 using AutomationFrameWork.Exceptions;
 
 namespace AutomationTesting
-{ 
-    
-    public class UnitTest1 
+{
+
+    public class UnitTest1
     {
-        [Test]   
+        [Test]
         //[TestCaseSource(typeof(DataHelper), "DataDrivenExcel", new object[] { "C:\\Users\\minhhoang\\Desktop\\Selenium Semninar\\BigData.xlsx", "Test1", false })]
-        public void TestMapping(string a,string b,string c,string d)
-        {            
+        public void TestMapping(string a, string b, string c, string d)
+        {
             Console.WriteLine(a);
             Console.WriteLine(b);
             Console.WriteLine(c);
-            Console.WriteLine(d);           
-            Console.WriteLine("============================");                      
+            Console.WriteLine(d);
+            Console.WriteLine("============================");
         }
         [Test]
         public void Ex3()
         {
             DriverFactory.Instance.StartDriver(DriverType.Chrome);
-            WebKeywords.Instance.Navigate("http://www.test.com");			
+            WebKeywords.Instance.Navigate("http://www.test.com");
             string _pageSource = DriverFactory.Instance.GetWebDriver.PageSource;
-            DriverFactory.Instance.CloseDriver();                       
+            DriverFactory.Instance.CloseDriver();
             foreach (Match _match in Regex.Matches(_pageSource, "123.+[0-9]+\""))
-                Console.WriteLine(_match.Value);  
-        }       
-		[Test]
-        public void TestKey ()
+                Console.WriteLine(_match.Value);
+        }
+        [Test]
+        public void TestKey()
         {
             string test = "abc12345566 asdsadsdsa dsadsadsad test://abc";
             try
@@ -55,5 +55,6 @@ namespace AutomationTesting
             catch (StepErrorException)
             {
             }
+        }
     }
 }
