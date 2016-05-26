@@ -5,6 +5,7 @@ using AutomationFrameWork.Driver;
 using OpenQA.Selenium.Internal;
 using System.Collections.ObjectModel;
 using AutomationFrameWork.Exceptions;
+using OpenQA.Selenium.Interactions;
 
 namespace AutomationFrameWork.ActionsKeys
 {
@@ -88,6 +89,8 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="element"></param>
         public void Click(IWebElement element)
         {
+            Actions _action = new Actions(DriverFactory.Instance.GetWebDriver);
+            _action.MoveToElement(element).Build().Perform();
             element.Click();
         }
         /// <summary>
@@ -98,7 +101,16 @@ namespace AutomationFrameWork.ActionsKeys
         /// <param name="text"></param>
         public void SetText(IWebElement element, string text)
         {
-            element.SendKeys(text);
+            try
+            {
+                element.Click();
+                element.SendKeys(text);
+            }
+            catch (WebDriverException)
+            {
+                throw new StepErrorException("Element is not enable for set text");
+            }
+           
         }
         /// <summary>
         /// This method use for 

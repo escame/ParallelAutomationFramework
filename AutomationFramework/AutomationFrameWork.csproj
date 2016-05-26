@@ -234,7 +234,7 @@
     <Compile Include="Base\Reporter\ReportUtils\GuidConverter.cs" />
     <Compile Include="Base\Reporter\ReportUtils\MainStatistics.cs" />
     <Compile Include="Base\Reporter\ReportUtils\Output.cs" />
-    <Compile Include="Base\TestEventListner\TestEventListner.cs" />
+    <Compile Include="Base\TestEventListener\TestEventListner.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\EmailInformationsExtensions.cs" />
     <Compile Include="Extensions\EmailMessageExtensions.cs" />
