@@ -19,42 +19,38 @@ using AutomationFrameWork.Exceptions;
 
 namespace AutomationTesting
 {
-
+    [Category("TestEvent")]
     public class UnitTest1
     {
         [Test]
-        //[TestCaseSource(typeof(DataHelper), "DataDrivenExcel", new object[] { "C:\\Users\\minhhoang\\Desktop\\Selenium Semninar\\BigData.xlsx", "Test1", false })]
-        public void TestMapping(string a, string b, string c, string d)
+        public void TestListner1()
         {
-            Console.WriteLine(a);
-            Console.WriteLine(b);
-            Console.WriteLine(c);
-            Console.WriteLine(d);
-            Console.WriteLine("============================");
+            Assert.True(true);
+            Thread.Sleep(7000);
         }
         [Test]
-        public void Ex3()
+        public void TestListner2()
         {
-            DriverFactory.Instance.StartDriver(DriverType.Chrome);
-            WebKeywords.Instance.Navigate("http://www.test.com");
-            string _pageSource = DriverFactory.Instance.GetWebDriver.PageSource;
-            DriverFactory.Instance.CloseDriver();
-            foreach (Match _match in Regex.Matches(_pageSource, "123.+[0-9]+\""))
-                Console.WriteLine(_match.Value);
+            Assert.True(true);
+            Thread.Sleep(7000);
         }
         [Test]
-        public void TestKey()
+        public void TestListner3()
         {
-            string test = "abc12345566 asdsadsdsa dsadsadsad test://abc";
-            try
-            {
-                System.Collections.Generic.List<string> text = Utilities.Instance.FindMatchText(test, "minh");
-                foreach (string temp in text)
-                    Console.WriteLine(temp);
-            }
-            catch (StepErrorException)
-            {
-            }
+            Assert.True(true);
+            Thread.Sleep(7000);
         }
-    }
+        [Test]
+        public void TestListner4()
+        {
+            Assert.True(true);
+            Thread.Sleep(7000);
+        }
+        [Test]
+        public void TestListner5()
+        {
+            Assert.True(true);
+            Thread.Sleep(7000);
+        }
+    }    
 }

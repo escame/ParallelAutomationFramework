@@ -17,7 +17,7 @@ using AutomationFrameWork.Reporter.ReportElements.ReportElementsCore;
 using AutomationFrameWork.Reporter.Notifications;
 using AutomationFrameWork.Reporter.ReportElements.ReportSections;
 using AutomationFrameWork.Reporter.TestEvents;
-
+using AutomationFrameWork.Base.TestEventListner;
 namespace AutomationFrameWork.Reporter.ReportAttributes
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
@@ -43,6 +43,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         public HTML (string testGuidString = "", string projectName = "", string className = "",
             string testName = "")
         {
+            TestEventListner event1 = new TestEventListner();
             _guid = testGuidString.Equals("")
                 ? Guid.Empty
                 : new Guid(testGuidString);

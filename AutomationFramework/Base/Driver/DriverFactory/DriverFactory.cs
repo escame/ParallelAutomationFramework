@@ -14,6 +14,7 @@ namespace AutomationFrameWork.Driver
     {
         private int _pageLoadTimeout;
         private int _scriptTimeout;
+        private bool _isMaximize;
         static DriverFactory ()
         {
         }
@@ -42,6 +43,8 @@ namespace AutomationFrameWork.Driver
                 IWebDriver _Driver = (IWebDriver)Drivers.DriverStorage;
                 _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
                 _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
+                if (_isMaximize)
+                    _Driver.Manage().Window.Maximize();
                 return _Driver;
             }
         }
@@ -85,10 +88,11 @@ namespace AutomationFrameWork.Driver
          /// start driver
          /// </summary>
          /// <param name="driverType"></param>
-        public void StartDriver (DriverType driverType,int pageLoadTimeout=60, int scriptTimeout=60)
+        public void StartDriver (DriverType driverType,int pageLoadTimeout=60, int scriptTimeout=60,bool isMaximazie=false)
         {
             _pageLoadTimeout = pageLoadTimeout;
             _scriptTimeout = scriptTimeout;
+            _isMaximize = isMaximazie;
             Drivers.StartDrivers(driverType);
         }
         /// <summary>

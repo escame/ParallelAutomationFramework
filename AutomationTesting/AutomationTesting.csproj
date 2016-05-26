@@ -110,7 +110,11 @@
     <Compile Include="POM\HomePage\LoginElement.cs" />
     <Compile Include="POM\HomePage\LoginPage.cs" />
     <Compile Include="POM\HomePage\LoginValidate .cs" />
+    <Compile Include="RealPRJ\Feature\NewCarSLP\NewCarSLP.cs" />
     <Compile Include="RealPRJ\Feature\OwnersSLPM1Desktop\OwnersSLP.cs" />
+    <Compile Include="RealPRJ\POM\NewCarSLP\NewCarSLPElements.cs" />
+    <Compile Include="RealPRJ\POM\NewCarSLP\NewCarSLPPage.cs" />
+    <Compile Include="RealPRJ\POM\NewCarSLP\NewCarSLPValidate.cs" />
     <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPElements.cs" />
     <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPPage.cs" />
     <Compile Include="RealPRJ\POM\OwnersSLPM1DeskTop\OwnersSLPValidate.cs" />
