@@ -94,7 +94,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mono.Cecil">
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Packages\NUnit.Engine.3.2.1\lib\Mono.Cecil.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -103,19 +104,23 @@
       <HintPath>..\Packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit-agent">
+    <Reference Include="nunit-agent, Version=3.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Packages\NUnit.Engine.3.2.1\lib\nunit-agent.exe</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit-agent-x86">
+    <Reference Include="nunit-agent-x86, Version=3.2.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Packages\NUnit.Engine.3.2.1\lib\nunit-agent-x86.exe</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.engine">
+    <Reference Include="nunit.engine, Version=3.2.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Packages\NUnit.Engine.3.2.1\lib\nunit.engine.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.engine.api">
+    <Reference Include="nunit.engine.api, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Packages\NUnit.Engine.3.2.1\lib\nunit.engine.api.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -177,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\Reporter\EmbeddedResources\Highstock\" />
+    <Folder Include="Base\TestEventListener\EmbeddedResources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionKeywords\MobileKeywords.cs" />
@@ -234,7 +240,7 @@
     <Compile Include="Base\Reporter\ReportUtils\GuidConverter.cs" />
     <Compile Include="Base\Reporter\ReportUtils\MainStatistics.cs" />
     <Compile Include="Base\Reporter\ReportUtils\Output.cs" />
-    <Compile Include="Base\TestEventListener\TestEvent.cs" />
+    <Compile Include="Base\TestEventListener\TestListener.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\EmailInformationsExtensions.cs" />
     <Compile Include="Extensions\EmailMessageExtensions.cs" />
