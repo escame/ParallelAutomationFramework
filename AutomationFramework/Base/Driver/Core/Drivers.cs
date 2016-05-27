@@ -45,9 +45,9 @@ namespace AutomationFrameWork.Driver.Core
         /// </summary>
         public static void CloseDrivers ()
         {
-            IWebDriver _driver = (IWebDriver)driverStored.Value;
-            _driver.Quit();
-            _driver.Dispose();
+            IWebDriver driver = (IWebDriver)driverStored.Value;
+            driver.Quit();
+            driver.Dispose();
             if (optionStorage.Value != null)
                 optionStorage.Value = null;
             if (desiredCapabilities.Value != null)

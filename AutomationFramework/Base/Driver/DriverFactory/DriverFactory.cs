@@ -37,12 +37,14 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                IWebDriver _Driver = (IWebDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
+                IWebDriver driver = (IWebDriver)Drivers.DriverStorage;
+                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
                 if (_isMaximize)
-                    _Driver.Manage().Window.Maximize();
-                return _Driver;
+                    driver.Manage().Window.Maximize();
+                return driver;
             }
         }
         /// <summary>
@@ -53,10 +55,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                PhantomJSDriver _Driver = (PhantomJSDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return _Driver;
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
+                PhantomJSDriver driver = (PhantomJSDriver)Drivers.DriverStorage;
+                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
+                return driver;
             }
         }
         /// <summary>
@@ -67,10 +71,12 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                AppiumDriver<AppiumWebElement> _Driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return _Driver;
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
+                AppiumDriver<AppiumWebElement> driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
+                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
+                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
+                return driver;
             }
         }
         /// <summary>
