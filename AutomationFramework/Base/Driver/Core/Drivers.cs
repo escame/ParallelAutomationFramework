@@ -12,7 +12,7 @@ namespace AutomationFrameWork.Driver.Core
     {
         protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
         protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();       
+        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();
         protected static ThreadLocal<String> remoteUri = new ThreadLocal<string>();
         private static readonly object _syncRoot = new Object();
 
@@ -24,22 +24,19 @@ namespace AutomationFrameWork.Driver.Core
         /// <param name="driverType"></param>
         public static void StartDrivers (DriverType driverType)
         {
-            lock (_syncRoot)
+            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
+                      .ToList();
+            foreach (Type className in listClass)
             {
-                List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                          .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
-                          .ToList();
-                foreach (Type className in listClass)
+                if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
                 {
-                    if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
-                    {
-                        MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                        FieldInfo instance = className.GetField("_instance",
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        object instanceDriver = instance.GetValue(null);
-                        startDriver.Invoke(instanceDriver, Type.EmptyTypes);
-                        break;
-                    }
+                    MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo instance = className.GetField("_instance",
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    object instanceDriver = instance.GetValue(null);                   
+                    startDriver.Invoke(instanceDriver, Type.EmptyTypes);                    
+                    break;
                 }
             }
         }
@@ -56,7 +53,7 @@ namespace AutomationFrameWork.Driver.Core
             if (desiredCapabilities.Value != null)
                 desiredCapabilities.Value = null;
             if (remoteUri.Value != null)
-                remoteUri.Value=null;
+                remoteUri.Value = null;
             if (driverStored.Value != null)
                 driverStored.Value = null;
         }
@@ -107,7 +104,7 @@ namespace AutomationFrameWork.Driver.Core
             {
                 optionStorage.Value = value;
             }
-        }        
+        }
         /// <summary>
         /// This method is use
         /// for return Uri of Cloud devices or remote Uri

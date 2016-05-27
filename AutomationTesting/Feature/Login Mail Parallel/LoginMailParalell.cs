@@ -9,10 +9,11 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
 {
 
     [TestFixture(DriverType.Chrome)]
-    [TestFixture(DriverType.InternetExplore)]
-    [TestFixture(DriverType.Firefox)]
-    [TestFixture(DriverType.EmulationiPad)]
+    [TestFixture(DriverType.EmulationiPhone4)]
+    [TestFixture(DriverType.EmulationiPhone5)]
     [TestFixture(DriverType.EmulationiPhone6)]
+    [TestFixture(DriverType.Firefox)]
+    [TestFixture(DriverType.EmulationiPad)]   
     [Parallelizable(ParallelScope.Self)]
     class TestParalell
     {
@@ -40,10 +41,103 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
-        public void TestDataDriven (string search)
+        public void TestDataDriven1 (string search)
         {
             WebKeywords.Instance.Navigate("https://google.com");
+            if(driver!=DriverType.EmulationiPhone4)
             WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+             WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven2 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven3 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven4 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven5 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven6 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven7 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven8 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven9 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+        }
+        [Test, TestCaseSource("GetTestData")]
+        [Category("SearchGoogle")]
+        public void TestDataDriven10 (string search)
+        {
+            WebKeywords.Instance.Navigate("https://google.com");
+            if (driver != DriverType.EmulationiPhone4)
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+            else
+                WebKeywords.Instance.SetText(DriverFactory.Instance.GetWebDriver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [TearDown]
         public void TearDown ()

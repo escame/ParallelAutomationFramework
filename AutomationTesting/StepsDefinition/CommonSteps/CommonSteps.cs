@@ -41,10 +41,7 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
                     break;
                 case "iphone4":
                     DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone4);
-                    break;
-                case "nexus6":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationNexus6);
-                    break;
+                    break;               
                 case "firefox":
                     DriverFactory.Instance.StartDriver(DriverType.Firefox);
                     break;

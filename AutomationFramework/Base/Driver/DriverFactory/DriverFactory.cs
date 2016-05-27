@@ -10,11 +10,12 @@ using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory 
+    public class DriverFactory
     {
         private int _pageLoadTimeout;
         private int _scriptTimeout;
         private bool _isMaximize;
+        private static readonly DriverFactory _instance = new DriverFactory();
         static DriverFactory ()
         {
         }
@@ -25,13 +26,9 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return DriverFactory.DriverFactoryInstance.Value;
+                return _instance;
             }
         }
-        static ThreadLocal<DriverFactory> DriverFactoryInstance = new ThreadLocal<DriverFactory>(() =>
-        {
-            return new DriverFactory();
-        });
         /// <summary>
         /// This method is use for
         /// return WebDriver ex: Chrome, Firefox, IE
@@ -88,7 +85,7 @@ namespace AutomationFrameWork.Driver
          /// start driver
          /// </summary>
          /// <param name="driverType"></param>
-        public void StartDriver (DriverType driverType,int pageLoadTimeout=60, int scriptTimeout=60,bool isMaximazie=false)
+        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
         {
             _pageLoadTimeout = pageLoadTimeout;
             _scriptTimeout = scriptTimeout;
@@ -109,7 +106,7 @@ namespace AutomationFrameWork.Driver
             {
                 Drivers.DriverOptions = value;
             }
-        }       
+        }
         /// <summary>
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
@@ -135,7 +132,7 @@ namespace AutomationFrameWork.Driver
             }
             set
             {
-                Drivers.RemoteUriCore=value;
+                Drivers.RemoteUriCore = value;
             }
         }
     }
