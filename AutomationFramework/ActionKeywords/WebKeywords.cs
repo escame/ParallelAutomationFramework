@@ -6,7 +6,7 @@ using OpenQA.Selenium.Internal;
 using System.Collections.ObjectModel;
 using AutomationFrameWork.Exceptions;
 using OpenQA.Selenium.Interactions;
-
+using AutomationFrameWork.Driver.Core;
 namespace AutomationFrameWork.ActionsKeys
 {
     public class WebKeywords
@@ -106,9 +106,9 @@ namespace AutomationFrameWork.ActionsKeys
                 element.Click();
                 element.SendKeys(text);
             }
-            catch (WebDriverException)
+            catch (WebDriverException e)
             {
-                throw new StepErrorException("Element is not enable for set text");
+                throw new StepErrorException("Element is not enable for set text" +"\r\n"+"error: " + e.Message);
             }
            
         }
