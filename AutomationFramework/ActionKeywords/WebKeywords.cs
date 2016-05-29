@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using AutomationFrameWork.Exceptions;
 using OpenQA.Selenium.Interactions;
 using AutomationFrameWork.Driver.Core;
+using System.Drawing.Imaging;
+
 namespace AutomationFrameWork.ActionsKeys
 {
     public class WebKeywords
@@ -276,7 +278,24 @@ namespace AutomationFrameWork.ActionsKeys
         public IJavaScriptExecutor JavaScript(IWebDriver driver)
         {
             return (IJavaScriptExecutor)driver;
-        }        
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public void GetScreenShot (string path = null, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
+        {
+            var now = DateTime.Now;           
+            var screenName = string.Format("screenshot_{0}.{1}", now.ToString("yyyyMMddHHmmssfff"), (formatType ?? ImageFormat.Png).ToString().ToLower());
+            path = path ?? Utils.Utilities.Instance.GetRelativePath("Screenshot\\");           
+            System.IO.Directory.CreateDirectory(path);     
+            creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime; 
+            (DriverFactory.Instance.GetWebDriver as ITakesScreenshot).GetScreenshot().SaveAsFile(path+screenName,(formatType ?? ImageFormat.Png));
+        }
+        public void GetScreenShotElement ()
+        {
+            
+        }    
         /// <summary>
         /// This method is use for
         /// return element
