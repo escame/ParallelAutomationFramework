@@ -30,8 +30,7 @@ namespace AutomationFrameWork.Driver.Core
             }
         }       
         protected override object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
-        {
-            //Drivers.DriverStorage = new AndroidDriver<AppiumWebElement>(new Uri(Drivers.RemoteUriCore), Android.Instance.DesiredCapabilities);
+        {           
             AndroidDriver<AppiumWebElement> driver = new AndroidDriver<AppiumWebElement>(new Uri(Drivers.RemoteUriCore), Android.Instance.DesiredCapabilities);
             driver.Manage().Timeouts().SetPageLoadTimeout(System.TimeSpan.FromSeconds(pageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));

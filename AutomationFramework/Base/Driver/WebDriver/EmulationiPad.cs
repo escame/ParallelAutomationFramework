@@ -29,8 +29,7 @@ namespace AutomationFrameWork.Driver.Core
             driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
-            //Drivers.DriverStorage = WebDriver;
+            return driver;          
         }
 
         protected override object DriverOption
