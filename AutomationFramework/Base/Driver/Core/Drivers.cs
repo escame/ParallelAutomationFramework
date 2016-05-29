@@ -11,10 +11,10 @@ namespace AutomationFrameWork.Driver.Core
 {
     abstract class Drivers
     {
-        private static ThreadLocal<object> driverStored ;
-        protected static ThreadLocal<DesiredCapabilities> desiredCapabilities ;
-        protected static ThreadLocal<object> optionStorage ;
-        protected static ThreadLocal<String> remoteUri ;
+        private static ThreadLocal<object> _driverStored ;
+        private static ThreadLocal<DesiredCapabilities> _desiredCapabilities ;
+        private static ThreadLocal<object> _optionStorage ;
+        private static ThreadLocal<String> _remoteUri ;
         //private static readonly object _syncRoot = new Object();
 
         /// <summary>
@@ -46,17 +46,17 @@ namespace AutomationFrameWork.Driver.Core
         /// </summary>
         public static void CloseDrivers ()
         {
-            IWebDriver driver = (IWebDriver)driverStored.Value;
+            IWebDriver driver = (IWebDriver)_driverStored.Value;
             driver.Quit();
             driver.Dispose();
-            if (optionStorage != null)
-                optionStorage.Value = null;
-            if (desiredCapabilities != null)
-                desiredCapabilities.Value = null;
-            if (remoteUri != null)
-                remoteUri.Value = null;
-            if (driverStored.Value != null)
-                driverStored.Value = null;
+            if (_optionStorage != null)
+                _optionStorage.Value = null;
+            if (_desiredCapabilities != null)
+                _desiredCapabilities.Value = null;
+            if (_remoteUri != null)
+                _remoteUri.Value = null;
+            if (_driverStored.Value != null)
+                _driverStored.Value = null;
         }
         /// <summary>
         /// This method is use 
@@ -67,13 +67,13 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return driverStored.Value;
+                return _driverStored.Value;
             }
             private set
             {
-                if(driverStored==null)
-                driverStored = new ThreadLocal<object>(true);
-                driverStored.Value = value;
+                if(_driverStored == null)
+                    _driverStored = new ThreadLocal<object>(true);
+                _driverStored.Value = value;
             }
         }
         /// <summary>
@@ -84,16 +84,16 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                if (desiredCapabilities == null)
-                    desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-                desiredCapabilities.Value = desiredCapabilities.Value == null ? new DesiredCapabilities() : desiredCapabilities.Value;
-                return desiredCapabilities.Value;
+                if (_desiredCapabilities == null)
+                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+                _desiredCapabilities.Value = _desiredCapabilities.Value == null ? new DesiredCapabilities() : _desiredCapabilities.Value;
+                return _desiredCapabilities.Value;
             }
             set
             {
-                if(desiredCapabilities==null)
-                desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-                desiredCapabilities.Value = value;
+                if(_desiredCapabilities == null)
+                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+                _desiredCapabilities.Value = value;
             }
         }
         /// <summary>
@@ -104,15 +104,15 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                if (optionStorage == null)
-                    optionStorage = new ThreadLocal<object>();
-                return optionStorage.Value;
+                if (_optionStorage == null)
+                    _optionStorage = new ThreadLocal<object>();
+                return _optionStorage.Value;
             }
             set
             {
-                if(optionStorage==null)
-                    optionStorage = new ThreadLocal<object>();
-                optionStorage.Value = value;
+                if(_optionStorage == null)
+                    _optionStorage = new ThreadLocal<object>();
+                _optionStorage.Value = value;
             }
         }
         /// <summary>
@@ -123,15 +123,15 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                if (remoteUri == null)
+                if (_remoteUri == null)
                     throw new StepErrorException("Please set Uri for Remote Server");
-                return remoteUri.Value;
+                return _remoteUri.Value;
             }
             set
             {
-                if (remoteUri == null)
-                    remoteUri = new ThreadLocal<string>();
-                remoteUri.Value = value;
+                if (_remoteUri == null)
+                    _remoteUri = new ThreadLocal<string>();
+                _remoteUri.Value = value;
             }
         }
         /// <summary>

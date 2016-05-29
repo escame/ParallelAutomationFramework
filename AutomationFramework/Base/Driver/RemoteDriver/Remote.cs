@@ -42,6 +42,25 @@ namespace AutomationFrameWork.Driver.Core
                 return Drivers.DesiredCapabilitiesCore;
             }
         }
+    }   
+}
+/// <summary>
+/// Implement screen shot for Remote Driver
+/// </summary>
+namespace OpenQA.Selenium.Remote
+{
+    public class ScreenshotRemoteDriver : RemoteWebDriver, ITakesScreenshot
+    {
+        public ScreenshotRemoteDriver (Uri remoteAddress, ICapabilities desiredCapabilities)
+            : base(remoteAddress, desiredCapabilities)
+        {
+        }
+
+        public Screenshot GetScreenshotRemoteDriver ()
+        {
+            Response screenshotResponse = this.Execute(DriverCommand.Screenshot, null);
+            string base64 = screenshotResponse.Value.ToString();
+            return new Screenshot(base64);
+        }
     }
 }
-
