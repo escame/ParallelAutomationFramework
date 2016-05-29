@@ -1,9 +1,12 @@
-﻿using AutomationFrameWork.Exceptions;
+﻿using AutomationFrameWork.Driver;
+using AutomationFrameWork.Exceptions;
 using AutomationFrameWork.Helper;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -78,11 +81,27 @@ namespace AutomationFrameWork.Utils
                 throw new StepErrorException("Not found match text in source text");
             return returnMatchText;
         }
-        public void GetElementImage (string path, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
+        public void GetWebElementImage (object element,string path, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
         {
+            ITakesScreenshot screenShotDriver = DriverFactory.Instance.GetWebDriver as ITakesScreenshot;            
             formatType = formatType ?? ImageFormat.Png;
             var now = DateTime.Now;
             creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime;
+            var screenName = string.Format("screenshot_{0}.{1}", now.ToString("yyyyMMddHHmmssfff"), formatType.ToString().ToLower());
+            var screenshot = screenShotDriver.GetScreenshot();
+            var elementScreenShot = (IWebElement)element;
+            using (MemoryStream stream = new MemoryStream(screenshot.AsByteArray))
+            {
+                using (Bitmap bitmap = new Bitmap(stream))
+                {
+                    RectangleF part = new RectangleF(elementScreenShot.Location.X, elementScreenShot.Location.Y, elementScreenShot.Size.Width, elementScreenShot.Size.Height);
+                    using (Bitmap bn = bitmap.Clone(part, bitmap.PixelFormat))
+                    {
+                        bn.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                }
+            }
+
         }
     }
 }
