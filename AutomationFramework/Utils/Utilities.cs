@@ -37,7 +37,9 @@ namespace AutomationFrameWork.Utils
         /// <returns></returns>
         public string GetRelativePath (string path)
         {
-            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)), "..//" + path));
+            //return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)), "..//" + path));           
+            System.Console.WriteLine(Path.Combine(Path.GetFullPath(Directory.GetParent(Directory.GetCurrentDirectory()).FullName),path));
+            return Path.GetFullPath(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName,path));
         }
         /// <summary>
         /// This method is use for
@@ -81,23 +83,32 @@ namespace AutomationFrameWork.Utils
                 throw new StepErrorException("Not found match text in source text");
             return returnMatchText;
         }
-        public void GetWebElementImage (object element,string path, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
+        /// <summary>
+        /// This method is use for
+        /// capture image of element
+        /// can use for report and UI testing
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="path"></param>
+        /// <param name="creationTime"></param>
+        /// <param name="formatType"></param>
+        public void GetWebElementBaseImage (object element,string path= null, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
         {
-            ITakesScreenshot screenShotDriver = DriverFactory.Instance.GetWebDriver as ITakesScreenshot;            
-            formatType = formatType ?? ImageFormat.Png;
             var now = DateTime.Now;
+            var screenName = string.Format("screenshot_{0}.{1}", now.ToString("yyyyMMddHHmmssfff"), (formatType ?? ImageFormat.Png).ToString().ToLower());
+            path = path ?? Utilities.Instance.GetRelativePath("BaseImage\\");
+            Directory.CreateDirectory(path);
             creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime;
-            var screenName = string.Format("screenshot_{0}.{1}", now.ToString("yyyyMMddHHmmssfff"), formatType.ToString().ToLower());
-            var screenshot = screenShotDriver.GetScreenshot();
-            var elementScreenShot = (IWebElement)element;
+            var screenshot = (DriverFactory.Instance.GetWebDriver as ITakesScreenshot).GetScreenshot();                
             using (MemoryStream stream = new MemoryStream(screenshot.AsByteArray))
             {
                 using (Bitmap bitmap = new Bitmap(stream))
                 {
+                    var elementScreenShot = (IWebElement)element;
                     RectangleF part = new RectangleF(elementScreenShot.Location.X, elementScreenShot.Location.Y, elementScreenShot.Size.Width, elementScreenShot.Size.Height);
                     using (Bitmap bn = bitmap.Clone(part, bitmap.PixelFormat))
                     {
-                        bn.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                        bn.Save(path+screenName, (formatType ?? ImageFormat.Png));
                     }
                 }
             }
