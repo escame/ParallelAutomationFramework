@@ -12,13 +12,15 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using AutomationFrameWork.Utils;
+using AutomationFrameWork.ActionsKeys;
+
 namespace AutomationTesting
 {
    
    
     public class TestITestListener 
     {
-       
+        [Category("Capture Element Image")]
         [Test]
         public void Event ()
         {
@@ -29,7 +31,10 @@ namespace AutomationTesting
             IWebDriver driver = DriverFactory.Instance.GetWebDriver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
-            Utilities.Instance.GetWebElementImage(el, "C:\\Temp\\test.png");
+            WebKeywords.Instance.GetScreenShot();
+            Utilities.Instance.GetWebElementBaseImage(el,formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
+            driver.Dispose();
+            DriverFactory.Instance.CloseDriver();
         }
     }
 }
