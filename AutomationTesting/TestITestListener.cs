@@ -7,6 +7,7 @@ using NUnit.Framework;
 using AutomationFrameWork.Base.TestEventListener;
 using System.Runtime.CompilerServices;
 using NUnit.Engine;
+using AutomationFrameWork.Driver;
 namespace AutomationTesting
 {
    
@@ -17,7 +18,7 @@ namespace AutomationTesting
         [Test]
         public void Event ()
         {
-            Console.WriteLine();
+            OpenQA.Selenium.IWebDriver driver = DriverFactory.Instance.GetWebDriver;
         }
     }
 }

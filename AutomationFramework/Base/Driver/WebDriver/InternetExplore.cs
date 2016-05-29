@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium.IE;
 using AutomationFrameWork.Helper;
+using OpenQA.Selenium;
+
 namespace AutomationFrameWork.Driver.Core
 {
     class InternetExplore : Drivers
@@ -20,9 +22,15 @@ namespace AutomationFrameWork.Driver.Core
             }
         }
 
-        protected override void StartDriver ()
+        protected override object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-            Drivers.DriverStorage = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
+            //Drivers.DriverStorage = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
+            IWebDriver driver = new InternetExplorerDriver(DriverHelper.Instance.DriverPath, (InternetExplorerOptions)InternetExplore.Instance.DriverOption);
+            driver.Manage().Timeouts().SetPageLoadTimeout(System.TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));
+            if (isMaximize)
+                driver.Manage().Window.Maximize();
+            return driver;
         }
 
         protected override object DriverOption

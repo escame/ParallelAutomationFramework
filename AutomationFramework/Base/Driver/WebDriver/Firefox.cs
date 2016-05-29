@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
 namespace AutomationFrameWork.Driver.Core
@@ -21,9 +22,15 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver ()
+        protected override object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-            Drivers.DriverStorage = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
+            IWebDriver driver = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
+            driver.Manage().Timeouts().SetPageLoadTimeout(System.TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));
+            if (isMaximize)
+                driver.Manage().Window.Maximize();
+            //Drivers.DriverStorage = new FirefoxDriver(Firefox.Instance.DesiredCapabilities);
+            return driver;
         }
         /// <summary>
         /// Not implement this method for firefox

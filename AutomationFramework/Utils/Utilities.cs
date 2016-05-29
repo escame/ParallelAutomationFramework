@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -56,26 +57,32 @@ namespace AutomationFrameWork.Utils
         /// <param name="source"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
-        public List<string> FindMatchText (string sourceText,string regex)
+        public List<string> FindMatchText (string sourceText,string regexText)
         {
-            if (regex == null || regex.Trim().Length == 0 || regex.Length==0)
+            if (regexText == null || regexText.Trim().Length == 0 || regexText.Length==0)
                 throw new StepErrorException("Regular Expression cannot null or blank");           
-            List<String> _returnMatchText = new List<string>();
+            List<String> returnMatchText = new List<string>();
             try 
             {              
-                Regex _regex = new Regex(regex);               
-                foreach (Match match in _regex.Matches(sourceText))
+                Regex regex = new Regex(regexText);               
+                foreach (Match match in regex.Matches(sourceText))
                 {
-                    _returnMatchText.Add(match.Value);
+                    returnMatchText.Add(match.Value);
                 }
             }
             catch (ArgumentException)
             {
                 throw new StepErrorException("Regular Expression is invalid");
             }
-            if (_returnMatchText.Count==0)
+            if (returnMatchText.Count==0)
                 throw new StepErrorException("Not found match text in source text");
-            return _returnMatchText;
+            return returnMatchText;
+        }
+        public void GetElementImage (string path, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
+        {
+            formatType = formatType ?? ImageFormat.Png;
+            var now = DateTime.Now;
+            creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime;
         }
     }
 }

@@ -1,20 +1,15 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using AutomationFrameWork.Driver.Core;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Appium;
-using System.Collections.Generic;
-using System;
-using System.Threading;
 using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
     public class DriverFactory
-    {
-        private int _pageLoadTimeout;
-        private int _scriptTimeout;
-        private bool _isMaximize;
+    {       
         private static readonly DriverFactory _instance = new DriverFactory();
         static DriverFactory ()
         {
@@ -38,13 +33,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 if (Drivers.DriverStorage == null)
-                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
-                IWebDriver driver = (IWebDriver)Drivers.DriverStorage;
-                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                if (_isMaximize)
-                    driver.Manage().Window.Maximize();
-                return driver;
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");                          
+                return (IWebDriver)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -56,11 +46,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 if (Drivers.DriverStorage == null)
-                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
-                PhantomJSDriver driver = (PhantomJSDriver)Drivers.DriverStorage;
-                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return driver;
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");             
+                return (PhantomJSDriver)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -72,11 +59,8 @@ namespace AutomationFrameWork.Driver
             get
             {
                 if (Drivers.DriverStorage == null)
-                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");
-                AppiumDriver<AppiumWebElement> driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
-                driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return driver;
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");              
+                return (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -92,11 +76,8 @@ namespace AutomationFrameWork.Driver
          /// </summary>
          /// <param name="driverType"></param>
         public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
-        {
-            _pageLoadTimeout = pageLoadTimeout;
-            _scriptTimeout = scriptTimeout;
-            _isMaximize = isMaximazie;
-            Drivers.StartDrivers(driverType);
+        {           
+            Drivers.StartDrivers(driverType,pageLoadTimeout,scriptTimeout,isMaximazie);
         }
         /// <summary>
         /// This method is use for
@@ -131,9 +112,7 @@ namespace AutomationFrameWork.Driver
         public String RemoteUri
         {
             get
-            {
-                if (Drivers.RemoteUriCore == null)
-                    throw new StepErrorException("Please set Uri for Remote Server");
+            {               
                 return Drivers.RemoteUriCore;
             }
             set
