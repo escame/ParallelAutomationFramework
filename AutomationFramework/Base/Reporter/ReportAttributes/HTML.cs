@@ -41,7 +41,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
 
         public HTML (string testGuidString = "", string projectName = "", string className = "",
             string testName = "")
-        {            
+        {
             _guid = testGuidString.Equals("")
                 ? Guid.Empty
                 : new Guid(testGuidString);
@@ -68,18 +68,15 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
                 _methodInfo = test.Method.MethodInfo;
                 if (!IsExistResources(_outputPath))
                 {
-                    lock (_syncRoot)
-                    {
-                        var primerName = Output.Files.PrimerStyleFile;
-                        ExtractResource(primerName, _outputPath);
+                    var primerName = Output.Files.PrimerStyleFile;
+                    ExtractResource(primerName, _outputPath);
 
-                        var octiconsName = Output.Files.OcticonsStyleFiles;
-                        ExtractResources(octiconsName, _outputPath);
+                    var octiconsName = Output.Files.OcticonsStyleFiles;
+                    ExtractResources(octiconsName, _outputPath);
 
-                        //jquery - 1.11.0.min.js
-                        var jqueryName = Output.Files.JQueryScriptFile;
-                        ExtractResource(jqueryName, _outputPath);
-                    }
+                    //jquery - 1.11.0.min.js
+                    var jqueryName = Output.Files.JQueryScriptFile;
+                    ExtractResource(jqueryName, _outputPath);
                 }
             }
         }
@@ -465,7 +462,7 @@ namespace AutomationFrameWork.Reporter.ReportAttributes
         private void Flush ()
         {
             _guid = Guid.Empty;
-            _test = new TestInformations();          
+            _test = new TestInformations();
             Report.TearDown();
         }
         private Boolean IsExistResources (string destinationPath)
