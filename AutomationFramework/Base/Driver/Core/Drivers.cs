@@ -14,8 +14,7 @@ namespace AutomationFrameWork.Driver.Core
         private static ThreadLocal<object> _driverStored ;
         private static ThreadLocal<DesiredCapabilities> _desiredCapabilities ;
         private static ThreadLocal<object> _optionStorage ;
-        private static ThreadLocal<String> _remoteUri ;
-        //private static readonly object _syncRoot = new Object();
+        private static ThreadLocal<String> _remoteUri ;        
 
         /// <summary>
         /// This method is use for
