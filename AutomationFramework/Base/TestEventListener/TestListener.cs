@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using NUnit.Engine;
 using NUnit.Engine.Extensibility;
 
-namespace AutomationFrameWork.Base.TestEventListener
+namespace AutomationFrameWork.Base.ReportListener
 {
     
     [Extension(Path = "/NUnit/Engine/TypeExtensions/ITestEventListener")]
