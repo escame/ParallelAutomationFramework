@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Reflection;
+using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver.Core
 {
     abstract class Drivers
     {
-        protected static ThreadLocal<object> driverStored = new ThreadLocal<object>(true);
-        protected static ThreadLocal<DesiredCapabilities> desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
-        protected static ThreadLocal<object> optionStorage = new ThreadLocal<object>();       
-        protected static ThreadLocal<String> remoteUri = new ThreadLocal<string>();
-        private static readonly object _syncRoot = new Object();
+        private static ThreadLocal<object> _driverStored ;
+        private static ThreadLocal<DesiredCapabilities> _desiredCapabilities ;
+        private static ThreadLocal<object> _optionStorage ;
+        private static ThreadLocal<String> _remoteUri ;        
 
         /// <summary>
         /// This method is use for
@@ -22,24 +22,21 @@ namespace AutomationFrameWork.Driver.Core
         /// and invoke method StartDriver
         /// </summary>
         /// <param name="driverType"></param>
-        public static void StartDrivers (DriverType driverType)
+        public static void StartDrivers (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-            lock (_syncRoot)
+            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
+                      .ToList();
+            foreach (Type className in listClass)
             {
-                List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                          .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
-                          .ToList();
-                foreach (Type className in listClass)
+                if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
                 {
-                    if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
-                    {
-                        MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                        FieldInfo instance = className.GetField("_instance",
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        object instanceDriver = instance.GetValue(null);
-                        startDriver.Invoke(instanceDriver, Type.EmptyTypes);
-                        break;
-                    }
+                    MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo instance = className.GetField("_instance",
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    object instanceDriver = instance.GetValue(null);                   
+                    DriverStorage = startDriver.Invoke(instanceDriver,new object[] { pageLoadTimeout, scriptTimeout , isMaximize});                    
+                    break;
                 }
             }
         }
@@ -48,17 +45,17 @@ namespace AutomationFrameWork.Driver.Core
         /// </summary>
         public static void CloseDrivers ()
         {
-            IWebDriver _driver = (IWebDriver)driverStored.Value;
-            _driver.Quit();
-            _driver.Dispose();
-            if (optionStorage.Value != null)
-                optionStorage.Value = null;
-            if (desiredCapabilities.Value != null)
-                desiredCapabilities.Value = null;
-            if (remoteUri.Value != null)
-                remoteUri.Value=null;
-            if (driverStored.Value != null)
-                driverStored.Value = null;
+            IWebDriver driver = (IWebDriver)_driverStored.Value;
+            driver.Quit();
+            driver.Dispose();
+            if (_optionStorage != null)
+                _optionStorage.Value = null;
+            if (_desiredCapabilities != null)
+                _desiredCapabilities.Value = null;
+            if (_remoteUri != null)
+                _remoteUri.Value = null;
+            if (_driverStored.Value != null)
+                _driverStored.Value = null;
         }
         /// <summary>
         /// This method is use 
@@ -69,11 +66,13 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return driverStored.Value;
+                return _driverStored.Value;
             }
-            protected set
+            private set
             {
-                driverStored.Value = value;
+                if(_driverStored == null)
+                    _driverStored = new ThreadLocal<object>(true);
+                _driverStored.Value = value;
             }
         }
         /// <summary>
@@ -84,13 +83,16 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                if (Drivers.desiredCapabilities.Value == null)
-                    Drivers.desiredCapabilities.Value = new DesiredCapabilities();
-                return Drivers.desiredCapabilities.Value;
+                if (_desiredCapabilities == null)
+                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+                _desiredCapabilities.Value = _desiredCapabilities.Value == null ? new DesiredCapabilities() : _desiredCapabilities.Value;
+                return _desiredCapabilities.Value;
             }
             set
             {
-                Drivers.desiredCapabilities.Value = value;
+                if(_desiredCapabilities == null)
+                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+                _desiredCapabilities.Value = value;
             }
         }
         /// <summary>
@@ -101,13 +103,17 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return optionStorage.Value;
+                if (_optionStorage == null)
+                    _optionStorage = new ThreadLocal<object>();
+                return _optionStorage.Value;
             }
             set
             {
-                optionStorage.Value = value;
+                if(_optionStorage == null)
+                    _optionStorage = new ThreadLocal<object>();
+                _optionStorage.Value = value;
             }
-        }        
+        }
         /// <summary>
         /// This method is use
         /// for return Uri of Cloud devices or remote Uri
@@ -116,25 +122,30 @@ namespace AutomationFrameWork.Driver.Core
         {
             get
             {
-                return remoteUri.Value;
+                if (_remoteUri == null)
+                    throw new StepErrorException("Please set Uri for Remote Server");
+                return _remoteUri.Value;
             }
             set
             {
-                remoteUri.Value = value;
+                if (_remoteUri == null)
+                    _remoteUri = new ThreadLocal<string>();
+                _remoteUri.Value = value;
             }
         }
         /// <summary>
         /// This method is use for
         /// Start driver for any class extend Drivers
         /// </summary>    
-        virtual protected void StartDriver ()
+        protected virtual object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-        }
+            throw new NotImplementedException();
+        }      
         /// <summary>
         /// This method is use for
         /// Get DriverOption for any class extend Drivers
         /// </summary>
-        virtual protected object DriverOption
+        protected virtual object DriverOption
         {
             get;
         }

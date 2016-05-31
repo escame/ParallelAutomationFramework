@@ -30,9 +30,12 @@ namespace AutomationFrameWork.Driver.Core
                 return 1;
             }
         }        
-        protected override void StartDriver ()
+        protected override object  StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {           
-            Drivers.DriverStorage = new IOSDriver<AppiumWebElement>(new Uri(Drivers.RemoteUriCore), iOS.Instance.DesiredCapabilities);
+            IOSDriver<AppiumWebElement> driver = new IOSDriver<AppiumWebElement>(new Uri(Drivers.RemoteUriCore), iOS.Instance.DesiredCapabilities);
+            driver.Manage().Timeouts().SetPageLoadTimeout(System.TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));
+            return driver;
         }
 
         private DesiredCapabilities DesiredCapabilities

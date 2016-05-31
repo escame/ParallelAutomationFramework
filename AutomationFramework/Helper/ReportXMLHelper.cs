@@ -6,23 +6,19 @@ namespace AutomationFrameWork.Reporter.ReportHelpers
 {
     public static class ReportXMLHelper
     {
-        private static readonly object _syncRoot = new Object();
         public static void Save<T> (this T t, string fullPath) where T : class
         {
-            lock (_syncRoot)
+            try
             {
-                try
+                var ser = new XmlSerializer(typeof(T));
+                using (var fs = new FileStream(fullPath, FileMode.CreateNew))
                 {
-                    var ser = new XmlSerializer(typeof(T));
-                    using (var fs = new FileStream(fullPath, FileMode.CreateNew))
-                    {
-                        ser.Serialize(fs, t);
-                    }
+                    ser.Serialize(fs, t);
                 }
-                catch (Exception ex)
-                {
-                    InternalLogs.Exception(ex, "Save exception");
-                }
+            }
+            catch (Exception ex)
+            {
+                InternalLogs.Exception(ex, "Save exception");
             }
         }
 

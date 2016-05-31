@@ -10,8 +10,7 @@ using System;
 namespace AutomationFrameWork.Reporter.ReportElements.ReportElementsCore
 {
     public class HtmlPage
-    {
-        private static readonly object _syncRoot = new Object();
+    {        
         public static string StyleString
         {
             get
@@ -23,15 +22,9 @@ namespace AutomationFrameWork.Reporter.ReportElements.ReportElementsCore
                     {
                         new StyleAttribute("background", ReportColors.BodyBackground),
                         new StyleAttribute(HtmlTextWriterStyle.Margin, "0px"),
-                        new StyleAttribute(HtmlTextWriterStyle.Height, "100%"),
-                        //new StyleAttribute(HtmlTextWriterStyle.FontFamily, "Tahoma,Verdana,Segoe,sans-serif");
+                        new StyleAttribute(HtmlTextWriterStyle.Height, "100%"),                
                         new StyleAttribute(HtmlTextWriterStyle.FontFamily,
-                            "\"Lucida Grande\", \"Lucida Sans Unicode\", Arial, Helvetica, sans-serif")
-
-                        //new StyleAttribute(HtmlTextWriterStyle.FontFamily, "\"Segoe UI\",Frutiger,\"Frutiger Linotype\"," +
-                        //                                                   "\"Dejavu Sans\",\"Helvetica Neue\",Arial,sans-serif")
-                        //new StyleAttribute(HtmlTextWriterStyle.FontFamily, "\"Franklin Gothic Medium\",\"Franklin Gothic\"," +
-                        //    "\"ITC Franklin Gothic\",Arial,sans-serif")
+                            "\"Lucida Grande\", \"Lucida Sans Unicode\", Arial, Helvetica, sans-serif")                       
                     }
                 });
                 mainCssSet.AddElement(new CssElement("html")
@@ -133,11 +126,8 @@ namespace AutomationFrameWork.Reporter.ReportElements.ReportElementsCore
 
         public void SavePage (string fullpath)
         {
-            GeneratePageString();
-            lock (_syncRoot)
-            {
-                File.WriteAllText(fullpath, FullPage);
-            }
+            GeneratePageString();            
+            File.WriteAllText(fullpath, FullPage);            
         }
     }
 }

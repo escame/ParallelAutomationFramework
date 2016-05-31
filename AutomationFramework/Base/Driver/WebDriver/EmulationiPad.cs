@@ -6,8 +6,7 @@ namespace AutomationFrameWork.Driver.Core
 {
     class EmulationiPad : Drivers
     {
-        private static readonly EmulationiPad _instance = new EmulationiPad();
-        private static IWebDriver WebDriver = null;
+        private static readonly EmulationiPad _instance = new EmulationiPad();       
         static EmulationiPad ()
         {
         }
@@ -22,11 +21,15 @@ namespace AutomationFrameWork.Driver.Core
                 return _instance;
             }
         }
-        protected override void StartDriver ()
+        protected override object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-            WebDriver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPad.Instance.DriverOption);
-            WebDriver.Manage().Window.Size = new Size(1024, 768);
-            Drivers.DriverStorage = WebDriver;
+            IWebDriver driver = new ChromeDriver(DriverHelper.Instance.DriverPath, (ChromeOptions)EmulationiPad.Instance.DriverOption);
+            driver.Manage().Window.Size = new Size(1024, 768);
+            driver.Manage().Timeouts().SetPageLoadTimeout(System.TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(System.TimeSpan.FromSeconds(scriptTimeout));
+            if (isMaximize)
+                driver.Manage().Window.Maximize();
+            return driver;          
         }
 
         protected override object DriverOption

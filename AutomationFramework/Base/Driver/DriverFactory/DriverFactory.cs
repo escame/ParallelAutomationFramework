@@ -1,20 +1,16 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using AutomationFrameWork.Driver.Core;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Appium;
-using System.Collections.Generic;
-using System;
-using System.Threading;
 using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
-    public class DriverFactory 
-    {
-        private int _pageLoadTimeout;
-        private int _scriptTimeout;
-        private bool _isMaximize;
+    public class DriverFactory
+    {       
+        private static readonly DriverFactory _instance = new DriverFactory();
         static DriverFactory ()
         {
         }
@@ -25,13 +21,9 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                return DriverFactory.DriverFactoryInstance.Value;
+                return _instance;
             }
         }
-        static ThreadLocal<DriverFactory> DriverFactoryInstance = new ThreadLocal<DriverFactory>(() =>
-        {
-            return new DriverFactory();
-        });
         /// <summary>
         /// This method is use for
         /// return WebDriver ex: Chrome, Firefox, IE
@@ -40,12 +32,9 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                IWebDriver _Driver = (IWebDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                if (_isMaximize)
-                    _Driver.Manage().Window.Maximize();
-                return _Driver;
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");                          
+                return (IWebDriver)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -56,10 +45,9 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                PhantomJSDriver _Driver = (PhantomJSDriver)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return _Driver;
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");             
+                return (PhantomJSDriver)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -70,10 +58,9 @@ namespace AutomationFrameWork.Driver
         {
             get
             {
-                AppiumDriver<AppiumWebElement> _Driver = (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
-                _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(_pageLoadTimeout));
-                _Driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(_scriptTimeout));
-                return _Driver;
+                if (Drivers.DriverStorage == null)
+                    throw new StepErrorException("Please call method DriverFactory.Instance.StartDriver(DriverType) for instance driver before can get");              
+                return (AppiumDriver<AppiumWebElement>)Drivers.DriverStorage;
             }
         }
         /// <summary>
@@ -83,16 +70,33 @@ namespace AutomationFrameWork.Driver
         public void CloseDriver ()
         {
             Drivers.CloseDrivers();
-        }/// <summary>
-         /// This method is use for
-         /// start driver
-         /// </summary>
-         /// <param name="driverType"></param>
-        public void StartDriver (DriverType driverType,int pageLoadTimeout=60, int scriptTimeout=60,bool isMaximazie=false)
+        }
+        /// <summary>
+        /// This method is use for
+        /// start driver
+        /// </summary>
+        /// <param name="driverType"></param>
+        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
+        {           
+            Drivers.StartDrivers(driverType,pageLoadTimeout,scriptTimeout,isMaximazie);
+        }      
+
+        public void StartDriver (DriverType driverType, bool isMaximazie = false)
         {
-            _pageLoadTimeout = pageLoadTimeout;
-            _scriptTimeout = scriptTimeout;
-            _isMaximize = isMaximazie;
+            Drivers.StartDrivers(driverType, isMaximize: isMaximazie);
+        }        
+
+        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60)
+        {           
+            Drivers.StartDrivers(driverType, pageLoadTimeout:pageLoadTimeout);
+        }
+
+        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, bool isMaximazie = false)
+        {
+            Drivers.StartDrivers(driverType, pageLoadTimeout: pageLoadTimeout, isMaximize: isMaximazie);
+        }
+        public void StartDriver (DriverType driverType)
+        {
             Drivers.StartDrivers(driverType);
         }
         /// <summary>
@@ -109,7 +113,7 @@ namespace AutomationFrameWork.Driver
             {
                 Drivers.DriverOptions = value;
             }
-        }       
+        }
         /// <summary>
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
@@ -128,14 +132,12 @@ namespace AutomationFrameWork.Driver
         public String RemoteUri
         {
             get
-            {
-                if (Drivers.RemoteUriCore == null)
-                    throw new StepErrorException("Please set Uri for Remote Server");
+            {               
                 return Drivers.RemoteUriCore;
             }
             set
             {
-                Drivers.RemoteUriCore=value;
+                Drivers.RemoteUriCore = value;
             }
         }
     }

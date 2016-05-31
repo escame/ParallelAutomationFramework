@@ -6,11 +6,9 @@
         Firefox,
         InternetExplore,
         EmulationiPad,       
-        EmulationiPhone6,
-        EmulationNexus6,
+        EmulationiPhone6,        
         EmulationiPhone5,
-        EmulationiPhone4,
-        EmulationMobile,
+        EmulationiPhone4,      
         Remote,
         PhantomJS,
     }

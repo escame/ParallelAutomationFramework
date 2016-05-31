@@ -1,11 +1,10 @@
 ﻿using System.Text;
 using NUnit.Engine;
 using NUnit.Engine.Extensibility;
-
-namespace AutomationFrameWork.Base.ReportListener
+namespace AutomationFrameWork.Base.TestEventListener
 {
     
-    [Extension(Path = "/NUnit/Engine/TypeExtensions/ITestEventListener")]
+    [Extension]
     public class TestListener : ITestEventListener
     {
         StringBuilder _builder = new StringBuilder();

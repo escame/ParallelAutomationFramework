@@ -1,9 +1,13 @@
-﻿using AutomationFrameWork.Exceptions;
+﻿using AutomationFrameWork.Driver;
+using AutomationFrameWork.Exceptions;
 using AutomationFrameWork.Helper;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,7 +37,9 @@ namespace AutomationFrameWork.Utils
         /// <returns></returns>
         public string GetRelativePath (string path)
         {
-            return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)), "..//" + path));
+            //return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)), "..//" + path));           
+            System.Console.WriteLine(Path.Combine(Path.GetFullPath(Directory.GetParent(Directory.GetCurrentDirectory()).FullName),path));
+            return Path.GetFullPath(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName,path));
         }
         /// <summary>
         /// This method is use for
@@ -56,26 +62,57 @@ namespace AutomationFrameWork.Utils
         /// <param name="source"></param>
         /// <param name="regex"></param>
         /// <returns></returns>
-        public List<string> FindMatchText (string sourceText,string regex)
+        public List<string> FindMatchText (string sourceText,string regexText)
         {
-            if (regex == null || regex.Trim().Length == 0 || regex.Length==0)
+            if (regexText == null || regexText.Trim().Length == 0 || regexText.Length==0)
                 throw new StepErrorException("Regular Expression cannot null or blank");           
-            List<String> _returnMatchText = new List<string>();
+            List<String> returnMatchText = new List<string>();
             try 
             {              
-                Regex _regex = new Regex(regex);               
-                foreach (Match match in _regex.Matches(sourceText))
+                Regex regex = new Regex(regexText);               
+                foreach (Match match in regex.Matches(sourceText))
                 {
-                    _returnMatchText.Add(match.Value);
+                    returnMatchText.Add(match.Value);
                 }
             }
             catch (ArgumentException)
             {
                 throw new StepErrorException("Regular Expression is invalid");
             }
-            if (_returnMatchText.Count==0)
+            if (returnMatchText.Count==0)
                 throw new StepErrorException("Not found match text in source text");
-            return _returnMatchText;
+            return returnMatchText;
+        }
+        /// <summary>
+        /// This method is use for
+        /// capture image of element
+        /// can use for report and UI testing
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="path"></param>
+        /// <param name="creationTime"></param>
+        /// <param name="formatType"></param>
+        public void GetWebElementBaseImage (object element,string path= null, DateTime creationTime = default(DateTime), ImageFormat formatType = null)
+        {
+            var now = DateTime.Now;
+            var screenName = string.Format("screenshot_{0}.{1}", now.ToString("yyyyMMddHHmmssfff"), (formatType ?? ImageFormat.Png).ToString().ToLower());
+            path = path ?? Utilities.Instance.GetRelativePath("BaseImage\\");
+            Directory.CreateDirectory(path);
+            creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime;
+            var screenshot = (DriverFactory.Instance.GetWebDriver as ITakesScreenshot).GetScreenshot();                
+            using (MemoryStream stream = new MemoryStream(screenshot.AsByteArray))
+            {
+                using (Bitmap bitmap = new Bitmap(stream))
+                {
+                    var elementScreenShot = (IWebElement)element;
+                    RectangleF part = new RectangleF(elementScreenShot.Location.X, elementScreenShot.Location.Y, elementScreenShot.Size.Width, elementScreenShot.Size.Height);
+                    using (Bitmap bn = bitmap.Clone(part, bitmap.PixelFormat))
+                    {
+                        bn.Save(path+screenName, (formatType ?? ImageFormat.Png));
+                    }
+                }
+            }
+
         }
     }
 }

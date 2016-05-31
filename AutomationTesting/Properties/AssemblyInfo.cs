@@ -17,7 +17,10 @@ using NUnit.Engine.Extensibility;
 [assembly: AssemblyCulture("")]
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 [assembly: HTML]
-
+[assembly: ExtensionPoint(
+               "/NUnit/Engine/TypeExtensions/ITestEventListener",
+               typeof(IDriverFactory),
+              Description = "Allows an extension to process progress reports and other events from the test.")]
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
