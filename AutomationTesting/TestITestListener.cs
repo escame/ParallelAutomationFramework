@@ -15,6 +15,10 @@ using AutomationFrameWork.Utils;
 using AutomationFrameWork.ActionsKeys;
 using System.Web.UI;
 using System.IO;
+using AutomationFrameWork.Extensions;
+using System.Collections.ObjectModel;
+using Mono.Collections.Generic;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace AutomationTesting
 {
@@ -77,5 +81,25 @@ namespace AutomationTesting
             FullPage = strWr.ToString();
             File.WriteAllText(@"C:\Users\Minh\Desktop\New folder\TestReport.html", FullPage);
         }
+        #region
+        //Test FindContext
+        [Test]
+        [Category("Context")]
+        public void TestContextFind ()
+        {
+           
+
+            Func<int, int, bool, string> something =(a,b,c)=> string.Format("string = {0} and {1}", a+b, c);
+
+            Console.WriteLine(something.Invoke(12,22,true));
+            Console.WriteLine(something);IWebElement el = null;
+            var wait = new OpenQA.Selenium.Support.UI.DefaultWait<IWebElement>(el);
+            wait.Until(element =>
+            {
+                return element.Displayed;
+            });
+            IWebDriver driver=null;driver.FindElements(new ByChained(By.Id(""),By.XPath(""),By.ClassName("")));
+        }
+        #endregion
     }
 }

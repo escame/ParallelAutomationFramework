@@ -245,6 +245,7 @@
     <Compile Include="Extensions\EmailInformationsExtensions.cs" />
     <Compile Include="Extensions\EmailMessageExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\FindElementsExtensions.cs" />
     <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="Helper\ReportConfigurationHelper.cs" />
     <Compile Include="Helper\ReportXMLHelper.cs" />
