@@ -12,12 +12,13 @@ namespace AutomationFrameWork.Driver.Core
 {
     abstract class Drivers
     {
-        private static ThreadLocal<object> _driverStored ;
+        private const string DriverCoreNamespace = "AutomationFrameWork.Driver.Core";
+        private static ThreadLocal<object> _driverStored;
         private static ThreadLocal<object> _optionStorage;
         private static ThreadLocal<object> _servicesStorage;
-        private static ThreadLocal<DesiredCapabilities> _desiredCapabilities ;
-        private static ThreadLocal<PhantomJSDriverService> _phantomJSDriverService ;
-        private static ThreadLocal<String> _remoteUri ;
+        private static ThreadLocal<DesiredCapabilities> _desiredCapabilities;
+        private static ThreadLocal<PhantomJSDriverService> _phantomJSDriverService;
+        private static ThreadLocal<String> _remoteUri;
 
         /// <summary>
         /// This method is use for
@@ -30,26 +31,23 @@ namespace AutomationFrameWork.Driver.Core
         /// and invoke method StartDriver
         /// </summary>
         /// <param name="driverType"></param>
-        public static void StartDrivers (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public static void StartDrivers(DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
-            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
-                      .ToList();
-            foreach (Type className in listClass)
+            Type foundClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(item => item.Namespace == DriverCoreNamespace && item.Name.Equals(driverType.ToString(), StringComparison.OrdinalIgnoreCase)) // TODO for review: refactor code to search driver
+                      .FirstOrDefault();
+
+            if (foundClass != null)
             {
-                if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
-                {                                      
-                    ConstructorInfo constructor = className.GetConstructor(Type.EmptyTypes);
-                    MethodInfo startDriver = className.GetMethod("StartDriver",BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.InvokeMethod);
-                    DriverStorage = startDriver.Invoke(constructor.Invoke(new object[] { }),new object[] { pageLoadTimeout, scriptTimeout, isMaximize });                                   
-                    break;
-                }
+                ConstructorInfo constructor = foundClass.GetConstructor(Type.EmptyTypes);
+                MethodInfo startDriver = foundClass.GetMethod("StartDriver", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
+                DriverStorage = startDriver.Invoke(constructor.Invoke(new object[] { }), new object[] { pageLoadTimeout, scriptTimeout, isMaximize });
             }
         }
         /// <summary>
         /// This method use for close driver 
         /// </summary>
-        public static void CloseDrivers ()
+        public static void CloseDrivers()
         {
             IWebDriver driver = (IWebDriver)_driverStored.Value;
             driver.Quit();
@@ -76,7 +74,7 @@ namespace AutomationFrameWork.Driver.Core
             }
             private set
             {
-                if(_driverStored == null)
+                if (_driverStored == null)
                     _driverStored = new ThreadLocal<object>(true);
                 _driverStored.Value = value;
             }
@@ -96,8 +94,8 @@ namespace AutomationFrameWork.Driver.Core
             }
             set
             {
-                if(_desiredCapabilities == null)
-                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>();
+                if (_desiredCapabilities == null)
+                    _desiredCapabilities = new ThreadLocal<DesiredCapabilities>(); // TODO question? why create new, then assign to new value in next line?
                 _desiredCapabilities.Value = value;
             }
         }
@@ -115,7 +113,7 @@ namespace AutomationFrameWork.Driver.Core
             }
             set
             {
-                if(_optionStorage == null)
+                if (_optionStorage == null)
                     _optionStorage = new ThreadLocal<object>();
                 _optionStorage.Value = value;
             }
@@ -170,7 +168,7 @@ namespace AutomationFrameWork.Driver.Core
                 {
                     _phantomJSDriverService = new ThreadLocal<PhantomJSDriverService>();
                     _phantomJSDriverService.Value = PhantomJSDriverService.CreateDefaultService(Helper.DriverHelper.Instance.DriverPath);
-                }         
+                }
                 return _phantomJSDriverService.Value;
             }
             set
@@ -179,6 +177,6 @@ namespace AutomationFrameWork.Driver.Core
                     _phantomJSDriverService = new ThreadLocal<PhantomJSDriverService>();
                 _phantomJSDriverService.Value = value;
             }
-        }     
+        }
     }
 }
