@@ -77,29 +77,11 @@ namespace AutomationFrameWork.Driver
         /// start driver
         /// </summary>
         /// <param name="driverType"></param>
-        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
-        {           
-            Drivers.StartDrivers(driverType,pageLoadTimeout,scriptTimeout,isMaximazie);
-        }      
-
-        public void StartDriver (DriverType driverType, bool isMaximazie = false)
+        public void StartDriver(DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
         {
-            Drivers.StartDrivers(driverType, isMaximize: isMaximazie);
-        }        
-
-        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60)
-        {           
-            Drivers.StartDrivers(driverType, pageLoadTimeout:pageLoadTimeout);
+            Drivers.StartDrivers(driverType, pageLoadTimeout, scriptTimeout, isMaximazie);
         }
 
-        public void StartDriver (DriverType driverType, int pageLoadTimeout = 60, bool isMaximazie = false)
-        {
-            Drivers.StartDrivers(driverType, pageLoadTimeout: pageLoadTimeout, isMaximize: isMaximazie);
-        }
-        public void StartDriver (DriverType driverType)
-        {
-            Drivers.StartDrivers(driverType);
-        }
         /// <summary>
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...

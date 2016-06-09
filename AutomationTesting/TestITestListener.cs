@@ -44,7 +44,7 @@ namespace AutomationTesting
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
             //DriverFactory.Instance.DriverOption = op;
-            DriverFactory.Instance.StartDriver(DriverType.Chrome, true);
+            DriverFactory.Instance.StartDriver(DriverType.Chrome, isMaximazie: true);
             IWebDriver driver = DriverFactory.Instance.GetWebDriver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
