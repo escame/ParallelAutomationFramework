@@ -22,9 +22,21 @@ using OpenQA.Selenium.Support.PageObjects;
 namespace AutomationTesting
 {
 
-
+    [TestFixture(DriverType.Chrome)]
+    [TestFixture(DriverType.EmulationiPhone4)]
+    [TestFixture(DriverType.EmulationiPhone5)]
+    [TestFixture(DriverType.EmulationiPhone6)]
+    [TestFixture(DriverType.EmulationiPad)]
+    [TestFixture(DriverType.Firefox)]
+    [TestFixture(DriverType.InternetExplore)]   
     public class TestITestListener
     {
+        DriverType _type;
+        IWebDriver driver;
+        public TestITestListener(DriverType type)
+        {
+            _type = type;
+        }
         [Category("Capture Element Image")]
         [Test]
         public void Event ()
@@ -83,21 +95,25 @@ namespace AutomationTesting
         #region
         //Test FindContext
         [Test]
+        [Repeat(5)]
         [Category("Context")]
         public void TestContextFind ()
+        {           
+            driver.Url = "http://www.google.com";
+            driver.Navigate().GoToUrl("http://vtc.vn");
+            driver.Navigate().Back();            
+        }
+        [SetUp]
+        public void SetUp()
         {
-           
-
-            Func<int, int, bool, string> something =(a,b,c)=> string.Format("string = {0} and {1}", a+b, c);
-
-            Console.WriteLine(something.Invoke(12,22,true));
-            Console.WriteLine(something);IWebElement el = null;
-            var wait = new OpenQA.Selenium.Support.UI.DefaultWait<IWebElement>(el);
-            wait.Until(element =>
-            {
-                return element.Displayed;
-            });
-            IWebDriver driver=null;driver.FindElements(new ByChained(By.Id(""),By.XPath(""),By.ClassName("")));
+                DriverFactory.Instance.StartDriver(_type);
+                driver = DriverFactory.Instance.GetWebDriver;
+            
+        }
+        [TearDown]
+        public void TearDown()
+        {
+            DriverFactory.Instance.CloseDriver();
         }
         #endregion
     }

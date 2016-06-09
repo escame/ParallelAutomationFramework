@@ -129,6 +129,21 @@ namespace AutomationFrameWork.Driver
                 Drivers.DesiredCapabilitiesCore = value;
             }
         }
+        public object DriverServices
+        {
+            get
+            {
+                return Drivers.DriverService;
+            }
+            set
+            {
+                Drivers.DriverService = value;
+            }
+        }
+        /// <summary>
+        /// This method is use
+        /// for set up URI in Remote Driver, Mobile Driver 
+        /// </summary>
         public String RemoteUri
         {
             get

@@ -203,7 +203,7 @@
     <Compile Include="Base\Page\BasePageMobile.cs" />
     <Compile Include="Base\Page\BasePageWeb.cs" />
     <Compile Include="Base\Driver\WebDriver\Chrome.cs" />
-    <Compile Include="Base\Driver\Core\Drivers.cs" />
+    <Compile Include="Base\Driver\Core\AbstractDrivers.cs" />
     <Compile Include="Base\Driver\DriverFactory\DriverFactory.cs" />
     <Compile Include="Base\Element\BaseMobileElements.cs" />
     <Compile Include="Base\Element\BaseWebElements.cs" />
@@ -246,6 +246,7 @@
     <Compile Include="Extensions\EmailMessageExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FindElementsExtensions.cs" />
+    <Compile Include="Extensions\WebDriverExtension.cs" />
     <Compile Include="Helper\DataHelper.cs" />
     <Compile Include="Helper\ReportConfigurationHelper.cs" />
     <Compile Include="Helper\ReportXMLHelper.cs" />

@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 
 
-namespace AutomationFrameWork.Extensions
+namespace AutomationFrameWork.Driver
 {
     public static class FindElementExtensions
     {
@@ -16,7 +16,7 @@ namespace AutomationFrameWork.Extensions
         /// <param name="polling">How many seconds to research.</param>
         /// <param name="displayed">Require the element to be displayed?</param>
         /// <returns>The found element.</returns>
-        public static IWebElement FindElement (this ISearchContext context, By by, uint timeout = 60,uint polling = 250, bool displayed = false)
+        public static IWebElement FindElement (this ISearchContext context, By by, uint timeout = 60,uint polling = 250, bool displayed = false,bool enabled=false)
         {
             var wait = new OpenQA.Selenium.Support.UI.DefaultWait<ISearchContext>(context);
             wait.Timeout = TimeSpan.FromSeconds(timeout);
@@ -24,7 +24,7 @@ namespace AutomationFrameWork.Extensions
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException));           
             return wait.Until(ctx => {
                 var elem = ctx.FindElement(by);
-                if (displayed && !elem.Displayed)
+                if (displayed && !elem.Displayed && !elem.Enabled)
                     return null;
                 return elem;
             });
@@ -51,6 +51,6 @@ namespace AutomationFrameWork.Extensions
                     return null;
                 return elem;
             });
-        }
+        }        
     }
 }

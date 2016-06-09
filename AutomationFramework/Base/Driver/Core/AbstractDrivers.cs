@@ -6,16 +6,24 @@ using System;
 using System.Linq;
 using System.Reflection;
 using AutomationFrameWork.Exceptions;
+using OpenQA.Selenium.PhantomJS;
 
 namespace AutomationFrameWork.Driver.Core
 {
     abstract class Drivers
     {
         private static ThreadLocal<object> _driverStored ;
+        private static ThreadLocal<object> _optionStorage;
+        private static ThreadLocal<object> _servicesStorage;
         private static ThreadLocal<DesiredCapabilities> _desiredCapabilities ;
-        private static ThreadLocal<object> _optionStorage ;
-        private static ThreadLocal<String> _remoteUri ;        
+        private static ThreadLocal<PhantomJSDriverService> _phantomJSDriverService ;
+        private static ThreadLocal<String> _remoteUri ;
 
+        /// <summary>
+        /// This method is use for
+        /// Start driver for any class extend Drivers
+        /// </summary>    
+        protected abstract object StartDriver(int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false);
         /// <summary>
         /// This method is use for
         /// scan all class driver with correct name via DriverType 
@@ -30,12 +38,10 @@ namespace AutomationFrameWork.Driver.Core
             foreach (Type className in listClass)
             {
                 if (className.Name.ToString().ToLower().Equals(driverType.ToString().ToLower()))
-                {
-                    MethodInfo startDriver = className.GetMethod("StartDriver", BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic);
-                    FieldInfo instance = className.GetField("_instance",
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    object instanceDriver = instance.GetValue(null);                   
-                    DriverStorage = startDriver.Invoke(instanceDriver,new object[] { pageLoadTimeout, scriptTimeout , isMaximize});                    
+                {                                      
+                    ConstructorInfo constructor = className.GetConstructor(Type.EmptyTypes);
+                    MethodInfo startDriver = className.GetMethod("StartDriver",BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.InvokeMethod);
+                    DriverStorage = startDriver.Invoke(constructor.Invoke(new object[] { }),new object[] { pageLoadTimeout, scriptTimeout, isMaximize });                                   
                     break;
                 }
             }
@@ -116,6 +122,25 @@ namespace AutomationFrameWork.Driver.Core
         }
         /// <summary>
         /// This method is use
+        /// for return DriverService like PhantomJSDriverService
+        /// </summary>
+        public static object DriverService
+        {
+            get
+            {
+                if (_servicesStorage == null)
+                    _servicesStorage = new ThreadLocal<object>();
+                return _servicesStorage.Value;
+            }
+            set
+            {
+                if (_servicesStorage == null)
+                    _servicesStorage = new ThreadLocal<object>();
+                _servicesStorage.Value = value;
+            }
+        }
+        /// <summary>
+        /// This method is use
         /// for return Uri of Cloud devices or remote Uri
         /// </summary>
         public static String RemoteUriCore
@@ -134,20 +159,26 @@ namespace AutomationFrameWork.Driver.Core
             }
         }
         /// <summary>
-        /// This method is use for
-        /// Start driver for any class extend Drivers
-        /// </summary>    
-        protected virtual object StartDriver (int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
-        {
-            throw new NotImplementedException();
-        }      
-        /// <summary>
-        /// This method is use for
-        /// Get DriverOption for any class extend Drivers
+        /// This method is use
+        /// for return PhantomJSDriverService
         /// </summary>
-        protected virtual object DriverOption
+        public static PhantomJSDriverService PhantomJSDriverService
         {
-            get;
-        }
+            get
+            {
+                if (_phantomJSDriverService == null)
+                {
+                    _phantomJSDriverService = new ThreadLocal<PhantomJSDriverService>();
+                    _phantomJSDriverService.Value = PhantomJSDriverService.CreateDefaultService(Helper.DriverHelper.Instance.DriverPath);
+                }         
+                return _phantomJSDriverService.Value;
+            }
+            set
+            {
+                if (_phantomJSDriverService == null)
+                    _phantomJSDriverService = new ThreadLocal<PhantomJSDriverService>();
+                _phantomJSDriverService.Value = value;
+            }
+        }     
     }
 }
