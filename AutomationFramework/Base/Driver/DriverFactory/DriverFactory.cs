@@ -28,7 +28,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use for
         /// return WebDriver ex: Chrome, Firefox, IE
         /// </summary>
-        public IWebDriver GetWebDriver
+        public IWebDriver GetWebDriver // TODO review: should be method;  should pass parameter to indicate if user would like to start driver before getting it?
         {
             get
             {
@@ -71,6 +71,7 @@ namespace AutomationFrameWork.Driver
         {
             Drivers.CloseDrivers();
         }
+        // TODO: duplicate code in overloads of StartDriver - should refactor to remain 1 only
         /// <summary>
         /// This method is use for
         /// start driver
