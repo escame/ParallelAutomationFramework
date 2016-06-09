@@ -8,6 +8,7 @@ using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
+    // TODO: general comment - behaviors should not bt put in Factory class
     public class DriverFactory
     {       
         private static readonly DriverFactory _instance = new DriverFactory();
