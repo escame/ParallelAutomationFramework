@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class Remote : Drivers
     {       

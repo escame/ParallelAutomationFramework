@@ -4,7 +4,7 @@ using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Remote;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class iOS : Drivers
     {
