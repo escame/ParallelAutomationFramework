@@ -6,7 +6,6 @@ using OpenQA.Selenium.Internal;
 using System.Collections.ObjectModel;
 using AutomationFrameWork.Exceptions;
 using OpenQA.Selenium.Interactions;
-using AutomationFrameWork.Driver.Core;
 using System.Drawing.Imaging;
 
 namespace AutomationFrameWork.ActionsKeys

@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
-using AutomationFrameWork.Driver.Core;
+using AutomationFrameWork.Driver;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Appium;

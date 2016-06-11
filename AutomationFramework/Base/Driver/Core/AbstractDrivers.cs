@@ -33,7 +33,7 @@ namespace AutomationFrameWork.Driver
         public static void StartDrivers (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(item => item.Namespace == "AutomationFrameWork.Driver.Core")
+                      .Where(item => item.Namespace == "AutomationFrameWork.Driver")
                       .ToList();
             foreach (Type className in listClass)
             {
