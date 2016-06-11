@@ -187,7 +187,7 @@
   <ItemGroup>
     <Compile Include="ActionKeywords\MobileKeywords.cs" />
     <Compile Include="ActionKeywords\WebKeywords.cs" />
-    <Compile Include="Base\Driver\Web\ChromeDesktop.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\ChromeDesktop.cs" />
     <Compile Include="Base\Driver\Core\DriverType.cs" />
     <Compile Include="Base\Driver\Interface\IDrivers.cs" />
     <Compile Include="Base\Driver\RemoteDriver\Remote.cs" />
@@ -200,14 +200,15 @@
     <Compile Include="Base\Driver\MobileDriver\Android.cs" />
     <Compile Include="Base\Driver\MobileDriver\iOS.cs" />
     <Compile Include="Base\Driver\WebDriver\PhantomJS.cs" />
-    <Compile Include="Base\Driver\Web\FirefoxDesktop.cs" />
-    <Compile Include="Base\Driver\Web\iPad.cs" />
-    <Compile Include="Base\Driver\Web\iPhone4.cs" />
-    <Compile Include="Base\Driver\Web\iPhone5.cs" />
-    <Compile Include="Base\Driver\Web\iPhone6.cs" />
-    <Compile Include="Base\Driver\Web\Nexus7.cs" />
-    <Compile Include="Base\Driver\Web\Nexus6.cs" />
-    <Compile Include="Base\Driver\Web\Nexus5.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\FirefoxDesktop.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\InternetExplorerDesktop.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\iPad.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\iPhone4.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\iPhone5.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\iPhone6.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\Nexus7.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\Nexus6.cs" />
+    <Compile Include="Base\Driver\WebBrowsers\Nexus5.cs" />
     <Compile Include="Base\Exception\StepErrorException.cs" />
     <Compile Include="Base\Page\BasePageInstance.cs" />
     <Compile Include="Base\Page\BasePageMobile.cs" />
