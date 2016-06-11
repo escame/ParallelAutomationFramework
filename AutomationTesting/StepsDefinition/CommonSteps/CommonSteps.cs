@@ -28,31 +28,31 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
             switch (browser.ToLower())
             {
                 case "chrome":
-                    DriverFactory.Instance.StartDriver(DriverType.Chrome);
+                    DriverFactory.StartDriver(DriverType.Chrome);
                     break;
                 case "ipad":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPad);
+                    DriverFactory.StartDriver(DriverType.EmulationiPad);
                     break;
                 case "iphone6":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone6);
+                    DriverFactory.StartDriver(DriverType.EmulationiPhone6);
                     break;
                 case "iphone5":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone5);
+                    DriverFactory.StartDriver(DriverType.EmulationiPhone5);
                     break;
                 case "iphone4":
-                    DriverFactory.Instance.StartDriver(DriverType.EmulationiPhone4);
+                    DriverFactory.StartDriver(DriverType.EmulationiPhone4);
                     break;               
                 case "firefox":
-                    DriverFactory.Instance.StartDriver(DriverType.Firefox);
+                    DriverFactory.StartDriver(DriverType.Firefox);
                     break;
                 case "ie":
-                    DriverFactory.Instance.StartDriver(DriverType.InternetExplore);
+                    DriverFactory.StartDriver(DriverType.InternetExplore);
                     break;
                 case "phantomjs":
-                    DriverFactory.Instance.StartDriver(DriverType.PhantomJS);
+                    DriverFactory.StartDriver(DriverType.PhantomJS);
                     break;
                 case "remote":
-                    DriverFactory.Instance.StartDriver(DriverType.Remote);
+                    DriverFactory.StartDriver(DriverType.Remote);
                     break;
                 default:
                     throw new ArgumentException("Invalid browser name, please type 'Chrome' 'Firefox' 'IE' 'iPad' 'Phantomjs' 'Remote' 'Nexus6' 'iPhone6' 'iPhone5' 'iPhone4' for can start browser");
@@ -101,12 +101,12 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
         [Given(@"Appium server has address '(.*)' with port listen '(.*)'")]
         public void GivenAppiumServer (string address, int portListen)
         {
-            DriverFactory.Instance.DesiredCapabilities = capabilities;
-            DriverFactory.Instance.RemoteUri= "http://" + address + ":" + portListen + "/wd/hub";
+            DriverFactory.DesiredCapabilities = capabilities;
+            DriverFactory.RemoteUri= "http://" + address + ":" + portListen + "/wd/hub";
             if (DeviceType.ToLower().Equals("android"))
-                DriverFactory.Instance.StartDriver(DriverType.Android);
+                DriverFactory.StartDriver(DriverType.Android);
             else if (DeviceType.ToLower().Equals("ios"))
-                DriverFactory.Instance.StartDriver(DriverType.iOS);
+                DriverFactory.StartDriver(DriverType.iOS);
             else
                 throw new ArgumentException("Please select device in 'Android' or 'iOS' for can start automation");
         }
@@ -134,7 +134,7 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
         public void cleanUp ()
         {
             Console.WriteLine("Stop run test....");
-            DriverFactory.Instance.CloseDriver();
+            DriverFactory.CloseDriver();
         }
 
     }

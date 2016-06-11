@@ -2,7 +2,7 @@
 using AutomationFrameWork.Helper;
 using OpenQA.Selenium;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class EmulationiPhone5 : Drivers
     {

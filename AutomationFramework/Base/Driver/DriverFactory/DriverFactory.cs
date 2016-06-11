@@ -8,28 +8,14 @@ using AutomationFrameWork.Exceptions;
 
 namespace AutomationFrameWork.Driver
 {
-    // TODO: general comment - behaviors should not bt put in Factory class
-    public class DriverFactory
-    {       
-        private static readonly DriverFactory _instance = new DriverFactory();
-        static DriverFactory ()
-        {
-        }
-        private DriverFactory ()
-        {
-        }
-        public static DriverFactory Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+    public static class DriverFactory
+    {      
+     
         /// <summary>
         /// This method is use for
         /// return WebDriver ex: Chrome, Firefox, IE
         /// </summary>
-        public IWebDriver GetWebDriver // TODO review: should be method;  should pass parameter to indicate if user would like to start driver before getting it?
+        public static IWebDriver WebDriver
         {
             get
             {
@@ -42,7 +28,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use for
         /// get phantomjs driver, use for headless browser testing
         /// </summary>
-        public PhantomJSDriver GetPhantomJSDriver
+        public static PhantomJSDriver PhantomJSDriver
         {
             get
             {
@@ -55,7 +41,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use for
         /// get mobile driver, it include android and ios 
         /// </summary>
-        public AppiumDriver<AppiumWebElement> GetMobileDriver
+        public static AppiumDriver<AppiumWebElement> MobileDriver
         {
             get
             {
@@ -68,26 +54,43 @@ namespace AutomationFrameWork.Driver
         /// This method use for
         /// close driver
         /// </summary>
-        public void CloseDriver ()
+        public static void CloseDriver ()
         {
             Drivers.CloseDrivers();
         }
-        // TODO: duplicate code in overloads of StartDriver - should refactor to remain 1 only
         /// <summary>
         /// This method is use for
         /// start driver
         /// </summary>
         /// <param name="driverType"></param>
-        public void StartDriver(DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
+        public static void StartDriver (DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximazie = false)
+        {           
+            Drivers.StartDrivers(driverType,pageLoadTimeout,scriptTimeout,isMaximazie);
+        }      
+
+        public static void StartDriver (DriverType driverType, bool isMaximazie = false)
         {
-            Drivers.StartDrivers(driverType, pageLoadTimeout, scriptTimeout, isMaximazie);
+            Drivers.StartDrivers(driverType, isMaximize: isMaximazie);
+        }        
+
+        public static void StartDriver (DriverType driverType, int pageLoadTimeout = 60)
+        {           
+            Drivers.StartDrivers(driverType, pageLoadTimeout:pageLoadTimeout);
         }
 
+        public static void StartDriver (DriverType driverType, int pageLoadTimeout = 60, bool isMaximazie = false)
+        {
+            Drivers.StartDrivers(driverType, pageLoadTimeout: pageLoadTimeout, isMaximize: isMaximazie);
+        }
+        public static void StartDriver (DriverType driverType)
+        {
+            Drivers.StartDrivers(driverType);
+        }
         /// <summary>
         /// This method is use for
         /// set driver option : Ex: ChromeOptions, InternetOptions...
         /// </summary>
-        public object DriverOption
+        public static object DriverOption
         {
             get
             {
@@ -102,7 +105,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use 
         /// for set up DesiredCapabilities in Remote Driver, Mobile Driver
         /// </summary>
-        public DesiredCapabilities DesiredCapabilities
+        public static DesiredCapabilities DesiredCapabilities
         {
             get
             {
@@ -113,7 +116,7 @@ namespace AutomationFrameWork.Driver
                 Drivers.DesiredCapabilitiesCore = value;
             }
         }
-        public object DriverServices
+        public static object DriverServices
         {
             get
             {
@@ -128,7 +131,7 @@ namespace AutomationFrameWork.Driver
         /// This method is use
         /// for set up URI in Remote Driver, Mobile Driver 
         /// </summary>
-        public String RemoteUri
+        public static String RemoteUri
         {
             get
             {               

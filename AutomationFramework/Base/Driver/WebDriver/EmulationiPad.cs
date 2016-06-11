@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System.Drawing;
 using AutomationFrameWork.Helper;
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class EmulationiPad : Drivers
     {

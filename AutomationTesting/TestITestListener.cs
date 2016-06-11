@@ -44,14 +44,14 @@ namespace AutomationTesting
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
             //DriverFactory.Instance.DriverOption = op;
-            DriverFactory.Instance.StartDriver(DriverType.Chrome, isMaximazie: true);
-            IWebDriver driver = DriverFactory.Instance.GetWebDriver;
+            DriverFactory.StartDriver(DriverType.Chrome, true);
+            IWebDriver driver = DriverFactory.WebDriver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
             WebKeywords.Instance.GetScreenShot();
             Utilities.Instance.GetWebElementBaseImage(el, formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
             driver.Dispose();
-            DriverFactory.Instance.CloseDriver();
+            DriverFactory.CloseDriver();
         }
         [Category("TestReportTemplate")]
         [Test]
@@ -106,14 +106,14 @@ namespace AutomationTesting
         [SetUp]
         public void SetUp()
         {
-                DriverFactory.Instance.StartDriver(_type);
-                driver = DriverFactory.Instance.GetWebDriver;
+                DriverFactory.StartDriver(_type);
+                driver = DriverFactory.WebDriver;
             
         }
         [TearDown]
         public void TearDown()
         {
-            DriverFactory.Instance.CloseDriver();
+            DriverFactory.CloseDriver();
         }
         #endregion
     }

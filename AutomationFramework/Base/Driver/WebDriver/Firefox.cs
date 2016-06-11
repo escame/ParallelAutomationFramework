@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class Firefox : Drivers
     {

@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using AutomationFrameWork.Helper;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class Chrome : Drivers
     {

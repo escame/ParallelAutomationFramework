@@ -8,7 +8,7 @@ using System.Reflection;
 using AutomationFrameWork.Exceptions;
 using OpenQA.Selenium.PhantomJS;
 
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     abstract class Drivers
     {

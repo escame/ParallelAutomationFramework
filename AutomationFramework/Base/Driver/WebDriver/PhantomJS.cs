@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium.PhantomJS;
 using AutomationFrameWork.Helper;
-namespace AutomationFrameWork.Driver.Core
+namespace AutomationFrameWork.Driver
 {
     class PhantomJS : Drivers
     {
