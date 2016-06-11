@@ -1,13 +1,13 @@
 ﻿using AutomationFrameWork.Driver.Interface;
 using OpenQA.Selenium.Chrome;
 using System;
-
+using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver
 {
-    class iPad : IDrivers
+    class iPad : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
 
-        public object DesiredCapabilities
+        public ChromeOptions DesiredCapabilities
         {
             get
             {
@@ -17,7 +17,7 @@ namespace AutomationFrameWork.Driver
                 return options;
             }
         }
-        public object DriverServices
+        public ChromeDriverService DriverServices
         {
             get
             {
@@ -29,13 +29,13 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public object Drivers(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = (ChromeOptions)desiredCapabilities;
+            var options = desiredCapabilities;
             options.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
-            return new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            return new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
         }
     }
 }

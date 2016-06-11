@@ -1,13 +1,14 @@
 ﻿using AutomationFrameWork.Driver.Interface;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 
 
 namespace AutomationFrameWork.Driver
 {
-    class FirefoxDesktop : IDrivers
+    class FirefoxDesktop : IDrivers<IWebDriver, FirefoxBinary, FirefoxProfile>
     {
-        public object DesiredCapabilities
+        public FirefoxProfile DesiredCapabilities
         {
             get
             {
@@ -20,21 +21,21 @@ namespace AutomationFrameWork.Driver
                 return profiles;
             }
         }
-        public object DriverServices
+        public FirefoxBinary DriverServices
         {
             get
             {
                 FirefoxBinary serivces = new FirefoxBinary();
-                serivces.Timeout = TimeSpan.FromSeconds(60);              
+                serivces.Timeout = TimeSpan.FromSeconds(60);
                 return serivces;
             }
         }
 
-        public object Drivers(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60)
         {
             driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;            
-            return new FirefoxDriver((FirefoxBinary)DriverServices,(FirefoxProfile)DesiredCapabilities,TimeSpan.FromSeconds(commandTimeOut));
+            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
+            return new FirefoxDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
         }
     }
 }

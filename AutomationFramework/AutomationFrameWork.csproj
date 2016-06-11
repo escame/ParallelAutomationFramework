@@ -187,6 +187,7 @@
   <ItemGroup>
     <Compile Include="ActionKeywords\MobileKeywords.cs" />
     <Compile Include="ActionKeywords\WebKeywords.cs" />
+    <Compile Include="Base\Driver\HeadlessBrowser\PhantomJSBrowser.cs" />
     <Compile Include="Base\Driver\WebBrowsers\ChromeDesktop.cs" />
     <Compile Include="Base\Driver\Core\DriverType.cs" />
     <Compile Include="Base\Driver\Interface\IDrivers.cs" />

@@ -1,9 +1,9 @@
 ﻿namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IDrivers
+    public interface IDrivers<DriverType,Services, Options>
     {
-        object Drivers(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60);
-        object DriverServices { get; }
-        object DesiredCapabilities { get; }
+        DriverType Drivers(Services driverServices = default(Services), Options desiredCapabilities = default(Options), int commandTimeOut = 60);
+        Services DriverServices { get; }
+        Options DesiredCapabilities { get; }
     }
 }

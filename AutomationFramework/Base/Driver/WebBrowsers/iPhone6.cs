@@ -1,13 +1,13 @@
 ﻿using AutomationFrameWork.Driver.Interface;
 using OpenQA.Selenium.Chrome;
 using System;
-
+using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver
 {
-    class iPhone6 : IDrivers
+    class iPhone6 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
 
-        public object DesiredCapabilities
+        public ChromeOptions DesiredCapabilities
         {
             get
             {
@@ -17,7 +17,7 @@ namespace AutomationFrameWork.Driver
                 return options;
             }
         }
-        public object DriverServices
+        public ChromeDriverService DriverServices
         {
             get
             {
@@ -29,13 +29,13 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public object Drivers(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = (ChromeOptions)desiredCapabilities;
+            var options = desiredCapabilities;
             options.EnableMobileEmulation("Apple iPhone 6");
-            return new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            return new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
         }
     }
 }

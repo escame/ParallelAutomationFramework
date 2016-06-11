@@ -1,14 +1,15 @@
 ﻿using System;
 using OpenQA.Selenium.Chrome;
 using AutomationFrameWork.Driver.Interface;
+using OpenQA.Selenium;
 
 namespace AutomationFrameWork.Driver
 {
-    class ChromeDesktop : IDrivers
+    class ChromeDesktop : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
        
 
-        public object DesiredCapabilities
+        public ChromeOptions DesiredCapabilities
         {
             get
             {
@@ -18,7 +19,7 @@ namespace AutomationFrameWork.Driver
             }          
         }
        
-        public object DriverServices
+        public ChromeDriverService DriverServices
         {
             get
             {
@@ -29,12 +30,13 @@ namespace AutomationFrameWork.Driver
                 return serivces;
             }            
         }
+       
 
-        public object Drivers(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            return new ChromeDriver((ChromeDriverService)driverServices, (ChromeOptions)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            return new ChromeDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
         }
     }
 }
