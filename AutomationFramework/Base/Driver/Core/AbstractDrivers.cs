@@ -12,7 +12,7 @@ namespace AutomationFrameWork.Driver
 {
     abstract class Drivers
     {
-        private const string DriverCoreNamespace = "AutomationFrameWork.Driver.Core";
+        private const string DriverCoreNamespace = "AutomationFrameWork.Driver";
         private static ThreadLocal<object> _driverStored;
         private static ThreadLocal<object> _optionStorage;
         private static ThreadLocal<object> _servicesStorage;

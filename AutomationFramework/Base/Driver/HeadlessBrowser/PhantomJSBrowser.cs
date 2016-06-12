@@ -27,7 +27,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public PhantomJSDriver Drivers(PhantomJSDriverService driverServices = null, PhantomJSOptions desiredCapabilities = null, int commandTimeOut = 60)
+        public PhantomJSDriver Drivers(PhantomJSDriverService driverServices = null, PhantomJSOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;

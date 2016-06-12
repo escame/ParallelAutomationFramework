@@ -1,11 +1,10 @@
 ﻿using AutomationFrameWork.Driver.Interface;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-
+using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver
 {
-    class iPhone5 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class iPhone6 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
 
         public ChromeOptions DesiredCapabilities
@@ -14,7 +13,7 @@ namespace AutomationFrameWork.Driver
             {
                 ChromeOptions options = new ChromeOptions();
                 options.LeaveBrowserRunning = true;
-                options.EnableMobileEmulation("Apple iPhone 5");
+                options.EnableMobileEmulation("Apple iPhone 6");
                 return options;
             }
         }
@@ -30,13 +29,18 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
             var options = desiredCapabilities;
-            options.EnableMobileEmulation("Apple iPhone 5");
-            return new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            options.EnableMobileEmulation("Apple iPhone 6");
+            IWebDriver driver = new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
+            if (isMaximize)
+                driver.Manage().Window.Maximize();
+            return driver;
         }
     }
 }

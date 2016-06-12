@@ -31,11 +31,16 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60)
+        public IWebDriver Drivers(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            return new FirefoxDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            IWebDriver driver = new FirefoxDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
+            if (isMaximize)
+                driver.Manage().Window.Maximize();
+            return driver;
         }
     }
 }
