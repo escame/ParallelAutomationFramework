@@ -41,12 +41,14 @@ text-align:center;
 font-size:26px;
 }
 .panel{
-margin:10px 5px;
-background-color:#C5CBD4;
+background-color:#9eacc1;
 border:1px solid transparent;
 border-radius:4px;
 box-shadow:0 1px 1px rgba(0,0,0,.05);
-dispaly:block;
+min-width:500px;
+min-height:100px;
+width:60%;
+margin:auto;
 }
 .panel-header{
 margin:5px 20px;
@@ -54,16 +56,44 @@ font-size:26px;
 font-weight:600;
 }
 .panel-body{
-background:white;
+background:#e3e7ea;
 line-height:1.428571;
+text-align:center;
+padding:15px 0px;
 }
-.panel-testinformation{
-text-align: center;
-margin:auto;
+.panel-information{
+ margin: auto;
+ padding:10px;
+}
+.panel-test-information{
+font-family: cursive;
+font-size:16px;
+font-weight:bold;
 width:15%;
-padding:10px;
-font-size:26px;
+border-style:outset;
+border-color:azure;
+border-width: 2px;
+padding:2px;
+margin:0px 2px;
 display:inline-block;
+}
+#pass{
+color:#00a006;
+}
+#failed{
+color:#f30a0a;
+}
+#error{
+color:#cac500;
+}
+#ignore{
+color:#5b92ce;
+}
+#ignore,#pass,#failed,#error,#total,#start,#start-time,#end-time,#duration,#percent-pass,#percent-failed,#percent-error,#percent-ignore{
+font-size:18px;
+font-weight:bold;
+font-family:sans-serif;
+text-transform:uppercase;
 }
 </style></head>
 <body>
@@ -72,29 +102,58 @@ display:inline-block;
 <div class="panel">
 <div class="panel-header">Test Summary</div>
 <div class="panel-body">
-<div class="panel-testinformation">
- <div>Total Test</div>
+<div class="panel-information">
+<div class="panel-information">
+<div class="panel-test-information">
+ <div id="total">Total Test</div>
  <div> 1102</div>
  </div>
-<div class="panel-testinformation">
- <div>Passed Test</div>
+<div class="panel-test-information">
+ <div id="pass">Passed Test</div>
  <div> 900</div>
  </div>
-<div class="panel-testinformation">
- <div>Failed Test</div>
+<div class="panel-test-information">
+ <div id ="failed">Failed Test</div>
  <div> 100</div>
  </div>
-<div class="panel-testinformation">
- <div>Error Test</div>
+<div class="panel-test-information">
+ <div id="error">Error Test</div>
  <div> 102</div>
  </div>
-<div class="panel-testinformation"> 
- <div>Start Time</div>
- <div> 17:04:30 06/04/2016</div>
+<div class="panel-test-information"> 
+ <div id="ignore">Ignore</div>
+ <div> 12</div>
  </div>
-<div class="panel-testinformation">
- <div>End Time</div>
+<div class="panel-test-information">
+ <div id="start-time">Start Time</div>
  <div> 19:04:21 06/05/201</div>
+</div>
+</div>
+<div class="panel-information">
+<div class="panel-test-information">
+ <div id="duration">Total Run Time</div>
+ <div>00:00:43:943</div>
+ </div>
+<div class="panel-test-information">
+ <div id="percent-pass">% Passed</div>
+ <div> 900</div>
+ </div>
+<div class="panel-test-information">
+ <div id="percent-failed">% Failed</div>
+ <div> 100</div>
+ </div>
+<div class="panel-test-information">
+ <div id="percent-error">% Error</div>
+ <div> 102</div>
+ </div>
+<div class="panel-test-information"> 
+ <div id="percent-ignore">% Ignore</div>
+ <div> 12</div>
+ </div>
+<div class="panel-test-information">
+ <div id="end-time">End Time</div>
+ <div> 19:04:21 06/05/201</div>
+</div>
 </div>
 </div>
 </div></body>

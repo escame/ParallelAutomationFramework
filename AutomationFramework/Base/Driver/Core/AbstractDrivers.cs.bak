@@ -33,11 +33,18 @@ namespace AutomationFrameWork.Driver
         /// <param name="driverType"></param>
         public static void StartDrivers(DriverType driverType, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
+<<<<<<< HEAD
+            List<Type> listClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(item => item.Namespace == "AutomationFrameWork.Driver")
+                      .ToList();
+            foreach (Type className in listClass)
+=======
             Type foundClass = System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
                       .Where(item => item.Namespace == DriverCoreNamespace && item.Name.Equals(driverType.ToString(), StringComparison.OrdinalIgnoreCase)) // TODO for review: refactor code to search driver
                       .FirstOrDefault();
 
             if (foundClass != null)
+>>>>>>> fff7b0f770da8058157aedf789fd619a51d7d04e
             {
                 ConstructorInfo constructor = foundClass.GetConstructor(Type.EmptyTypes);
                 MethodInfo startDriver = foundClass.GetMethod("StartDriver", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
