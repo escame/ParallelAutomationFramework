@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Chrome;
 namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IDriverOptions<DriverOptions> 
+    public interface IDriverOptions<Options> 
     {
-        DriverOptions Options { get; }
+        Options DesiredCapabilities { get; }
     }
   
 }

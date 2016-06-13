@@ -88,8 +88,9 @@ namespace AutomationTesting
         [Category("Context")]
         public void TestContextFind()
         {
-
-            IWebDriver driver = new ChromeDriver();
+            ChromeDesktop desk = new ChromeDesktop();
+            desk.StartDriver();
+            IWebDriver driver = desk.Driver ;
             driver.Url = "http://www.google.com";
             driver.Navigate().GoToUrl("http://vtc.vn");
             driver.Navigate().Back();

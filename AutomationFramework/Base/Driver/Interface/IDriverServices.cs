@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IDriverServices<DriverServices>
-    {        
-        DriverServices Services {get;}
+    public interface IDriverServices<Services>
+    {
+        Services DriverServices { get;}
     }    
 }
