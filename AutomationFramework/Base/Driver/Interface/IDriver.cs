@@ -2,6 +2,6 @@
 {
     public interface IDriver<Drivers> 
     {
-        Drivers Driver{get;}
+        Drivers Driver{ get; set; }
     }
 }

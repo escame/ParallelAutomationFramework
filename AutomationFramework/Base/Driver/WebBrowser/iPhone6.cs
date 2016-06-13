@@ -2,11 +2,11 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using OpenQA.Selenium;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.WebBrowser
 {
     class iPhone6 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
-
+        public iPhone6() { }
         public ChromeOptions DesiredCapabilities
         {
             get

@@ -2,11 +2,13 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using OpenQA.Selenium;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class iPhone4 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class iPhone4 : IBrowsers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
 
+        public iPhone4() { }      
+        public IWebDriver Driver { get; set; }
         public ChromeOptions DesiredCapabilities
         {
             get
@@ -29,7 +31,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
@@ -40,7 +42,7 @@ namespace AutomationFrameWork.Driver
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
-        }
+            Driver = driver;
+        }      
     }
 }

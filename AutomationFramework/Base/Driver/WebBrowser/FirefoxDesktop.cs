@@ -4,10 +4,15 @@ using OpenQA.Selenium.Firefox;
 using System;
 
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class FirefoxDesktop : IDrivers<IWebDriver, FirefoxBinary, FirefoxProfile>
+    class FirefoxDesktop : IBrowsers<IWebDriver, FirefoxBinary, FirefoxProfile>
     {
+        FirefoxDesktop() { }
+        public IWebDriver Driver
+        {
+            get; set;
+        }
         public FirefoxProfile DesiredCapabilities
         {
             get
@@ -31,7 +36,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
@@ -40,7 +45,7 @@ namespace AutomationFrameWork.Driver
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
+            Driver = driver;
         }
     }
 }

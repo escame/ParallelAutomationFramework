@@ -1,10 +1,12 @@
 ﻿using System;
 using OpenQA.Selenium.PhantomJS;
 using AutomationFrameWork.Driver.Interface;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.HeadlessBrowser
 {
-    class PhantomJSBrowser : IDrivers<PhantomJSDriver, PhantomJSDriverService, PhantomJSOptions>
+    class PhantomJSBrowser : IBrowsers<PhantomJSDriver, PhantomJSDriverService, PhantomJSOptions>
     {
+        public PhantomJSBrowser() { }
+        public PhantomJSDriver Driver { get; set; }
         public PhantomJSOptions DesiredCapabilities
         {
             get
@@ -27,11 +29,11 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public PhantomJSDriver Drivers(PhantomJSDriverService driverServices = null, PhantomJSOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(PhantomJSDriverService driverServices = null, PhantomJSOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            return new PhantomJSDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-        }
+            Driver= new PhantomJSDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+        }       
     }
 }

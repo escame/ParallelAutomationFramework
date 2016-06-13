@@ -2,11 +2,16 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using OpenQA.Selenium;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class iPad : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class iPad : IBrowsers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
 
+        public iPad() { }
+        public IWebDriver Driver
+        {
+            get; set;
+        }
         public ChromeOptions DesiredCapabilities
         {
             get
@@ -16,7 +21,8 @@ namespace AutomationFrameWork.Driver
                 options.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
                 return options;
             }
-        }
+        }    
+
         public ChromeDriverService DriverServices
         {
             get
@@ -29,7 +35,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
@@ -40,7 +46,9 @@ namespace AutomationFrameWork.Driver
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
+            Driver = driver;
         }
+
+     
     }
 }

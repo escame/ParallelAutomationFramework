@@ -3,10 +3,15 @@ using System;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class InternetExplorerDesktop : IDrivers<IWebDriver, InternetExplorerDriverService, InternetExplorerOptions>
+    class InternetExplorerDesktop : IBrowsers<IWebDriver, InternetExplorerDriverService, InternetExplorerOptions>
     {
+        public InternetExplorerDesktop() { }
+        public IWebDriver Driver
+        {
+            get; set;
+        }
         public InternetExplorerOptions DesiredCapabilities
         {
             get
@@ -23,7 +28,8 @@ namespace AutomationFrameWork.Driver
                 options.UnexpectedAlertBehavior = InternetExplorerUnexpectedAlertBehavior.Ignore;
                 return options;
             }
-        }
+        }        
+
         public InternetExplorerDriverService DriverServices
         {
             get
@@ -36,7 +42,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public IWebDriver Drivers(InternetExplorerDriverService driverServices = null, InternetExplorerOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(InternetExplorerDriverService driverServices = null, InternetExplorerOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
@@ -45,7 +51,8 @@ namespace AutomationFrameWork.Driver
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
+            Driver = driver;
         }
+     
     }
 }

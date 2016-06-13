@@ -2,10 +2,12 @@
 using OpenQA.Selenium.Remote;
 using AutomationFrameWork.Driver.Interface;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.RemoteBrowser
 {
-    class RemoteBrowser : IDrivers<RemoteWebDriver, Uri, DesiredCapabilities>
+    class RemoteBrowser : IBrowsers<RemoteWebDriver, Uri, DesiredCapabilities>
     {
+        public RemoteBrowser() { }
+        public RemoteWebDriver Driver{ get; set; }
         public DesiredCapabilities DesiredCapabilities
         {
             get
@@ -23,7 +25,7 @@ namespace AutomationFrameWork.Driver
             }
         }
 
-        public RemoteWebDriver Drivers(Uri driverServices , DesiredCapabilities desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(Uri driverServices = null, DesiredCapabilities desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
             RemoteWebDriver driver = new RemoteWebDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
@@ -31,7 +33,7 @@ namespace AutomationFrameWork.Driver
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
-        }
+            Driver = driver;
+        }       
     }
 }

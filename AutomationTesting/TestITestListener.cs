@@ -18,6 +18,7 @@ using AutomationFrameWork.Extensions;
 using System.Collections.ObjectModel;
 using Mono.Collections.Generic;
 using OpenQA.Selenium.Support.PageObjects;
+using AutomationFrameWork.Driver.Interface;
 
 namespace AutomationTesting
 {
@@ -88,18 +89,18 @@ namespace AutomationTesting
         [Category("Context")]
         public void TestContextFind()
         {
-            ChromeDesktop desk = new ChromeDesktop();
-            desk.StartDriver();
-            IWebDriver driver = desk.Driver ;
+            //IDriver<IWebDriver> test = new ChromeDesktop { Driver= new ChromeDesktop().StartDriver()};
+
+            IWebDriver driver = DriverManager.WebBrowser(DriverType.Chrome);
             driver.Url = "http://www.google.com";
             driver.Navigate().GoToUrl("http://vtc.vn");
             driver.Navigate().Back();
             driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).SendKeys("test this show with long string ");
-            System.Threading.Thread.Sleep(5000);
+
             driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).Clear();
-            System.Threading.Thread.Sleep(5000);
+
             driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).SendKeys("test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string  test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string ");
-            System.Threading.Thread.Sleep(5000);
+
             driver.Quit();
         }
        
