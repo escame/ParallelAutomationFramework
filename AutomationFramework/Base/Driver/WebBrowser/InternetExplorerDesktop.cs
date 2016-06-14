@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class InternetExplorerDesktop : IBrowsers<IWebDriver, InternetExplorerDriverService, InternetExplorerOptions>
+    class InternetExplorerDesktop : IDrivers<IWebDriver, InternetExplorerDriverService, InternetExplorerOptions>
     {
         public InternetExplorerDesktop() { }
         public IWebDriver Driver
@@ -28,7 +28,7 @@ namespace AutomationFrameWork.Driver.WebBrowser
                 options.UnexpectedAlertBehavior = InternetExplorerUnexpectedAlertBehavior.Ignore;
                 return options;
             }
-        }        
+        }
 
         public InternetExplorerDriverService DriverServices
         {
@@ -42,17 +42,17 @@ namespace AutomationFrameWork.Driver.WebBrowser
             }
         }
 
-        public void StartDriver(InternetExplorerDriverService driverServices = null, InternetExplorerOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            IWebDriver driver = new InternetExplorerDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            IWebDriver driver = new InternetExplorerDriver((InternetExplorerDriverService)driverServices, (InternetExplorerOptions)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
             driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }
-     
+
     }
 }

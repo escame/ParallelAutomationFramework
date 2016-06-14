@@ -7,6 +7,7 @@ namespace AutomationFrameWork.Driver.WebBrowser
     class iPhone6 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
         public iPhone6() { }
+        public IWebDriver Driver { get; set; }
         public ChromeOptions DesiredCapabilities
         {
             get
@@ -29,18 +30,18 @@ namespace AutomationFrameWork.Driver.WebBrowser
             }
         }
 
-        public IWebDriver Drivers(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = desiredCapabilities;
+            var options = (ChromeOptions)desiredCapabilities;
             options.EnableMobileEmulation("Apple iPhone 6");
-            IWebDriver driver = new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            IWebDriver driver = new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
             driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
-            return driver;
+            Driver = driver;
         }
     }
 }

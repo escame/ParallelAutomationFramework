@@ -5,9 +5,9 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class Nexus5 : IBrowsers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class SamsungS4 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
     {
-        public Nexus5() { }
+        public SamsungS4() { }
         public IWebDriver Driver { get; set; }
         public ChromeOptions DesiredCapabilities
         {
@@ -15,7 +15,7 @@ namespace AutomationFrameWork.Driver.WebBrowser
             {
                 ChromeOptions options = new ChromeOptions();
                 options.LeaveBrowserRunning = true;
-                options.EnableMobileEmulation("Nexus 5");
+                options.EnableMobileEmulation("Samsung Galaxy S4");
                 return options;
             }
         }
@@ -31,18 +31,18 @@ namespace AutomationFrameWork.Driver.WebBrowser
             }
         }
 
-        public void StartDriver(ChromeDriverService driverServices = null, ChromeOptions desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = desiredCapabilities;
-            options.EnableMobileEmulation("Nexus 5");
-            IWebDriver driver = new ChromeDriver(driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
+            var options = (ChromeOptions)desiredCapabilities;
+            options.EnableMobileEmulation("Samsung Galaxy S4");
+            IWebDriver driver = new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
             driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)
                 driver.Manage().Window.Maximize();
             Driver = driver;
-        }      
+        }
     }
 }

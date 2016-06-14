@@ -188,12 +188,9 @@
     <Compile Include="ActionKeywords\MobileKeywords.cs" />
     <Compile Include="ActionKeywords\WebKeywords.cs" />
     <Compile Include="Base\Driver\Core\DriverManager.cs" />
+    <Compile Include="Base\Driver\DriverFactory\PhantomJSBrowserFactory.cs" />
     <Compile Include="Base\Driver\DriverFactory\WebBrowserFactory.cs" />
     <Compile Include="Base\Driver\HeadlessBrowser\PhantomJSBrowser.cs" />
-    <Compile Include="Base\Driver\Interface\IBrowsers.cs" />
-    <Compile Include="Base\Driver\Interface\IDriver.cs" />
-    <Compile Include="Base\Driver\Interface\IDriverOptions.cs" />
-    <Compile Include="Base\Driver\Interface\IDriverServices.cs" />
     <Compile Include="Base\Driver\Interface\IFactory.cs" />
     <Compile Include="Base\Driver\Remote\RemoteBrowser.cs" />
     <Compile Include="Base\Driver\Utils\BrowserType.cs" />
@@ -218,7 +215,7 @@
     <Compile Include="Base\Driver\WebBrowser\iPhone6.cs" />
     <Compile Include="Base\Driver\WebBrowser\Nexus7.cs" />
     <Compile Include="Base\Driver\WebBrowser\Nexus6.cs" />
-    <Compile Include="Base\Driver\WebBrowser\Nexus5.cs" />
+    <Compile Include="Base\Driver\WebBrowser\SamsungS4.cs" />
     <Compile Include="Base\Exception\StepErrorException.cs" />
     <Compile Include="Base\Page\BasePageInstance.cs" />
     <Compile Include="Base\Page\BasePageMobile.cs" />

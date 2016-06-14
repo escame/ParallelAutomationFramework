@@ -6,9 +6,9 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebBrowser
 {
-    class FirefoxDesktop : IBrowsers<IWebDriver, FirefoxBinary, FirefoxProfile>
+    class FirefoxDesktop : IDrivers<IWebDriver, FirefoxBinary, FirefoxProfile>
     {
-        FirefoxDesktop() { }
+        public FirefoxDesktop() { }
         public IWebDriver Driver
         {
             get; set;
@@ -36,11 +36,11 @@ namespace AutomationFrameWork.Driver.WebBrowser
             }
         }
 
-        public void StartDriver(FirefoxBinary driverServices = null, FirefoxProfile desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             driverServices = driverServices ?? DriverServices;
             desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            IWebDriver driver = new FirefoxDriver(driverServices, desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            IWebDriver driver = new FirefoxDriver((FirefoxBinary)driverServices, (FirefoxProfile)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
             driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
             if (isMaximize)

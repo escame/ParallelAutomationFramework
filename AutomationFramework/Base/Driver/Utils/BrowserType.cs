@@ -12,12 +12,12 @@ namespace AutomationFrameWork.Driver
         {
             ChromeDesktop,
             FirefoxDesktop,
-            InternetExploreDesktop,
+            InternetExplorerDesktop,
             iPad,
             iPhone4,
             iPhone5,
             iPhone6,
-            Nexus5,
+            SamsungS4,
             Nexus6,
             Nexus7
         }

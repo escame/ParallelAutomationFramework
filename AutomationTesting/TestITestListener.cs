@@ -19,11 +19,12 @@ using System.Collections.ObjectModel;
 using Mono.Collections.Generic;
 using OpenQA.Selenium.Support.PageObjects;
 using AutomationFrameWork.Driver.Interface;
+using AutomationFrameWork.Driver.WebBrowser;
 
 namespace AutomationTesting
 {
 
-   
+    [Parallelizable(ParallelScope.Self)]
     public class TestITestListener
     {
         DriverType _type;
@@ -86,12 +87,13 @@ namespace AutomationTesting
         #region
         //Test FindContext
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         [Category("Context")]
         public void TestContextFind()
         {
             //IDriver<IWebDriver> test = new ChromeDesktop { Driver= new ChromeDesktop().StartDriver()};
-
-            IWebDriver driver = DriverManager.WebBrowser(DriverType.Chrome);
+            WebBrowserFactory fac = new WebBrowserFactory(BrowserType.WebBrowser.InternetExplorerDesktop);           
+            IWebDriver driver = fac.GetDriver();
             driver.Url = "http://www.google.com";
             driver.Navigate().GoToUrl("http://vtc.vn");
             driver.Navigate().Back();
@@ -106,14 +108,15 @@ namespace AutomationTesting
        
         #endregion
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         [Category("IFactory")]
         public void TestFactory()
         {
-            IFactory<String, BrowserTypes.WebBrowser> type;
-            type = new WebFactory();
-            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.ChromeDesktop));
-            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.iPad));
-            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.iPhone4));
+
+            IWebDriver driver = DriverManager.WebBrowser(BrowserType.WebBrowser.Nexus7);
+            driver.Url = "https://www.whatismybrowser.com/";
+            System.Threading.Thread.Sleep(3000);
+            driver.Quit();
         }
     }
 }

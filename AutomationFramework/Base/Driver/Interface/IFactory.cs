@@ -1,8 +1,14 @@
 ﻿namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IFactory<Type, Driver, Services, Options>
-
+    public interface IFactory<Type, Driver>
     {
-        Driver GetDriver(Type type,Services driverServices = default(Services), Options desiredCapabilities = default(Options), int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false);
+        object DesiredCapabilities { get; set; }
+        object DriverServices { get; set; }
+        int CommandTimeout { get; set; }
+        int PageLoadTimeout { get; set; }
+        int ScriptTimeout { get; set; }
+        bool MaximizeBrowser { get; set; }
+        Type BrowserType { get; set; }
+        Driver GetDriver();
     }  
 }
