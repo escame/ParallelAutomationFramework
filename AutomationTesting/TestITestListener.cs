@@ -105,5 +105,15 @@ namespace AutomationTesting
         }
        
         #endregion
+        [Test]
+        [Category("IFactory")]
+        public void TestFactory()
+        {
+            IFactory<String, BrowserTypes.WebBrowser> type;
+            type = new WebFactory();
+            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.ChromeDesktop));
+            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.iPad));
+            Console.WriteLine(type.GetDriver(BrowserTypes.WebBrowser.iPhone4));
+        }
     }
 }
