@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutomationFrameWork.Driver
+﻿namespace AutomationFrameWork.Driver
 {
     public class BrowserType
     {
-        public enum WebBrowser
+        public enum Browser
         {
             ChromeDesktop,
             FirefoxDesktop,
@@ -19,18 +13,9 @@ namespace AutomationFrameWork.Driver
             iPhone6,
             SamsungS4,
             Nexus6,
-            Nexus7
-        }
-        public enum HeadlessBrowser
-        {
-            PhantomJSBrowser
-        }
-        public enum RemoteBrowser
-        {
+            Nexus7,
+            PhantomJSBrowser,
             RemoteBrowser
-        }
-        public enum MobileBrowser
-        {
-        }
+        }     
     }
 }

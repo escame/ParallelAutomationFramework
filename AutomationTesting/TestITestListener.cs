@@ -23,11 +23,19 @@ using AutomationFrameWork.Driver.WebBrowser;
 
 namespace AutomationTesting
 {
-
+    [TestFixture(BrowserType.Browser.ChromeDesktop)]
+    [TestFixture(BrowserType.Browser.iPad)]
+    [TestFixture(BrowserType.Browser.Nexus6)]
+    [TestFixture(BrowserType.Browser.iPhone6)]
     [Parallelizable(ParallelScope.Self)]
     public class TestITestListener
     {
-        DriverType _type;
+        public TestITestListener(object type)
+        {
+            driverType = type;
+        }
+        BrowserType _type;
+        object driverType;
         IWebDriver driver;       
         [Category("Capture Element Image")]
         [Test]
@@ -35,15 +43,14 @@ namespace AutomationTesting
         {
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
-            //DriverFactory.Instance.DriverOption = op;
-            DriverFactory.StartDriver(DriverType.Chrome, true);
-            IWebDriver driver = DriverFactory.WebDriver;
+            //DriverFactory.Instance.DriverOption = op;          
+            IWebDriver driver = DriverManager.WebBrowserDriver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
             WebKeywords.Instance.GetScreenShot();
             Utilities.Instance.GetWebElementBaseImage(el, formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
             driver.Dispose();
-            DriverFactory.CloseDriver();
+            DriverManager.CloseDriver();
         }
         [Category("TestReportTemplate")]
         [Test]
@@ -113,11 +120,16 @@ namespace AutomationTesting
         public void TestFactory()
         {
 
-            DriverManager.StartWebBrowser(BrowserType.WebBrowser.Nexus7);
-            IWebDriver driver = DriverManager.WebBrowserDriver;
+          
             driver.Url = "https://www.whatismybrowser.com/";          
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(10000);
             driver.Quit();
+        }
+        [SetUp]
+        public void SetUp()
+        {
+            DriverManager.StartWebBrowser((BrowserType.Browser)driverType);
+            driver = DriverManager.WebBrowserDriver;
         }
     }
 }

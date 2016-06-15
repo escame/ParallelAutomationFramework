@@ -17,15 +17,13 @@ namespace AutomationTesting.Feature.Login_Mail_Mobile
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.SetCapability("deviceName", "Note5");
             caps.SetCapability("udid", "0415313132353234");
-            caps.SetCapability("browserName", MobileBrowserType.Chrome);
-            DriverFactory.DesiredCapabilities = caps;
-            string _remoteUri = "http://" + NodeFactory.Instance.AddressNumber + ":" + NodeFactory.Instance.PortNumber + "/wd/hub";
-            DriverFactory.RemoteUri=_remoteUri;
+            caps.SetCapability("browserName", MobileBrowserType.Chrome);          
+            string _remoteUri = "http://" + NodeFactory.Instance.AddressNumber + ":" + NodeFactory.Instance.PortNumber + "/wd/hub";          
         }
         [Test]
         public void LoginMailSucessfullyMobile ()
         {
-            DriverFactory.StartDriver(DriverType.Android, 120, 120);
+            DriverManager.StartRemoteBrowser(BrowserType.Browser.ChromeDesktop);
             WebKeywords.Instance.Navigate("https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier");
             LoginPage.Instance.EnterUserName("specflowdemo@gmail.com");
             LoginPage.Instance.ClickNext();
@@ -36,7 +34,7 @@ namespace AutomationTesting.Feature.Login_Mail_Mobile
         [TearDown]
         public void TearDown ()
         {
-            DriverFactory.CloseDriver();
+            DriverManager.CloseDriver();
             NodeFactory.Instance.CloseNodeServer();
         }
     }

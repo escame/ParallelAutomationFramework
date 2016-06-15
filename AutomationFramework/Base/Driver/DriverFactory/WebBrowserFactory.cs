@@ -5,11 +5,8 @@ using System.Linq;
 using System.Reflection;
 namespace AutomationFrameWork.Driver
 {
-    class WebBrowserFactory : IFactory<BrowserType.WebBrowser, IWebDriver>
-
-    {       
-        
-        private const string DriverCoreNamespace = "AutomationFrameWork.Driver.WebBrowser";       
+    class WebBrowserFactory : IFactory<BrowserType.Browser, IWebDriver>
+    {          
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
         public int CommandTimeout { get; set; }
@@ -17,9 +14,9 @@ namespace AutomationFrameWork.Driver
         public int ScriptTimeout { get; set; }
         public bool MaximizeBrowser { get; set; }
 
-        public BrowserType.WebBrowser BrowserType { get; set; }
+        public BrowserType.Browser BrowserType { get; set; }
 
-        public WebBrowserFactory(BrowserType.WebBrowser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false) {
+        public WebBrowserFactory(BrowserType.Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false) {
             BrowserType = type;
             DriverServices = driverServices;
             DesiredCapabilities = desiredCapabilities;
@@ -31,7 +28,7 @@ namespace AutomationFrameWork.Driver
         public IWebDriver GetDriver()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
-                     .Where(item => item.Namespace == DriverCoreNamespace && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase)) 
+                     .Where(item => item.Namespace == Constants.WEB_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase)) 
                      .FirstOrDefault();
                     
             if (foundClass != null)

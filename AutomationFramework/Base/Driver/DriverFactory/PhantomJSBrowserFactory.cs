@@ -6,9 +6,8 @@ using System.Linq;
 
 namespace AutomationFrameWork.Driver
 {
-    class PhantomJSBrowserFactory : IFactory<BrowserType.HeadlessBrowser, PhantomJSDriver>
-    {
-        private const string DriverCoreNamespace = "AutomationFrameWork.Driver.WebBrowser";
+    class PhantomJSBrowserFactory : IFactory<BrowserType.Browser, PhantomJSDriver>
+    {       
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
         public int CommandTimeout { get; set; }
@@ -16,9 +15,9 @@ namespace AutomationFrameWork.Driver
         public int ScriptTimeout { get; set; }
         public bool MaximizeBrowser { get; set; }
 
-        public BrowserType.HeadlessBrowser BrowserType { get; set; }
+        public BrowserType.Browser BrowserType { get; set; }
 
-        public PhantomJSBrowserFactory(BrowserType.HeadlessBrowser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public PhantomJSBrowserFactory(BrowserType.Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             BrowserType = type;
             DriverServices = driverServices;
@@ -31,7 +30,7 @@ namespace AutomationFrameWork.Driver
         public PhantomJSDriver GetDriver()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
-                     .Where(item => item.Namespace == DriverCoreNamespace && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase))
+                     .Where(item => item.Namespace == Constants.HEADLESS_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase))
                      .FirstOrDefault();
 
             if (foundClass != null)
