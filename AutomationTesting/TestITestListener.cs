@@ -92,8 +92,8 @@ namespace AutomationTesting
         public void TestContextFind()
         {
             //IDriver<IWebDriver> test = new ChromeDesktop { Driver= new ChromeDesktop().StartDriver()};
-            WebBrowserFactory fac = new WebBrowserFactory(BrowserType.WebBrowser.InternetExplorerDesktop);           
-            IWebDriver driver = fac.GetDriver();
+
+            IWebDriver driver = new ChromeDriver();
             driver.Url = "http://www.google.com";
             driver.Navigate().GoToUrl("http://vtc.vn");
             driver.Navigate().Back();
@@ -113,8 +113,9 @@ namespace AutomationTesting
         public void TestFactory()
         {
 
-            IWebDriver driver = DriverManager.WebBrowser(BrowserType.WebBrowser.Nexus7);
-            driver.Url = "https://www.whatismybrowser.com/";
+            DriverManager.StartWebBrowser(BrowserType.WebBrowser.Nexus7);
+            IWebDriver driver = DriverManager.WebBrowserDriver;
+            driver.Url = "https://www.whatismybrowser.com/";          
             System.Threading.Thread.Sleep(3000);
             driver.Quit();
         }
