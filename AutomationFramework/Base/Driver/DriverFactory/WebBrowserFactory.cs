@@ -3,7 +3,7 @@ using AutomationFrameWork.Driver.Interface;
 using System;
 using System.Linq;
 using System.Reflection;
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Factory
 {
     class WebBrowserFactory : IFactory<BrowserType.Browser, IWebDriver>
     {          

@@ -195,6 +195,7 @@
     <Compile Include="Base\Driver\RemoteBrowser\RemoteBrowser.cs" />
     <Compile Include="Base\Driver\Utils\BrowserType.cs" />
     <Compile Include="Base\Driver\Utils\Constants.cs" />
+    <Compile Include="Base\Driver\Utils\FactoryType.cs" />
     <Compile Include="Base\Driver\WebBrowser\ChromeDesktop.cs" />
     <Compile Include="Base\Driver\Interface\IDrivers.cs" />
     <Compile Include="Base\Driver\WebBrowser\FirefoxDesktop.cs" />

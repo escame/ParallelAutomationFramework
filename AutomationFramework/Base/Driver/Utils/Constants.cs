@@ -11,5 +11,6 @@ namespace AutomationFrameWork.Driver
         public const string WEB_DRIVER_NAME_SPACE = "AutomationFrameWork.Driver.WebBrowser";
         public const string HEADLESS_DRIVER_NAME_SPACE = "AutomationFrameWork.Driver.HeadlessBrowser";
         public const string REMOTE_DRIVER_NAME_SPACE = "AutomationFrameWork.Driver.RemoteBrowser";
+        public const string FACTORY_NAME_SPACE = "AutomationFrameWork.Driver.Factory";
     }
 }

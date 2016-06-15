@@ -4,7 +4,7 @@ using OpenQA.Selenium.PhantomJS;
 using System.Reflection;
 using System.Linq;
 
-namespace AutomationFrameWork.Driver
+namespace AutomationFrameWork.Driver.Factory
 {
     class PhantomJSBrowserFactory : IFactory<BrowserType.Browser, PhantomJSDriver>
     {       
