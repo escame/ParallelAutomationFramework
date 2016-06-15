@@ -11,7 +11,7 @@ namespace AutomationFrameWork.Base
         protected IWebDriver WebDriver;
         public BaseWebElements()
         {
-            this.WebDriver = DriverFactory.WebDriver;
+            this.WebDriver = DriverManager.WebBrowserDriver;
         }
     }
 }

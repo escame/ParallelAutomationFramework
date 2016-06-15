@@ -18,40 +18,39 @@ using AutomationFrameWork.Extensions;
 using System.Collections.ObjectModel;
 using Mono.Collections.Generic;
 using OpenQA.Selenium.Support.PageObjects;
+using AutomationFrameWork.Driver.Interface;
+using AutomationFrameWork.Driver.WebBrowser;
 
 namespace AutomationTesting
 {
-
-    [TestFixture(DriverType.Chrome)]
-    [TestFixture(DriverType.EmulationiPhone4)]
-    [TestFixture(DriverType.EmulationiPhone5)]
-    [TestFixture(DriverType.EmulationiPhone6)]
-    [TestFixture(DriverType.EmulationiPad)]
-    [TestFixture(DriverType.Firefox)]
-    [TestFixture(DriverType.InternetExplore)]   
+    [TestFixture(BrowserType.Browser.ChromeDesktop)]
+    [TestFixture(BrowserType.Browser.iPad)]
+    [TestFixture(BrowserType.Browser.Nexus6)]
+    [TestFixture(BrowserType.Browser.iPhone6)]
+    [Parallelizable(ParallelScope.Self)]
     public class TestITestListener
     {
-        DriverType _type;
-        IWebDriver driver;
-        public TestITestListener(DriverType type)
+        public TestITestListener(object type)
         {
-            _type = type;
+            driverType = type;
         }
+        BrowserType _type;
+        object driverType;
+        IWebDriver driver;       
         [Category("Capture Element Image")]
         [Test]
         public void Event ()
         {
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
-            //DriverFactory.Instance.DriverOption = op;
-            DriverFactory.StartDriver(DriverType.Chrome, true);
-            IWebDriver driver = DriverFactory.WebDriver;
+            //DriverFactory.Instance.DriverOption = op;          
+            IWebDriver driver = DriverManager.WebBrowserDriver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
             WebKeywords.Instance.GetScreenShot();
             Utilities.Instance.GetWebElementBaseImage(el, formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
             driver.Dispose();
-            DriverFactory.CloseDriver();
+            DriverManager.CloseDriver();
         }
         [Category("TestReportTemplate")]
         [Test]
@@ -95,26 +94,42 @@ namespace AutomationTesting
         #region
         //Test FindContext
         [Test]
-        [Repeat(5)]
+        [Parallelizable(ParallelScope.Self)]
         [Category("Context")]
-        public void TestContextFind ()
-        {           
+        public void TestContextFind()
+        {
+            //IDriver<IWebDriver> test = new ChromeDesktop { Driver= new ChromeDesktop().StartDriver()};
+
+            IWebDriver driver = new ChromeDriver();
             driver.Url = "http://www.google.com";
             driver.Navigate().GoToUrl("http://vtc.vn");
-            driver.Navigate().Back();            
+            driver.Navigate().Back();
+            driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).SendKeys("test this show with long string ");
+
+            driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).Clear();
+
+            driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")).SendKeys("test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string  test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string test this show with long string ");
+
+            driver.Quit();
+        }
+       
+        #endregion
+        [Test]
+        [Parallelizable(ParallelScope.Self)]
+        [Category("IFactory")]
+        public void TestFactory()
+        {
+
+          
+            driver.Url = "https://www.whatismybrowser.com/";          
+            System.Threading.Thread.Sleep(10000);
+            driver.Quit();
         }
         [SetUp]
         public void SetUp()
         {
-                DriverFactory.StartDriver(_type);
-                driver = DriverFactory.WebDriver;
-            
+            DriverManager.StartWebBrowser((BrowserType.Browser)driverType);
+            driver = DriverManager.WebBrowserDriver;
         }
-        [TearDown]
-        public void TearDown()
-        {
-            DriverFactory.CloseDriver();
-        }
-        #endregion
     }
 }

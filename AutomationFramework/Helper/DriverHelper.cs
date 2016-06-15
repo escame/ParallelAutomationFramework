@@ -1,4 +1,4 @@
-﻿using AutomationFrameWork.Driver.Core;
+﻿using AutomationFrameWork.Driver;
 using AutomationFrameWork.Utils;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
