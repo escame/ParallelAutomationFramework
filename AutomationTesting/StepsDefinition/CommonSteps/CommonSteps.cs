@@ -28,7 +28,7 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
             switch (browser.ToLower())
             {
                 case "chrome":
-                    DriverManager.StartWebBrowser(BrowserType.Browser.ChromeDesktop);                
+                    DriverManager.StartDriver(FactoryType.WebBrowserFactory,BrowserType.Browser.ChromeDesktop);                
                     break;
                 default:
                     throw new ArgumentException("Invalid browser name, please type 'Chrome' 'Firefox' 'IE' 'iPad' 'Phantomjs' 'Remote' 'Nexus6' 'iPhone6' 'iPhone5' 'iPhone4' for can start browser");

@@ -15,7 +15,9 @@
             Nexus6,
             Nexus7,
             PhantomJSBrowser,
-            RemoteBrowser
+            RemoteBrowser,
+            Android,
+            iOS
         }     
     }
 }
