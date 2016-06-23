@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 namespace AutomationFrameWork.Driver.Factory
 {
-    class WebBrowserFactory : IFactory<BrowserType.Browser, IWebDriver>
+    class WebBrowserFactory : IFactory<Browser, IWebDriver>
     {          
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -14,9 +14,19 @@ namespace AutomationFrameWork.Driver.Factory
         public int ScriptTimeout { get; set; }
         public bool MaximizeBrowser { get; set; }
 
-        public BrowserType.Browser BrowserType { get; set; }
-
-        public WebBrowserFactory(BrowserType.Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false) {
+        public Browser BrowserType { get; set; }
+        /// <summary>
+        /// This method is use for instance Desktop Web Browser
+        /// Ex: Chrome, IE, Firefox...
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="driverServices"></param>
+        /// <param name="desiredCapabilities"></param>
+        /// <param name="commandTimeOut"></param>
+        /// <param name="pageLoadTimeout"></param>
+        /// <param name="scriptTimeout"></param>
+        /// <param name="isMaximize"></param>
+        public WebBrowserFactory(Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false) {
             BrowserType = type;
             DriverServices = driverServices;
             DesiredCapabilities = desiredCapabilities;
@@ -41,7 +51,7 @@ namespace AutomationFrameWork.Driver.Factory
                 return (IWebDriver)property.GetValue(instance, null);               
             }
             else
-                throw new NotImplementedException("Browser "+BrowserType +" is not implemented");
+                throw new OperationCanceledException("WebBrowser for"+BrowserType +" is not implemented");
         }
     }
 }

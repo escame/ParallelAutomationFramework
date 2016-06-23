@@ -19,28 +19,31 @@ using System.Collections.ObjectModel;
 using Mono.Collections.Generic;
 using OpenQA.Selenium.Support.PageObjects;
 using AutomationFrameWork.Driver.Interface;
-
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.Events;
 
 namespace AutomationTesting
 {
-    [TestFixture(BrowserType.Browser.ChromeDesktop,FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.iPad,FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.FirefoxDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.InternetExplorerDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.iPhone4, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.iPhone5, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.iPhone6, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.Nexus6, FactoryType.WebBrowserFactory)]
-    [TestFixture(BrowserType.Browser.Nexus7, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.ChromeDesktop,FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.iPad,FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.FirefoxDesktop, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.InternetExplorerDesktop, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.iPhone4, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.iPhone5, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.iPhone6, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.Nexus6, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.Nexus7, FactoryType.WebBrowserFactory)]
     [Parallelizable(ParallelScope.Self)]
     public class TestITestListener
     {
-        public TestITestListener(BrowserType.Browser browserType,FactoryType factoryType)
+        public TestITestListener(Browser browserType,FactoryType factoryType)
         {
             _type = browserType;
             _factory = factoryType;
         }
-        BrowserType.Browser _type;
+        Browser _type;
         FactoryType _factory;
         object driverType;
         IWebDriver driver;       
@@ -51,13 +54,14 @@ namespace AutomationTesting
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
             //DriverFactory.Instance.DriverOption = op;          
-            IWebDriver driver = DriverManager.WebBrowserDriver;
+            DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.ChromeDesktop);
+            IWebDriver driver = DriverManager<IWebDriver>.Driver;
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
             WebKeywords.Instance.GetScreenShot();
             Utilities.Instance.GetWebElementBaseImage(el, formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
             driver.Dispose();
-            DriverManager.CloseDriver();
+            DriverManager<IWebDriver>.CloseDriver();
         }
         [Category("TestReportTemplate")]
         [Test]
@@ -119,29 +123,29 @@ namespace AutomationTesting
 
             driver.Quit();
         }
-       
+
         #endregion
-        [Test]
-        [Parallelizable(ParallelScope.Self)]
-        [Category("IFactory")]      
+        [Test]        
+        [Category("WebDriverListner")]
         public void TestFactory()
         {
-
-          
-            driver.Url = "https://www.whatismybrowser.com/";           
+            
+            IWebDriver driver = new FirefoxDriver();           
+            driver = new EventFiringWebDriver(driver);
+            ((EventFiringWebDriver)driver).Navigated+= new EventHandler<WebDriverNavigationEventArgs>(EventFiringInstance_Navigated);
+            ((EventFiringWebDriver)driver).FindingElement += new EventHandler<FindElementEventArgs>(ClickEvent);
+            driver.Url = "http://www.google.com";
+            driver.FindElement(OpenQA.Selenium.By.Id("lst-ib"));        
             driver.Quit();
         }
-        [SetUp]
-        public void SetUp()
+        private void EventFiringInstance_Navigated(object sender, WebDriverNavigationEventArgs e)
         {
-            //DriverManager.StartWebBrowser((BrowserType.Browser)driverType);
-            DriverManager.StartDriver(_factory, _type);
-            driver = DriverManager.WebBrowserDriver;
+            Console.WriteLine(sender.ToString());
+            Console.WriteLine("Test: "+e.Url);       
         }
-        [TearDown]
-        public void TearDown()
+        private void ClickEvent(object sender, FindElementEventArgs e)
         {
-            DriverManager.CloseDriver();
+            Console.WriteLine(e.FindMethod.ToString());
         }
     }
 }

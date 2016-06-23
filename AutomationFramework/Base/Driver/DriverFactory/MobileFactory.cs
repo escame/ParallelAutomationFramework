@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace AutomationFrameWork.Driver.DriverFactory
 {
-    class MobileFactory : IFactory<BrowserType.Browser, AppiumDriver<AppiumWebElement>>
+    class MobileFactory : IFactory<Browser, AppiumDriver<AppiumWebElement>>
     {
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -14,9 +14,18 @@ namespace AutomationFrameWork.Driver.DriverFactory
         public int PageLoadTimeout { get; set; }
         public int ScriptTimeout { get; set; }
         public bool MaximizeBrowser { get; set; }
-
-        public BrowserType.Browser BrowserType { get; set; }
-        public MobileFactory(BrowserType.Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public Browser BrowserType { get; set; }
+        /// <summary>
+        /// This method is use for instance Mobile driver
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="driverServices"></param>
+        /// <param name="desiredCapabilities"></param>
+        /// <param name="commandTimeOut"></param>
+        /// <param name="pageLoadTimeout"></param>
+        /// <param name="scriptTimeout"></param>
+        /// <param name="isMaximize"></param>
+        public MobileFactory(Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             BrowserType = type;
             DriverServices = driverServices;
@@ -42,7 +51,7 @@ namespace AutomationFrameWork.Driver.DriverFactory
                 return (AppiumDriver<AppiumWebElement>)property.GetValue(instance, null);
             }
             else
-                throw new NotImplementedException("Browser " + BrowserType + " is not implemented");
+                throw new OperationCanceledException("MobileDriver for " + BrowserType + " is not implemented");
         }
     }
 }

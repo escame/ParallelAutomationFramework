@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AutomationFrameWork.Driver.Factory
 {
-    class PhantomJSBrowserFactory : IFactory<BrowserType.Browser, PhantomJSDriver>
+    class PhantomJSBrowserFactory : IFactory<Browser, PhantomJSDriver>
     {       
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -14,10 +14,19 @@ namespace AutomationFrameWork.Driver.Factory
         public int PageLoadTimeout { get; set; }
         public int ScriptTimeout { get; set; }
         public bool MaximizeBrowser { get; set; }
-
-        public BrowserType.Browser BrowserType { get; set; }
-
-        public PhantomJSBrowserFactory(BrowserType.Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public Browser BrowserType { get; set; }
+        /// <summary>
+        /// This method is used for instance phantomjsdriver
+        /// can use for headless browser testing or capture network traffic
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="driverServices"></param>
+        /// <param name="desiredCapabilities"></param>
+        /// <param name="commandTimeOut"></param>
+        /// <param name="pageLoadTimeout"></param>
+        /// <param name="scriptTimeout"></param>
+        /// <param name="isMaximize"></param>
+        public PhantomJSBrowserFactory(Browser type, object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
         {
             BrowserType = type;
             DriverServices = driverServices;
@@ -43,7 +52,7 @@ namespace AutomationFrameWork.Driver.Factory
                 return (PhantomJSDriver)property.GetValue(instance, null);
             }
             else
-                throw new NotImplementedException("Browser " + BrowserType + " is not implemented");
+                throw new OperationCanceledException("HeadlessBrowser for" + BrowserType + " is not implemented");
         }
     }
 }

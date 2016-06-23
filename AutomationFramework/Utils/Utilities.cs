@@ -99,7 +99,7 @@ namespace AutomationFrameWork.Utils
             path = path ?? Utilities.Instance.GetRelativePath("BaseImage\\");
             Directory.CreateDirectory(path);
             creationTime = creationTime.Equals(default(DateTime)) ? now : creationTime;
-            var screenshot = (DriverManager.WebBrowserDriver as ITakesScreenshot).GetScreenshot();                
+            var screenshot = (DriverManager<IWebDriver>.Driver as ITakesScreenshot).GetScreenshot();                
             using (MemoryStream stream = new MemoryStream(screenshot.AsByteArray))
             {
                 using (Bitmap bitmap = new Bitmap(stream))
