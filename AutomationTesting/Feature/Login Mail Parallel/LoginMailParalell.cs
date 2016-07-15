@@ -46,6 +46,7 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
             LoginPage.Instance.EnterPass("0934058877");
             LoginPage.Instance.ClickSignIn();
             LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com");
+            if(_driver==Browser.PhantomJSBrowser)
             Console.WriteLine(((OpenQA.Selenium.PhantomJS.PhantomJSDriver)DriverManager<IWebDriver>.Driver).Title);
         }
         [Test]      

@@ -59,7 +59,7 @@ namespace AutomationFrameWork.Driver
                 Object[] args = { type, driverServices, desiredCapabilities, commandTimeOut, pageLoadTimeout, scriptTimeout, isMaximize };
                 object instance = Activator.CreateInstance(foundClass, args);
                 Type classType = instance.GetType();
-                MethodInfo method = classType.GetMethod("GetDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
+                MethodInfo method = classType.GetMethod("GetDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance).MakeGenericMethod(new[] { typeof(DriverType)});
                 DriverStored = method.Invoke(instance, null);
             }
             else

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AutomationFrameWork.Driver.Factory
 {
-    class PhantomJSBrowserFactory : IFactory<Browser, PhantomJSDriver>
+    class PhantomJSBrowserFactory : IFactory
     {       
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -36,7 +36,7 @@ namespace AutomationFrameWork.Driver.Factory
             ScriptTimeout = scriptTimeout;
             MaximizeBrowser = isMaximize;
         }
-        public PhantomJSDriver GetDriver()
+        public PhantomJSDriver  GetDriver<PhantomJSDriver>()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
                      .Where(item => item.Namespace == Constants.HEADLESS_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase))

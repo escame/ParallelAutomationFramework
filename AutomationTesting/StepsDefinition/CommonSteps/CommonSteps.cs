@@ -30,6 +30,12 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
                 case "chrome":
                     DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory,Browser.ChromeDesktop);                
                     break;
+                case "firefox":
+                    DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.FirefoxDesktop);
+                    break;
+                case "ie":
+                    DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.InternetExplorerDesktop);
+                    break;
                 default:
                     throw new ArgumentException("Invalid browser name, please type 'Chrome' 'Firefox' 'IE' 'iPad' 'Phantomjs' 'Remote' 'Nexus6' 'iPhone6' 'iPhone5' 'iPhone4' for can start browser");
             }

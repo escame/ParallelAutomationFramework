@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 namespace AutomationFrameWork.Driver.Factory
 {
-    class WebBrowserFactory : IFactory<Browser, IWebDriver>
+    class WebBrowserFactory : IFactory
     {          
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -35,7 +35,7 @@ namespace AutomationFrameWork.Driver.Factory
             ScriptTimeout = scriptTimeout;
             MaximizeBrowser = isMaximize;           
         }
-        public IWebDriver GetDriver()
+        public IWebDriver GetDriver<IWebDriver>()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
                      .Where(item => item.Namespace == Constants.WEB_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase)) 

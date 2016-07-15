@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace AutomationFrameWork.Driver.DriverFactory
 {
-    class MobileFactory : IFactory<Browser, AppiumDriver<AppiumWebElement>>
+    class MobileFactory : IFactory
     {
         public object DesiredCapabilities { get; set; }
         public object DriverServices { get; set; }
@@ -35,7 +35,7 @@ namespace AutomationFrameWork.Driver.DriverFactory
             ScriptTimeout = scriptTimeout;
             MaximizeBrowser = isMaximize;
         }
-        public AppiumDriver<AppiumWebElement> GetDriver()
+        public AppiumDriver GetDriver<AppiumDriver>()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
                      .Where(item => item.Namespace == Constants.MOBILE_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase))
@@ -48,11 +48,11 @@ namespace AutomationFrameWork.Driver.DriverFactory
                 MethodInfo method = classType.GetMethod("StartDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
                 method.Invoke(instance, new object[] { DriverServices, DesiredCapabilities, CommandTimeout, PageLoadTimeout, ScriptTimeout, MaximizeBrowser });
                 PropertyInfo property = classType.GetProperty("Driver");
-                return (AppiumDriver<AppiumWebElement>)property.GetValue(instance, null);
+                return (AppiumDriver)property.GetValue(instance, null);
             }
             else
                 throw new OperationCanceledException("MobileDriver for " + BrowserType + " is not implemented");
-        }
+        }      
     }
 }
 

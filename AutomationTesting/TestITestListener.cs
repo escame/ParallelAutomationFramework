@@ -23,6 +23,7 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
+using AutomationFrameWork.Driver.Factory;
 
 namespace AutomationTesting
 {
@@ -146,6 +147,12 @@ namespace AutomationTesting
         private void ClickEvent(object sender, FindElementEventArgs e)
         {
             Console.WriteLine(e.FindMethod.ToString());
+        }
+        [Test]
+        [Category("TestListner")]
+        public void TestAddIn()
+        {
+           
         }
     }
 }

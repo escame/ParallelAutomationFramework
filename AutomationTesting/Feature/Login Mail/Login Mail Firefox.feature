@@ -1,11 +1,11 @@
-﻿Feature: Login Mail Firefox
+﻿Feature: Login Mail IE
 	In order to send mail
 	I want to be login to mail mail account
 
 	
 	
 Scenario: Login Mail Sucessfully
-	Given I start 'Firefox' browser to run
+	Given I start 'IE' browser to run
 	Given I have entered 'https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier' in browser
 	When I have entered 'specflowdemo@gmail.com' into the username
 	And I click on next button
@@ -15,13 +15,13 @@ Scenario: Login Mail Sucessfully
                                                           
 
 Scenario: Login mail with wrong user name
-	Given I start 'Firefox' browser to run
+	Given I start 'IE' browser to run
 	Given I have entered 'https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier' in browser
 	When I have entered 'specflowdemotestthisnotvaliduser@gmail.com' into the username
 	And I click on next button
 	Then The username error message display 'Sorry, Google doesn't recognize that email. '
 Scenario: Login mail with wrong pass
-	Given I start 'Firefox' browser to run
+	Given I start 'IE' browser to run
 	Given I have entered 'https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier' in browser
 	When I have entered 'specflowdemo@gmail.com' into the username
 	And I click on next button
