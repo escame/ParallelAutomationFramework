@@ -4,7 +4,7 @@ using System;
 using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class iPad : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class iPad : IDrivers<IWebDriver>
     {
 
         public iPad() { }
@@ -12,7 +12,7 @@ namespace AutomationFrameWork.Driver.WebDriver
         {
             get; set;
         }
-        public ChromeOptions DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -23,7 +23,7 @@ namespace AutomationFrameWork.Driver.WebDriver
             }
         }
 
-        public ChromeDriverService DriverServices
+        public object DriverServices
         {
             get
             {
@@ -34,21 +34,19 @@ namespace AutomationFrameWork.Driver.WebDriver
                 return serivces;
             }
         }
-
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = (ChromeOptions)desiredCapabilities;
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            var options = (ChromeOptions)configuration.DesiredCapabilities;
             options.AddArgument("--user-agent=Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/9.0 Mobile/10A5355d Safari/8536.25");
-            IWebDriver driver = new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
-            if (isMaximize)
+            IWebDriver driver = new ChromeDriver((ChromeDriverService)configuration.DriverServices, options, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
+            if (configuration.MaximizeBrowser)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }
-
 
     }
 }

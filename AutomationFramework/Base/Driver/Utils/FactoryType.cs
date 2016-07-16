@@ -10,7 +10,8 @@ namespace AutomationFrameWork.Driver
     {
         PhantomJSBrowserFactory,
         WebBrowserFactory,
-        MobileFactory
+        MobileFactory,
+        RemoteBrowserFactory
     }
 
 }

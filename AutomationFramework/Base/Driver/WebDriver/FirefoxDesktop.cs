@@ -6,14 +6,14 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class FirefoxDesktop : IDrivers<IWebDriver, FirefoxBinary, FirefoxProfile>
+    class FirefoxDesktop : IDrivers<IWebDriver>
     {
         public FirefoxDesktop() { }
         public IWebDriver Driver
         {
             get; set;
         }
-        public FirefoxProfile DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -26,7 +26,7 @@ namespace AutomationFrameWork.Driver.WebDriver
                 return profiles;
             }
         }
-        public FirefoxBinary DriverServices
+        public object DriverServices
         {
             get
             {
@@ -36,14 +36,14 @@ namespace AutomationFrameWork.Driver.WebDriver
             }
         }
 
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            IWebDriver driver = new FirefoxDriver((FirefoxBinary)driverServices, (FirefoxProfile)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
-            if (isMaximize)
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            IWebDriver driver = new FirefoxDriver((FirefoxBinary)configuration.DriverServices, (FirefoxProfile)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
+            if (configuration.MaximizeBrowser)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }

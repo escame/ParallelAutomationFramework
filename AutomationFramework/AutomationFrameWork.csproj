@@ -185,6 +185,7 @@
     <Compile Include="ActionKeywords\WebKeywords.cs" />
     <Compile Include="Base\Driver\Core\DriverManager.cs" />
     <Compile Include="Base\Driver\DriverFactory\MobileFactory.cs" />
+    <Compile Include="Base\Driver\DriverFactory\RemoteBrowserFactory.cs" />
     <Compile Include="Base\Driver\DriverFactory\PhantomJSBrowserFactory.cs" />
     <Compile Include="Base\Driver\DriverFactory\WebBrowserFactory.cs" />
     <Compile Include="Base\Driver\HeadlessDriver\PhantomJSBrowser.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Base\Driver\RemoteDriver\RemoteBrowser.cs" />
     <Compile Include="Base\Driver\Utils\BrowserType.cs" />
     <Compile Include="Base\Driver\Utils\Constants.cs" />
+    <Compile Include="Base\Driver\Utils\DriverConfiguration.cs" />
     <Compile Include="Base\Driver\Utils\FactoryType.cs" />
     <Compile Include="Base\Driver\WebDriver\ChromeDesktop.cs" />
     <Compile Include="Base\Driver\Interface\IDrivers.cs" />

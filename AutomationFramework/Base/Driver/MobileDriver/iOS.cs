@@ -8,13 +8,13 @@ using OpenQA.Selenium.Appium.Enums;
 
 namespace AutomationFrameWork.Driver.MobileDriver
 {
-    class iOS : IDrivers<IOSDriver<AppiumWebElement>, AppiumServiceBuilder, DesiredCapabilities>
+    class iOS : IDrivers<IOSDriver<AppiumWebElement>>
     {
         public IOSDriver<AppiumWebElement> Driver
         {
             get; set;
         }
-        public DesiredCapabilities DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -25,7 +25,7 @@ namespace AutomationFrameWork.Driver.MobileDriver
             }
         }
 
-        public AppiumServiceBuilder DriverServices
+        public object DriverServices
         {
             get
             {
@@ -36,13 +36,13 @@ namespace AutomationFrameWork.Driver.MobileDriver
             }
         }
 
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            IOSDriver<AppiumWebElement> driver = new IOSDriver<AppiumWebElement>((AppiumServiceBuilder)driverServices, (DesiredCapabilities)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            IOSDriver<AppiumWebElement> driver = new IOSDriver<AppiumWebElement>((AppiumServiceBuilder)configuration.DriverServices, (DesiredCapabilities)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
             Driver = driver;
         }
     }

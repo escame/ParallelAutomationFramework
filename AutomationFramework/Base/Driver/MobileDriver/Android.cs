@@ -8,24 +8,24 @@ using System;
 
 namespace AutomationFrameWork.Driver.MobileDriver
 {
-    class Android : IDrivers<AndroidDriver<AppiumWebElement>, AppiumServiceBuilder, DesiredCapabilities>
+    class Android : IDrivers<AndroidDriver<AppiumWebElement>>
     {
         public AndroidDriver<AppiumWebElement> Driver
         {
             get; set;
         }
-        public DesiredCapabilities DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
-                DesiredCapabilities capabilities = DesiredCapabilities.Android();
+                DesiredCapabilities capabilities = OpenQA.Selenium.Remote.DesiredCapabilities.Android();
                 capabilities.SetCapability("browserName", MobileBrowserType.Chrome);
                 capabilities.SetCapability("deviceName", "Android");
                 return capabilities;
             }
         }     
 
-        public AppiumServiceBuilder DriverServices
+        public object DriverServices
         {
             get
             {
@@ -36,13 +36,13 @@ namespace AutomationFrameWork.Driver.MobileDriver
             }
         }
 
-        public void StartDriver(object driverServices = null, object desiredCapabilities=null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            AndroidDriver<AppiumWebElement> driver = new AndroidDriver<AppiumWebElement>((AppiumServiceBuilder)driverServices, (DesiredCapabilities)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            AndroidDriver<AppiumWebElement> driver = new AndroidDriver<AppiumWebElement>((AppiumServiceBuilder)configuration.DriverServices, (DesiredCapabilities)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
             Driver = driver;
         }
     }

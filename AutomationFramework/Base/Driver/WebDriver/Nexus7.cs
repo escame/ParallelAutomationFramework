@@ -5,14 +5,14 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class Nexus7 : IDrivers<IWebDriver, ChromeDriverService, ChromeOptions>
+    class Nexus7 : IDrivers<IWebDriver>
     {
         public Nexus7() { }
         public IWebDriver Driver
         {
             get; set;
         }
-        public ChromeOptions DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -23,7 +23,7 @@ namespace AutomationFrameWork.Driver.WebDriver
             }
         }
 
-        public ChromeDriverService DriverServices
+        public object DriverServices
         {
             get
             {
@@ -33,18 +33,17 @@ namespace AutomationFrameWork.Driver.WebDriver
                 serivces.SuppressInitialDiagnosticInformation = false;
                 return serivces;
             }
-        }
-
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        }      
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            var options = (ChromeOptions)desiredCapabilities;
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            var options = (ChromeOptions)configuration.DesiredCapabilities;
             options.EnableMobileEmulation("Google Nexus 7");
-            IWebDriver driver = new ChromeDriver((ChromeDriverService)driverServices, options, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
-            if (isMaximize)
+            IWebDriver driver = new ChromeDriver((ChromeDriverService)configuration.DriverServices, options, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
+            if (configuration.MaximizeBrowser)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }

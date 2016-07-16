@@ -5,14 +5,14 @@ using OpenQA.Selenium;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class InternetExplorerDesktop : IDrivers<IWebDriver, InternetExplorerDriverService, InternetExplorerOptions>
+    class InternetExplorerDesktop : IDrivers<IWebDriver>
     {
         public InternetExplorerDesktop() { }
         public IWebDriver Driver
         {
             get; set;
         }
-        public InternetExplorerOptions DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -30,7 +30,7 @@ namespace AutomationFrameWork.Driver.WebDriver
             }
         }
 
-        public InternetExplorerDriverService DriverServices
+        public object DriverServices
         {
             get
             {
@@ -42,17 +42,16 @@ namespace AutomationFrameWork.Driver.WebDriver
             }
         }
 
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            IWebDriver driver = new InternetExplorerDriver((InternetExplorerDriverService)driverServices, (InternetExplorerOptions)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
-            if (isMaximize)
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            IWebDriver driver = new InternetExplorerDriver((InternetExplorerDriverService)configuration.DriverServices, (InternetExplorerOptions)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
+            if (configuration.MaximizeBrowser)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }
-
     }
 }

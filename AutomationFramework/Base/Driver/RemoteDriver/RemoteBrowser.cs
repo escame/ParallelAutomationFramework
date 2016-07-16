@@ -4,11 +4,11 @@ using AutomationFrameWork.Driver.Interface;
 
 namespace AutomationFrameWork.Driver.RemoteDriver
 {
-    class RemoteBrowser : IDrivers<RemoteWebDriver, Uri, DesiredCapabilities>
+    class RemoteBrowser : IDrivers<RemoteWebDriver>
     {
         public RemoteBrowser() { }
         public RemoteWebDriver Driver { get; set; }
-        public DesiredCapabilities DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -17,7 +17,7 @@ namespace AutomationFrameWork.Driver.RemoteDriver
             }
         }
 
-        public Uri DriverServices
+        public object DriverServices
         {
             get
             {
@@ -25,13 +25,13 @@ namespace AutomationFrameWork.Driver.RemoteDriver
             }
         }
 
-        public void StartDriver(object driverServices, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuarion)
         {
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            RemoteWebDriver driver = new RemoteWebDriver((Uri)driverServices, (DesiredCapabilities)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(pageLoadTimeout));
-            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(scriptTimeout));
-            if (isMaximize)
+            configuarion.DesiredCapabilities = configuarion.DesiredCapabilities ?? DesiredCapabilities;
+            RemoteWebDriver driver = new RemoteWebDriver(configuarion.RemoteUri, (DesiredCapabilities)configuarion.DesiredCapabilities, TimeSpan.FromSeconds(configuarion.CommandTimeout));
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuarion.PageLoadTimeout));
+            driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuarion.ScriptTimeout));
+            if (configuarion.MaximizeBrowser)
                 driver.Manage().Window.Maximize();
             Driver = driver;
         }

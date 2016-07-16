@@ -3,11 +3,11 @@ using OpenQA.Selenium.PhantomJS;
 using AutomationFrameWork.Driver.Interface;
 namespace AutomationFrameWork.Driver.HeadlessDriver
 {
-    class PhantomJSBrowser : IDrivers<PhantomJSDriver, PhantomJSDriverService, PhantomJSOptions>
+    class PhantomJSBrowser : IDrivers<PhantomJSDriver>
     {
         public PhantomJSBrowser() { }
         public PhantomJSDriver Driver { get; set; }
-        public PhantomJSOptions DesiredCapabilities
+        public object DesiredCapabilities
         {
             get
             {
@@ -16,7 +16,7 @@ namespace AutomationFrameWork.Driver.HeadlessDriver
             }
         }
 
-        public PhantomJSDriverService DriverServices
+        public object DriverServices
         {
             get
             {
@@ -29,11 +29,11 @@ namespace AutomationFrameWork.Driver.HeadlessDriver
             }
         }
 
-        public void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false)
+        public void StartDriver(DriverConfiguration configuration)
         {
-            driverServices = driverServices ?? DriverServices;
-            desiredCapabilities = desiredCapabilities ?? DesiredCapabilities;
-            Driver= new PhantomJSDriver((PhantomJSDriverService)driverServices, (PhantomJSOptions)desiredCapabilities, TimeSpan.FromSeconds(commandTimeOut));
+            configuration.DriverServices = configuration.DriverServices ?? DriverServices;
+            configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
+            Driver= new PhantomJSDriver((PhantomJSDriverService)configuration.DriverServices, (PhantomJSOptions)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
         }       
     }
 }

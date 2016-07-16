@@ -1,10 +1,10 @@
 ﻿namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IDrivers<Drivers,Services, Options>
+    public interface IDrivers<Drivers>
     {
-        void StartDriver(object driverServices = null, object desiredCapabilities = null, int commandTimeOut = 60, int pageLoadTimeout = 60, int scriptTimeout = 60, bool isMaximize = false);
+        void StartDriver(DriverConfiguration configuration);
         Drivers Driver { get; set; }
-        Services DriverServices { get; }
-        Options DesiredCapabilities { get; }
-    }
+        object DriverServices { get; }
+        object DesiredCapabilities { get; }
+    }    
 }
