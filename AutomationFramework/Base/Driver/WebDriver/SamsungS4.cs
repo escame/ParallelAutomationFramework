@@ -5,10 +5,10 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class SamsungS4 : IDrivers<IWebDriver>
+    class SamsungS4 : IDrivers
     {
         public SamsungS4() { }
-        public IWebDriver Driver { get; set; }
+        public object Driver { get; set; }
         public object DesiredCapabilities
         {
             get

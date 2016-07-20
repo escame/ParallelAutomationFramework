@@ -4,10 +4,10 @@ using AutomationFrameWork.Driver.Interface;
 
 namespace AutomationFrameWork.Driver.RemoteDriver
 {
-    class RemoteBrowser : IDrivers<RemoteWebDriver>
+    class RemoteBrowser : IDrivers
     {
         public RemoteBrowser() { }
-        public RemoteWebDriver Driver { get; set; }
+        public object Driver { get; set; }
         public object DesiredCapabilities
         {
             get

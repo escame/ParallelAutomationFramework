@@ -8,9 +8,9 @@ using OpenQA.Selenium.Appium.Enums;
 
 namespace AutomationFrameWork.Driver.MobileDriver
 {
-    class iOS : IDrivers<IOSDriver<AppiumWebElement>>
+    class iOS : IDrivers
     {
-        public IOSDriver<AppiumWebElement> Driver
+        public object Driver
         {
             get; set;
         }

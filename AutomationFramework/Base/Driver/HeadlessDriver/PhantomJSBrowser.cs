@@ -3,10 +3,10 @@ using OpenQA.Selenium.PhantomJS;
 using AutomationFrameWork.Driver.Interface;
 namespace AutomationFrameWork.Driver.HeadlessDriver
 {
-    class PhantomJSBrowser : IDrivers<PhantomJSDriver>
+    class PhantomJSBrowser : IDrivers
     {
         public PhantomJSBrowser() { }
-        public PhantomJSDriver Driver { get; set; }
+        public object Driver { get; set; }
         public object DesiredCapabilities
         {
             get

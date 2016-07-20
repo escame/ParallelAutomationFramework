@@ -4,11 +4,11 @@ using System;
 using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class iPad : IDrivers<IWebDriver>
+    class iPad : IDrivers
     {
 
         public iPad() { }
-        public IWebDriver Driver
+        public object Driver
         {
             get; set;
         }

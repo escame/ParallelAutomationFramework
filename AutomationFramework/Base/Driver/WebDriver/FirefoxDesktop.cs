@@ -6,10 +6,10 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class FirefoxDesktop : IDrivers<IWebDriver>
+    class FirefoxDesktop : IDrivers
     {
         public FirefoxDesktop() { }
-        public IWebDriver Driver
+        public object Driver
         {
             get; set;
         }

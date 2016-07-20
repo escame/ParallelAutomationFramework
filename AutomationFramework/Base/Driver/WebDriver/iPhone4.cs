@@ -4,11 +4,11 @@ using System;
 using OpenQA.Selenium;
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class iPhone4 : IDrivers<IWebDriver>
+    class iPhone4 : IDrivers
     {
 
         public iPhone4() { }
-        public IWebDriver Driver { get; set; }
+        public object Driver { get; set; }
         public object DesiredCapabilities
         {
             get

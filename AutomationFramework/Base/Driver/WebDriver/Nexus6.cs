@@ -5,10 +5,10 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class Nexus6 : IDrivers<IWebDriver>
+    class Nexus6 : IDrivers
     {
         public Nexus6() { }
-        public IWebDriver Driver
+        public object Driver
         {
             get; set;
         }

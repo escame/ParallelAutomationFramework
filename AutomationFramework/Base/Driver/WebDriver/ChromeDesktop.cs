@@ -5,10 +5,10 @@ using OpenQA.Selenium;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class ChromeDesktop : IDrivers<IWebDriver>
+    class ChromeDesktop : IDrivers
     {
         public ChromeDesktop() { }
-        public IWebDriver Driver
+        public object Driver
         {
             get; set;
         }

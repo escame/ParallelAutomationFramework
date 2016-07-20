@@ -12,13 +12,12 @@ namespace AutomationFrameWork.Driver
         private static ThreadLocal<object> _driverStored = new ThreadLocal<object>();
         /// <summary>
         /// This method return driver base on generic TypeofDriver
-        /// Ex: DriverManger<IWebDriver> will return IWebDriver
-        /// DriverManager<PhantomJSDriver> will return PhantomJSDriver
+        /// Ex: GetDriver<IWebDriver> will return IWebDriver
+        /// GetDriver<PhantomJSDriver> will return PhantomJSDriver
         /// </summary>        
         public static TypeTest GetDriver<TypeTest>() 
         {
             return (TypeTest)DriverStored;
-
         }
         /// <summary>
         /// This is use for stored driver 

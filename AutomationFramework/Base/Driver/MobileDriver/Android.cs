@@ -8,9 +8,9 @@ using System;
 
 namespace AutomationFrameWork.Driver.MobileDriver
 {
-    class Android : IDrivers<AndroidDriver<AppiumWebElement>>
+    class Android : IDrivers
     {
-        public AndroidDriver<AppiumWebElement> Driver
+        public object Driver
         {
             get; set;
         }

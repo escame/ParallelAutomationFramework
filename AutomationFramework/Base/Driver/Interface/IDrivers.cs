@@ -1,9 +1,9 @@
 ﻿namespace AutomationFrameWork.Driver.Interface
 {
-    public interface IDrivers<Drivers>
+    public interface IDrivers
     {
         void StartDriver(DriverConfiguration configuration);
-        Drivers Driver { get; set; }
+        object Driver { get; set; }
         object DriverServices { get; }
         object DesiredCapabilities { get; }
     }    

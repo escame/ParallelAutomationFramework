@@ -5,10 +5,10 @@ using System;
 
 namespace AutomationFrameWork.Driver.WebDriver
 {
-    class iPhone5 : IDrivers<IWebDriver>
+    class iPhone5 : IDrivers
     {
         public iPhone5() { }
-        public IWebDriver Driver { get; set; }
+        public object Driver { get; set; }
         public object DesiredCapabilities
         {
             get
