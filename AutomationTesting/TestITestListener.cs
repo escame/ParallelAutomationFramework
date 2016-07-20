@@ -55,14 +55,14 @@ namespace AutomationTesting
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
             //DriverFactory.Instance.DriverOption = op;          
-            DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.ChromeDesktop);
-            IWebDriver driver = DriverManager<IWebDriver>.Driver;
+            DriverManager.StartDriver(FactoryType.WebBrowserFactory, Browser.ChromeDesktop);
+            IWebDriver driver = DriverManager.GetDriver<IWebDriver>();
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));
             WebKeywords.Instance.GetScreenShot();
             Utilities.Instance.GetWebElementBaseImage(el, formatType: System.Drawing.Imaging.ImageFormat.Jpeg);
             driver.Dispose();
-            DriverManager<IWebDriver>.CloseDriver();
+            DriverManager.CloseDriver();
         }
         [Category("TestReportTemplate")]
         [Test]
@@ -152,7 +152,8 @@ namespace AutomationTesting
         [Category("TestListner")]
         public void TestAddIn()
         {
-           
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
+            Assert.True(POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(),POM.TestFramework.TestFrameworkAction.Instance.Message);
         }
     }
 }

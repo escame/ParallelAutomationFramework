@@ -209,11 +209,11 @@
     <Compile Include="Base\Driver\WebDriver\Nexus6.cs" />
     <Compile Include="Base\Driver\WebDriver\SamsungS4.cs" />
     <Compile Include="Base\Exception\StepErrorException.cs" />
-    <Compile Include="Base\Page\BasePageInstance.cs" />
-    <Compile Include="Base\Page\BasePageMobile.cs" />
-    <Compile Include="Base\Page\BasePageWeb.cs" />
-    <Compile Include="Base\Element\BaseMobileElements.cs" />
-    <Compile Include="Base\Element\BaseWebElements.cs" />
+    <Compile Include="Base\PageObjectModel\PageAction\BasePageInstance.cs" />
+    <Compile Include="Base\PageObjectModel\PageAction\BasePageMobile.cs" />
+    <Compile Include="Base\PageObjectModel\PageAction\BasePageWeb.cs" />
+    <Compile Include="Base\PageObjectModel\PageElement\BaseMobileElements.cs" />
+    <Compile Include="Base\PageObjectModel\PageElement\BaseWebElements.cs" />
     <Compile Include="Base\Reporter\Main\Report.cs" />
     <Compile Include="Base\Reporter\ReportAttributes\EventNotification.cs" />
     <Compile Include="Base\Reporter\ReportAttributes\HTML.cs" />
@@ -280,8 +280,8 @@
     <Compile Include="Base\Reporter\ReportElements\HtmlCustomElements\ReportMenuItem.cs" />
     <Compile Include="Base\Reporter\ReportElements\HtmlCustomElements\SectionName.cs" />
     <Compile Include="Base\Reporter\ReportElements\HtmlCustomElements\Tooltip.cs" />
-    <Compile Include="Base\Validation\BaseMobileValidation.cs" />
-    <Compile Include="Base\Validation\BaseWebValidation.cs" />
+    <Compile Include="Base\PageObjectModel\PageValidation\BaseMobileValidation.cs" />
+    <Compile Include="Base\PageObjectModel\PageValidation\BaseWebValidation.cs" />
     <Compile Include="Helper\ReportHelper.cs" />
     <Compile Include="Helper\ReportTestHelper.cs" />
     <Compile Include="Helper\TestSuiteReportHelper.cs" />

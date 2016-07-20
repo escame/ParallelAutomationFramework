@@ -11,7 +11,7 @@ namespace AutomationFrameWork.Base
         protected AppiumDriver<AppiumWebElement> MobileDriver;        
         public BaseMobileElements ()
         {
-            this.MobileDriver = DriverManager<AppiumDriver<AppiumWebElement>>.Driver;
+            this.MobileDriver = DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>();
         }
     }
 }

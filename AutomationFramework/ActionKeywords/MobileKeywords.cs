@@ -21,33 +21,33 @@ namespace AutomationFrameWork.ActionsKeys
         }
         public void ScroolToClick (string text)
         {
-            DriverManager<AppiumDriver<AppiumWebElement>>.Driver.ScrollToExact(text).Click();
+            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().ScrollToExact(text).Click();
         }
         public AppiumWebElement FindElementByAndroidUIAutomator(string value)
         {            
-            var _AndroidDriver = DriverManager<AndroidDriver<AppiumWebElement>>.Driver;   
+            var _AndroidDriver = DriverManager.GetDriver<AndroidDriver<AppiumWebElement>>();   
             return _AndroidDriver.FindElementByAndroidUIAutomator(value);
         }
         public AppiumWebElement FindElementByIosUIAutomation(string value)
         {            
-            var _IOsDriver = DriverManager<IOSDriver<AppiumWebElement>>.Driver;           
+            var _IOsDriver = DriverManager.GetDriver<IOSDriver<AppiumWebElement>>();           
             return _IOsDriver.FindElementByIosUIAutomation(value);
         }
         public void Swipe(int startX, int startY, int endX, int endY, int duration)
         {
-            DriverManager<AppiumDriver<AppiumWebElement>>.Driver.Swipe(startX, startY, endX, endY, duration);
+            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().Swipe(startX, startY, endX, endY, duration);
         }
         public void SwipeInVertical(int startY, int endY, int duration)
         {
-            DriverManager<AppiumDriver<AppiumWebElement>>.Driver.Swipe(0, startY, 0, endY, duration);
+            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().Swipe(0, startY, 0, endY, duration);
         }
         public void SwipeInHorizontal(int startX, int endX, int duration)
         {
-            DriverManager<AppiumDriver<AppiumWebElement>>.Driver.Swipe(startX, 0, endX, 0, duration);
+            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().Swipe(startX, 0, endX, 0, duration);
         }
         public void SwipeToElement(AppiumWebElement elementFrom,AppiumWebElement elementTo,int duration)
         {
-            DriverManager<AppiumDriver<AppiumWebElement>>.Driver.Swipe(elementFrom.Location.X,elementFrom.Location.Y,elementTo.LocationOnScreenOnceScrolledIntoView.X,elementTo.LocationOnScreenOnceScrolledIntoView.X,duration);
+            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().Swipe(elementFrom.Location.X,elementFrom.Location.Y,elementTo.LocationOnScreenOnceScrolledIntoView.X,elementTo.LocationOnScreenOnceScrolledIntoView.X,duration);
         }
     }
 }

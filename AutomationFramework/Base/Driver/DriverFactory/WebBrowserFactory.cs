@@ -21,7 +21,7 @@ namespace AutomationFrameWork.Driver.Factory
             BrowserType = type;
             Configuration = configuration;         
         }
-        public IWebDriver GetDriver<IWebDriver>()
+        public object GetDriver()
         {
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
                      .Where(item => item.Namespace == Constants.WEB_DRIVER_NAME_SPACE && item.Name.Equals(BrowserType.ToString(), StringComparison.OrdinalIgnoreCase)) 
@@ -34,7 +34,7 @@ namespace AutomationFrameWork.Driver.Factory
                 MethodInfo method = classType.GetMethod("StartDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
                 method.Invoke(instance, new object[] { Configuration });
                 PropertyInfo property = classType.GetProperty("Driver");
-                return (IWebDriver)property.GetValue(instance, null);               
+                return property.GetValue(instance, null);               
             }
             else
                 throw new OperationCanceledException("WebBrowser for"+BrowserType +" is not implemented");

@@ -34,7 +34,7 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         [SetUp]
         public void SetUp ()
         {
-            DriverManager<IWebDriver>.StartDriver(_type,_driver);
+            DriverManager.StartDriver(_type,_driver);
         }
         [Test]     
         [Category("SearchGoogle")]
@@ -47,7 +47,7 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
             LoginPage.Instance.ClickSignIn();
             LoginPage.Instance.Verify().ValidateLoginSucesfully("specflowdemo@gmail.com");
             if(_driver==Browser.PhantomJSBrowser)
-            Console.WriteLine(((OpenQA.Selenium.PhantomJS.PhantomJSDriver)DriverManager<IWebDriver>.Driver).Title);
+            Console.WriteLine(((OpenQA.Selenium.PhantomJS.PhantomJSDriver)DriverManager.GetDriver<IWebDriver>()).Title);
         }
         [Test]      
         [Category("SearchGoogle")]
@@ -75,9 +75,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-             WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+             WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -85,9 +85,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -95,9 +95,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -105,9 +105,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")] 
         [Category("SearchGoogle")]
@@ -115,9 +115,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]   
         [Category("SearchGoogle")]
@@ -125,9 +125,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]  
         [Category("SearchGoogle")]
@@ -135,9 +135,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -145,9 +145,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -155,9 +155,9 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [Test, TestCaseSource("GetTestData")]
         [Category("SearchGoogle")]
@@ -165,14 +165,14 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
         {
             WebKeywords.Instance.Navigate("https://google.com");
             if (_driver != Browser.iPhone4)
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("lst-ib")), search);
             else
-                WebKeywords.Instance.SetText(DriverManager<IWebDriver>.Driver.FindElement(OpenQA.Selenium.By.Id("mib")), search);
+                WebKeywords.Instance.SetText(DriverManager.GetDriver<IWebDriver>().FindElement(OpenQA.Selenium.By.Id("mib")), search);
         }
         [TearDown]
         public void TearDown ()
         {
-            DriverManager<IWebDriver>.CloseDriver();
+            DriverManager.CloseDriver();
         }
 
         private static IEnumerable<String> GetTestData ()

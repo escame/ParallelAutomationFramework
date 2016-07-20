@@ -4,6 +4,6 @@
     {       
         DriverConfiguration Configuration { get; set; }
         Browser BrowserType { get; set; }
-        Driver GetDriver<Driver>();     
+        object GetDriver();     
     }  
 }

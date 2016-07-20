@@ -28,13 +28,13 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
             switch (browser.ToLower())
             {
                 case "chrome":
-                    DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory,Browser.ChromeDesktop);                
+                    DriverManager.StartDriver(FactoryType.WebBrowserFactory,Browser.ChromeDesktop);                
                     break;
                 case "firefox":
-                    DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.FirefoxDesktop);
+                    DriverManager.StartDriver(FactoryType.WebBrowserFactory, Browser.FirefoxDesktop);
                     break;
                 case "ie":
-                    DriverManager<IWebDriver>.StartDriver(FactoryType.WebBrowserFactory, Browser.InternetExplorerDesktop);
+                    DriverManager.StartDriver(FactoryType.WebBrowserFactory, Browser.InternetExplorerDesktop);
                     break;
                 default:
                     throw new ArgumentException("Invalid browser name, please type 'Chrome' 'Firefox' 'IE' 'iPad' 'Phantomjs' 'Remote' 'Nexus6' 'iPhone6' 'iPhone5' 'iPhone4' for can start browser");
@@ -109,7 +109,7 @@ namespace AutomationTesting.StepsDefinition.CommonSteps
         public void cleanUp ()
         {
             Console.WriteLine("Stop run test....");
-            DriverManager<IWebDriver>.CloseDriver();
+            DriverManager.CloseDriver();
         }
 
     }

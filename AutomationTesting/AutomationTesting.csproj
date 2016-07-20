@@ -123,6 +123,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Feature\Demo Network Sniffer\NetworkSniffer.cs" />
     <Compile Include="Feature\Login Mail Mobile\LoginMailInMobile.cs" />
     <Compile Include="Feature\Login Mail Parallel\LoginMailParalell.cs" />
     <Compile Include="Feature\Login Mail\Login Mail Chrome.feature.cs">
@@ -138,6 +139,9 @@
     <Compile Include="POM\HomePage\LoginElement.cs" />
     <Compile Include="POM\HomePage\LoginPage.cs" />
     <Compile Include="POM\HomePage\LoginValidate .cs" />
+    <Compile Include="POM\TestFramework\TestFrameworkAction.cs" />
+    <Compile Include="POM\TestFramework\TestFrameworkElement.cs" />
+    <Compile Include="POM\TestFramework\TestFrameworkValidate.cs" />
     <Compile Include="StepsDefinition\CommonSteps\CommonSteps.cs" />
     <Compile Include="StepsDefinition\LoginSteps\LoginSteps.cs" />
     <Compile Include="TestITestListener.cs" />
@@ -176,6 +180,7 @@
       <Link>phantomjs.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Feature\Demo Network Sniffer\netlog.js" />
     <Content Include="ReportConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

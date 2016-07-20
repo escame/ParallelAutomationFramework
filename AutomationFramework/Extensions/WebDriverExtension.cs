@@ -18,13 +18,13 @@ namespace AutomationFrameWork.Driver
             try
             {
                 
-                DriverManager<IWebDriver>.Driver.JavaScript().ExecuteScript("arguments[0].scrollIntoView();", element);
+               DriverManager.GetDriver<IWebDriver>().JavaScript().ExecuteScript("arguments[0].scrollIntoView();", element);
                 element.Click();
             }
             catch (WebDriverException)
             {
-                DriverManager<IWebDriver>.Driver.JavaScript().ExecuteScript("window.scrollTo(0, 0);");
-                DriverManager<IWebDriver>.Driver.JavaScript().ExecuteScript("arguments[0].scrollIntoView();", element);
+               DriverManager.GetDriver<IWebDriver>().JavaScript().ExecuteScript("window.scrollTo(0, 0);");
+               DriverManager.GetDriver<IWebDriver>().JavaScript().ExecuteScript("arguments[0].scrollIntoView();", element);
                 element.Click();
             }
         }

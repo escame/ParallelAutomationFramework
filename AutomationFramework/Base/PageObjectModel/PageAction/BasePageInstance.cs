@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AutomationFrameWork.Base
 {
-    public abstract class PageInstance<T> 
-    where T : new()
+    public abstract class PageInstance<PageObject> 
+    where PageObject : new()
     {
-        private static readonly Lazy<T> _instance = new Lazy<T>(() => new T());
+        private static readonly Lazy<PageObject> _instance = new Lazy<PageObject>(() => new PageObject());
 
-        public static T Instance
+        public static PageObject Instance
         {
             get
             {

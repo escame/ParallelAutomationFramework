@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace AutomationFrameWork.Driver
 {
-    public static class DriverManager<DriverType>
+    public static class DriverManager
     {
         private static ThreadLocal<object> _driverStored = new ThreadLocal<object>();
         /// <summary>
         /// This method return driver base on generic TypeofDriver
         /// Ex: DriverManger<IWebDriver> will return IWebDriver
         /// DriverManager<PhantomJSDriver> will return PhantomJSDriver
-        /// </summary>
-        public static DriverType Driver
+        /// </summary>        
+        public static TypeTest GetDriver<TypeTest>() 
         {
-            get
-            { return (DriverType)DriverStored; }
+            return (TypeTest)DriverStored;
+
         }
         /// <summary>
         /// This is use for stored driver 
@@ -55,7 +55,7 @@ namespace AutomationFrameWork.Driver
                 Object[] args = { type, driverConfiguaration };
                 object instance = Activator.CreateInstance(foundClass, args);
                 Type classType = instance.GetType();
-                MethodInfo method = classType.GetMethod("GetDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance).MakeGenericMethod(new[] { typeof(DriverType)});
+                MethodInfo method = classType.GetMethod("GetDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
                 DriverStored = method.Invoke(instance, null);
             }
             else
