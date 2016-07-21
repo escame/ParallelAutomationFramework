@@ -25,6 +25,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
 using AutomationFrameWork.Driver.Factory;
 
+
 namespace AutomationTesting
 {
     [TestFixture(Browser.ChromeDesktop,FactoryType.WebBrowserFactory)]
@@ -150,10 +151,37 @@ namespace AutomationTesting
         }
         [Test]
         [Category("TestListner")]
-        public void TestAddIn()
+        public void TestAddInFailed()
         {
             POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
             Assert.True(POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(),POM.TestFramework.TestFrameworkAction.Instance.Message);
+            
+        }
+        [Test]
+        [Category("TestListner")]
+        public void TestAddInIgnore()
+        {
+            throw new IgnoreException("Ignore");
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
+            Assert.True(POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(), POM.TestFramework.TestFrameworkAction.Instance.Message);
+
+        }
+        [Test]
+        [Category("TestListner")]
+        public void TestAddInPass()
+        {
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
+            Assert.True(!POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(), POM.TestFramework.TestFrameworkAction.Instance.Message);
+
+        }
+        [Test]
+        [Category("TestListner")]
+        [Explicit("Explicit Test")]
+        public void TestAddInExplicit()
+        {
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
+            Assert.True(!POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(), POM.TestFramework.TestFrameworkAction.Instance.Message);
+
         }
     }
 }
