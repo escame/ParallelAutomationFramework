@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using AutomationFrameWork.Driver.Interface;
 using OpenQA.Selenium;
 
-namespace AutomationFrameWork.Driver.WebDriver
+namespace AutomationFrameWork.Driver
 {
     class ChromeDesktop : IDrivers
     {

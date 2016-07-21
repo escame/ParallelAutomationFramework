@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 
-namespace AutomationFrameWork.Driver.WebDriver
+namespace AutomationFrameWork.Driver
 {
     class iPhone5 : IDrivers
     {

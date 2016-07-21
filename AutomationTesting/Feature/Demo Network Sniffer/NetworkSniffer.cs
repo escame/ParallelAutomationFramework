@@ -18,7 +18,7 @@ namespace AutomationTesting.DemoPhantomJS
             services.LogFile = "D:\\AutomationReport\\Log.txt";
             configuration.DriverServices = services;
             configuration.DesiredCapabilities = options;
-            DriverManager.StartDriver(FactoryType.PhantomJSBrowserFactory, Browser.PhantomJSBrowser,configuration);
+            DriverManager.StartDriver(Browser.PhantomJSBrowser,configuration);
         }
         [Test,Description("Demo PhantomJS"),Category("Demo Network Sniffer")]
         public void DemoNetworkSniffer()

@@ -23,30 +23,27 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
-using AutomationFrameWork.Driver.Factory;
 
 
 namespace AutomationTesting
 {
-    [TestFixture(Browser.ChromeDesktop,FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPad,FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.FirefoxDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.InternetExplorerDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone4, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone5, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone6, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.Nexus6, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.Nexus7, FactoryType.WebBrowserFactory)]
+    [TestFixture(Browser.ChromeDesktop)]
+    [TestFixture(Browser.iPad)]
+    [TestFixture(Browser.FirefoxDesktop)]
+    [TestFixture(Browser.InternetExplorerDesktop)]
+    [TestFixture(Browser.iPhone4)]
+    [TestFixture(Browser.iPhone5)]
+    [TestFixture(Browser.iPhone6)]
+    [TestFixture(Browser.Nexus6)]
+    [TestFixture(Browser.Nexus7)]
     [Parallelizable(ParallelScope.Self)]
     public class TestITestListener
     {
-        public TestITestListener(Browser browserType,FactoryType factoryType)
+        public TestITestListener(Browser browserType)
         {
-            _type = browserType;
-            _factory = factoryType;
+            _type = browserType;            
         }
-        Browser _type;
-        FactoryType _factory;
+        Browser _type;        
         object driverType;
         IWebDriver driver;       
         [Category("Capture Element Image")]
@@ -56,7 +53,7 @@ namespace AutomationTesting
             ChromeOptions op = new ChromeOptions();
             op.EnableMobileEmulation("Apple iPhone 4");
             //DriverFactory.Instance.DriverOption = op;          
-            DriverManager.StartDriver(FactoryType.WebBrowserFactory, Browser.ChromeDesktop);
+            DriverManager.StartDriver(Browser.ChromeDesktop);
             IWebDriver driver = DriverManager.GetDriver<IWebDriver>();
             driver.Url = "https://www.whatismybrowser.com/";
             IWebElement el = driver.FindElement(By.XPath("//*[@id='holder']//*[@class='detection-primary content-block']"));

@@ -15,10 +15,11 @@ namespace AutomationFrameWork.Driver
         /// Ex: GetDriver<IWebDriver> will return IWebDriver
         /// GetDriver<PhantomJSDriver> will return PhantomJSDriver
         /// </summary>        
-        public static TypeTest GetDriver<TypeTest>() 
+        public static DriverType GetDriver<DriverType>()
         {
-            return (TypeTest)DriverStored;
+            return (DriverType)DriverStored;
         }
+
         /// <summary>
         /// This is use for stored driver 
         /// when running in paralell in single machine
@@ -42,23 +43,24 @@ namespace AutomationFrameWork.Driver
         /// <param name="factoryType"></param>
         /// <param name="type"></param>
         /// <param name="configuaration"></param>     
-        public static void StartDriver(FactoryType factoryType, Browser type, DriverConfiguration driverConfiguaration = null)
+        public static void StartDriver(Browser type, DriverConfiguration driverConfiguaration = null)
         {
             driverConfiguaration = driverConfiguaration ?? new DriverConfiguration();
             Type foundClass = Assembly.GetExecutingAssembly().GetTypes()
-                         .Where(item => item.Namespace == Constants.FACTORY_NAME_SPACE && item.Name.Equals(factoryType.ToString(), StringComparison.OrdinalIgnoreCase))
-                         .FirstOrDefault();
+                    .Where(item => item.Namespace == Constants.DRIVER_NAME_SPACE && item.Name.Equals(type.ToString(), StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault();
 
             if (foundClass != null)
             {
-                Object[] args = { type, driverConfiguaration };
-                object instance = Activator.CreateInstance(foundClass, args);
+                object instance = Activator.CreateInstance(foundClass);
                 Type classType = instance.GetType();
-                MethodInfo method = classType.GetMethod("GetDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
-                DriverStored = method.Invoke(instance, null);
+                MethodInfo method = classType.GetMethod("StartDriver", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance);
+                method.Invoke(instance, new object[] { driverConfiguaration });
+                PropertyInfo property = classType.GetProperty("Driver");
+                DriverStored= property.GetValue(instance, null);
             }
             else
-                throw new NotImplementedException("Factory for " + factoryType + " is not implemented");
+                throw new OperationCanceledException("WebBrowser for" + type + " is not implemented"); 
         }
         /// <summary>
         /// This method is use for close and destroy driver

@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Remote;
 using AutomationFrameWork.Driver.Interface;
 
-namespace AutomationFrameWork.Driver.RemoteDriver
+namespace AutomationFrameWork.Driver
 {
     class RemoteBrowser : IDrivers
     {

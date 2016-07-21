@@ -6,7 +6,7 @@ using OpenQA.Selenium.Appium.Service;
 using OpenQA.Selenium.Remote;
 using System;
 
-namespace AutomationFrameWork.Driver.MobileDriver
+namespace AutomationFrameWork.Driver
 {
     class Android : IDrivers
     {

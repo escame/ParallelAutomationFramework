@@ -6,7 +6,7 @@ using OpenQA.Selenium.Remote;
 using AutomationFrameWork.Driver.Interface;
 using OpenQA.Selenium.Appium.Enums;
 
-namespace AutomationFrameWork.Driver.MobileDriver
+namespace AutomationFrameWork.Driver
 {
     class iOS : IDrivers
     {

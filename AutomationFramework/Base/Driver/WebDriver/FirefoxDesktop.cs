@@ -4,7 +4,7 @@ using OpenQA.Selenium.Firefox;
 using System;
 
 
-namespace AutomationFrameWork.Driver.WebDriver
+namespace AutomationFrameWork.Driver
 {
     class FirefoxDesktop : IDrivers
     {

@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using OpenQA.Selenium;
-namespace AutomationFrameWork.Driver.WebDriver
+namespace AutomationFrameWork.Driver
 {
     class iPad : IDrivers
     {

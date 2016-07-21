@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium.PhantomJS;
 using AutomationFrameWork.Driver.Interface;
-namespace AutomationFrameWork.Driver.HeadlessDriver
+namespace AutomationFrameWork.Driver
 {
     class PhantomJSBrowser : IDrivers
     {

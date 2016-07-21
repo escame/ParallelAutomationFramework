@@ -10,31 +10,29 @@ namespace AutomationTesting.Feature.Login_Mail_Parallel
 {
 
 
-    [TestFixture(Browser.ChromeDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPad, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.FirefoxDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.InternetExplorerDesktop, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone4, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone5, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.iPhone6, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.Nexus6, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.Nexus7, FactoryType.WebBrowserFactory)]
-    [TestFixture(Browser.PhantomJSBrowser, FactoryType.PhantomJSBrowserFactory)]
+    [TestFixture(Browser.ChromeDesktop)]
+    [TestFixture(Browser.iPad)]
+    [TestFixture(Browser.FirefoxDesktop)]
+    [TestFixture(Browser.InternetExplorerDesktop)]
+    [TestFixture(Browser.iPhone4)]
+    [TestFixture(Browser.iPhone5)]
+    [TestFixture(Browser.iPhone6)]
+    [TestFixture(Browser.Nexus6)]
+    [TestFixture(Browser.Nexus7)]
+    [TestFixture(Browser.PhantomJSBrowser)]
     [Parallelizable(ParallelScope.Self)]
     class TestParalell
     {
 
-        Browser _driver;
-        FactoryType _type;
-        public TestParalell (Browser type,FactoryType factory)
+        Browser _driver;        
+        public TestParalell (Browser type)
         {
-            _driver = type;
-            _type = factory;
+            _driver = type;    
         }
         [SetUp]
         public void SetUp ()
         {
-            DriverManager.StartDriver(_type,_driver);
+            DriverManager.StartDriver(_driver);
         }
         [Test]     
         [Category("SearchGoogle")]

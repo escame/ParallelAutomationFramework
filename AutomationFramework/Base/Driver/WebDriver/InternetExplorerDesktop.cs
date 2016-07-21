@@ -3,7 +3,7 @@ using System;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
 
-namespace AutomationFrameWork.Driver.WebDriver
+namespace AutomationFrameWork.Driver
 {
     class InternetExplorerDesktop : IDrivers
     {
