@@ -123,6 +123,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Feature\Demo Data Driven Attribute\DataDriven.cs" />
     <Compile Include="Feature\Demo Network Sniffer\NetworkSniffer.cs" />
     <Compile Include="Feature\Login Mail Mobile\LoginMailInMobile.cs" />
     <Compile Include="Feature\Login Mail Parallel\LoginMailParalell.cs" />
