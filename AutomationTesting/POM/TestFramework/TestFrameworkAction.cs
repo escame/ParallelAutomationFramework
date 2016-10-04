@@ -14,5 +14,15 @@ namespace AutomationTesting.POM.TestFramework
         {
             Message = Message + " "+message;
         }
+        public TestFrameworkAction DoSomeThing()
+        {
+            System.Console.WriteLine("Check Do Some Thing");
+            return this;
+        }
+        public TestFrameworkAction PrintSomeThing()
+        {
+            System.Console.WriteLine("Check Print Some Thing");
+            return this;
+        }
     }
 }

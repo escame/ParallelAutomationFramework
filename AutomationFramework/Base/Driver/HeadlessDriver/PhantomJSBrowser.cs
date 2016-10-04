@@ -12,6 +12,7 @@ namespace AutomationFrameWork.Driver
             get
             {
                 PhantomJSOptions options = new PhantomJSOptions();
+                options.AddAdditionalCapability("phantomjs.page.settings.UserAgent", "Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X;en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4Mobile/7B334b Safari/531.21.10 ");
                 return options;
             }
         }

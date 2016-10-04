@@ -24,7 +24,7 @@ namespace AutomationTesting.POM.HomePage
             WebKeywords.Instance.Click(Element.btnSignin);
         }
         public void EnterPass (string pass)
-        {
+        {       
             WebKeywords.Instance.WaitElementToBeClickable(Element.waitTxtPass, 30);
             WebKeywords.Instance.SetText(Element.txtPassword, pass);
         }

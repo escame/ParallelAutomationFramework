@@ -13,7 +13,7 @@ namespace AutomationTesting.DemoPhantomJS
         {
             DriverConfiguration configuration = new DriverConfiguration();
             var options = new PhantomJSOptions();
-            options.AddAdditionalCapability("phantomjs.page.settings.UserAgent", "Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X;en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4Mobile/7B334b Safari/531.21.10 ");
+            options.AddAdditionalCapability("phantomjs.page.settings.UserAgent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36");
             var services = PhantomJSDriverService.CreateDefaultService();
             services.LogFile = "D:\\AutomationReport\\Log.txt";
             configuration.DriverServices = services;

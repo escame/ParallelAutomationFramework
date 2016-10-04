@@ -23,7 +23,8 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
-
+using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium;
 
 namespace AutomationTesting
 {
@@ -172,13 +173,58 @@ namespace AutomationTesting
 
         }
         [Test]
-        [Category("TestListner")]
-        [Explicit("Explicit Test")]
+        [Category("Test Nested Class")]       
         public void TestAddInExplicit()
+        {          
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomeThing().PrintSomeThing().Verify().ValidateFalse(true).ValidateTrue(true).ValidateString("TEst mnasda");
+            POM.TestFramework.TestFrameworkAction.Instance.DoSomeThing().PrintSomeThing().Verify().ValidateFalse(true).ValidateTrue(true).ValidateString("TEsrsd");
+        }
+        [Test]
+        [Category("Test MARIONETTE Driver")]
+        public void TestMaruonetteDriver()
         {
-            POM.TestFramework.TestFrameworkAction.Instance.DoSomething("Minh Hoang Test");
-            Assert.True(!POM.TestFramework.TestFrameworkAction.Instance.CheckSingleton(), POM.TestFramework.TestFrameworkAction.Instance.Message);
-
+            //System.Environment.SetEnvironmentVariable("webdriver.gecko.driver", @"D:\WorkSpace\Git\AutomationFramework\Drivers\geckodriver.exe");
+            //FirefoxDriverService service = FirefoxDriverService.CreateDefaultService(@"D:\WorkSpace\Git\AutomationFramework\Drivers\", "geckodriver.exe");
+            //service.Port = 64444;
+            //service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+            IWebDriver driver = new FirefoxDriver();
+            driver.Url = "https://www.google.com";
+            //driver.Quit();
+        }
+        [Test]
+        [Category("HTMLUnit Driver")]
+        public void TestHtmlUnit()
+        {            
+            var remoteServer = new Uri("http://localhost:6969/wd/hub/");
+            DesiredCapabilities desiredCapabilities = DesiredCapabilities.HtmlUnit();
+            desiredCapabilities.IsJavaScriptEnabled = true;
+            var WebDriver = new RemoteWebDriver(remoteServer,desiredCapabilities);
+           
+            WebDriver.Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, 30));
+            //go to url 
+            WebDriver.Navigate().GoToUrl("https://www.kbb.com");
+            Console.WriteLine(WebDriver.Title);
+            WebDriver.Quit();
+        }
+        [Test,Category("Appium Test")]
+        public void OpenKMSApp()
+        {          
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.SetCapability("deviceName", "Note5");
+            caps.SetCapability("udid", "0415313132353234");
+            caps.SetCapability("appActivity",".activities.login.LoginActivity");            
+            //caps.SetCapability("appWaitActivity", ".activities.main.MainActivity");
+            caps.SetCapability("appWaitPackage", "com.kms_technology.kmsdirectory");
+            var driver = new AndroidDriver<AppiumWebElement>(new Uri("http://127.0.0.1:4723/wd/hub"), caps);
+          
+            driver.FindElement(By.Id("com.kms_technology.kmsdirectory:id/userNameEditText")).SendKeys("minhhoang");
+            driver.FindElement(By.Id("com.kms_technology.kmsdirectory:id/passwordEditText")).SendKeys("Kms@1234");
+            driver.FindElement(By.Id("com.kms_technology.kmsdirectory:id/loginBtn")).Click();
+            System.Threading.Thread.Sleep(10000);
+            driver.FindElement(By.Id("com.kms_technology.kmsdirectory:id/editText")).SendKeys("minh hoang");
+            Console.WriteLine(driver.FindElement(By.Id("com.kms_technology.kmsdirectory:id/editText")).Text);
+            System.Threading.Thread.Sleep(10000);
+            driver.Quit();
         }
     }
 }
