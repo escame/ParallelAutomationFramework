@@ -19,10 +19,12 @@ namespace AutomationFrameWork.ActionsKeys
         {           
            return _instance;
         }
-        public void ScroolToClick (string text)
-        {
-            DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().ScrollToExact(text).Click();
-        }
+
+        //TODO Deprecated Scroll in Appium
+        //public void ScroolToClick (string text)
+        //{
+        //    DriverManager.GetDriver<AppiumDriver<AppiumWebElement>>().ScrollToExact(text).Click();
+        //}
         public AppiumWebElement FindElementByAndroidUIAutomator(string value)
         {            
             var _AndroidDriver = DriverManager.GetDriver<AndroidDriver<AppiumWebElement>>();   

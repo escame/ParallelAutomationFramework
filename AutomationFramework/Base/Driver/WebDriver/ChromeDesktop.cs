@@ -37,7 +37,10 @@ namespace AutomationFrameWork.Driver
         {
             configuration.DriverServices = configuration.DriverServices ?? DriverServices;
             configuration.DesiredCapabilities = configuration.DesiredCapabilities ?? DesiredCapabilities;
-            IWebDriver driver = new ChromeDriver((ChromeDriverService)configuration.DriverServices, (ChromeOptions)configuration.DesiredCapabilities, TimeSpan.FromSeconds(configuration.CommandTimeout));
+            var options = new ChromeOptions();
+            options = (ChromeOptions)configuration.DesiredCapabilities;
+            IWebDriver driver = new ChromeDriver((ChromeDriverService)configuration.DriverServices, options);
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(configuration.CommandTimeout));
             driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(configuration.PageLoadTimeout));
             driver.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(configuration.ScriptTimeout));
             if (configuration.MaximizeBrowser)

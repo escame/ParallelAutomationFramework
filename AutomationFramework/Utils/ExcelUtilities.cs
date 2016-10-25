@@ -86,12 +86,14 @@ namespace AutomationFrameWork.Utils
             try
             {
                 DataTable _returnDataTable = null;
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+                string pathExtension = Path.GetExtension(path).ToLower();
                 FileStream _stream = File.Open(path, FileMode.Open, FileAccess.Read);
-                if (path.Split('.')[1].ToString().ToLower().Equals("xlsx"))
+                if (pathExtension.Equals(".xlsx"))
                 {
                     _read = ExcelReaderFactory.CreateOpenXmlReader(_stream);
                 }
-                else if (path.Split('.')[1].ToString().ToLower().Equals("xls"))
+                else if (pathExtension.Equals(".xls"))
                 {
                     _read = ExcelReaderFactory.CreateBinaryReader(_stream);
                 }
